@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denis & Mama — Study Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #F5F0EA; --bg-alt: #EDEAE3; --bg-card: #FFFFFF;
+    --text: #111111; --muted: #888888; --rule: #D0C8C0;
+    --gold: #B8943A; --red: #B5271A;
+    --check: #2A6A3A;
+    --mono: 'Courier Prime', 'Courier New', monospace;
+    --serif: 'IM Fell English', Georgia, serif;
+  }
+  body { background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 16px; line-height: 1.7; min-height: 100vh; }
+  header { border-bottom: 1px solid var(--rule); padding: 2.5rem 4vw 2rem; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .header-left h1 { font-family: var(--mono); font-size: clamp(1.4rem,4vw,2.6rem); font-weight: 700; letter-spacing: 0.08em; line-height: 1.1; text-transform: uppercase; }
+  .header-left .tagline { font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+  .status-badge { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); border: 1px solid var(--gold); padding: 0.3rem 0.8rem; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
+  .status-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .tz-bar { background: var(--text); color: var(--bg); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; padding: 0.5rem 4vw; display: flex; gap: 3rem; flex-wrap: wrap; }
+  .tz-bar span { opacity: 0.7; } .tz-bar b { opacity: 1; }
+  main { padding: 0 4vw 6rem; max-width: 1200px; margin: 0 auto; }
+  .prog-banner { margin: 2rem 0 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .prog-label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
+  .prog-wrap { flex: 1; min-width: 200px; height: 3px; background: var(--rule); }
+  .prog-fill { height: 100%; background: var(--text); transition: width 0.4s; }
+  .prog-ct { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+  .legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+  .leg-item { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+  .leg-dot { width: 10px; height: 10px; flex-shrink: 0; }
+  .day-block { border: 1px solid var(--rule); background: var(--bg-card); margin-bottom: 2px; }
+  .day-hdr { display: grid; grid-template-columns: 120px 70px 1fr auto; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--rule); cursor: pointer; }
+  .day-date { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; }
+  .day-cd { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--muted); }
+  .chip { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.7rem; display: inline-block; }
+  .chip-LAW { background: #1A1A1A; color: #F5F0EA; }
+  .chip-MANAGEMENT { background: #3D3D3D; color: #F5F0EA; }
+  .chip-COMPUTERS { background: #E8E3DC; color: #1A1A1A; border: 1px solid var(--rule); }
+  .chip-REST { background: transparent; color: var(--muted); border: 1px solid var(--rule); }
+  .tog { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); user-select: none; transition: transform 0.2s; }
+  .tog.open { transform: rotate(180deg); }
+  .phases { display: none; }
+  .phases.open { display: block; }
+  .phase { display: grid; grid-template-columns: 145px 1fr auto; align-items: start; gap: 1rem; padding: 0.9rem 1.2rem; border-top: 1px solid var(--rule); }
+  .phase.done { background: #F6FAF6; }
+  .ph-time { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; color: var(--muted); padding-top: 0.15rem; white-space: nowrap; }
+  .ph-title { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 0.2rem; }
+  .ph-desc { font-family: var(--serif); font-size: 0.88rem; font-style: italic; color: var(--muted); line-height: 1.5; }
+  .phase.done .ph-desc { text-decoration: line-through; opacity: 0.45; }
+  .chk { width: 28px; height: 28px; border: 1px solid var(--rule); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; color: transparent; transition: all 0.15s; margin-top: 0.1rem; }
+  .chk:hover { border-color: var(--text); }
+  .chk.on { background: var(--check); border-color: var(--check); color: white; }
+  .exam-strip { background: var(--red); color: #F5F0EA; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .exam-strip em { opacity: 0.75; font-style: italic; font-family: var(--serif); letter-spacing: 0; text-transform: none; font-size: 0.75rem; }
+  .exams-sec { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 2rem; }
+  .exams-lbl { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 1rem; }
+  .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; }
+  .exam-card { background: var(--bg-card); border: 1px solid var(--rule); padding: 1rem 1.2rem; }
+  .exam-card .subj { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .exam-card .dt { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--red); }
+  .exam-card .note { font-family: var(--mono); font-size: 0.66rem; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.06em; }
+  footer { border-top: 1px solid var(--rule); padding: 2rem 4vw; font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+  @media(max-width:600px){
+    .day-hdr{grid-template-columns:1fr auto}
+    .day-cd{display:none}
+    .chip{grid-column:1;grid-row:2}
+    .tog{grid-column:2;grid-row:1;align-self:center}
+    .phase{grid-template-columns:1fr auto}
+    .ph-time{grid-column:1/-1;font-size:0.66rem}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Denis &amp; Mama</h1>
+    <p class="tagline">Study Schedule — June 4–15, 2026</p>
+  </div>
+  <div class="status-badge">System Active</div>
+</header>
+
+<div class="tz-bar">
+  <span>Los Angeles: <b>7:00 – 9:00 AM</b></span>
+  <span>Belgrade: <b>4:00 – 6:00 PM</b></span>
+  <span>Duration: <b>2 hours / day</b></span>
+  <span>Sessions: <b>12 days</b></span>
+</div>
+
+<main>
+  <div class="prog-banner">
+    <span class="prog-label">Progress</span>
+    <div class="prog-wrap"><div class="prog-fill" id="pBar" style="width:0%"></div></div>
+    <span class="prog-ct" id="pCt">0 / 36 phases</span>
+  </div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#1A1A1A"></div>Law (5)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#3D3D3D"></div>Management (3)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#D0C8C0;border:1px solid #999"></div>Computers (1)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:transparent;border:1px solid #999"></div>Rest</div>
+  </div>
+  <div id="sched"></div>
+  <div class="exams-sec">
+    <p class="exams-lbl">04. Exam Dates</p>
+    <div class="exam-grid">
+      <div class="exam-card"><div class="subj">Law</div><div class="dt">Tuesday, June 16</div><div class="note">5 prep sessions · highest priority</div></div>
+      <div class="exam-card"><div class="subj">Management</div><div class="dt">Wednesday, June 17</div><div class="note">3 prep sessions · second priority</div></div>
+      <div class="exam-card"><div class="subj">English</div><div class="dt">Thursday, June 18</div><div class="note">No prep needed</div></div>
+      <div class="exam-card"><div class="subj">Computers</div><div class="dt">Friday, June 19</div><div class="note">1 session · light terminology pass</div></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>© 2026 Natasha Bajc — Nexus Hestia Technologies</span>
+  <span>Denis &amp; Mama · denis-mama.vercel.app</span>
+</footer>
+
+<script>
+const D=[
+  {date:"Wed, June 4",cd:"D–12",subj:"LAW",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Explanation",d:"Denis explains law structure and subject overview to Natasha"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Quiz",d:"Natasha quizzes Denis: key concepts, definitions, basic structure"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Gap List",d:"Denis writes what he's unsure of — notes for next session"}
+  ]},
+  {date:"Thu, June 5",cd:"D–11",subj:"LAW",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Explanation",d:"Denis explains case types and classification systems"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Quiz",d:"Natasha quizzes Denis: case classification deep dive from his notes"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Gap List",d:"Denis writes uncertain points — priority list for Friday"}
+  ]},
+  {date:"Fri, June 6",cd:"D–10",subj:"LAW",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Explanation",d:"Denis explains practice areas and legal principles"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Quiz",d:"Natasha quizzes from Denis's notes and problem areas"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Prioritize",d:"Denis ranks his 3 weakest law areas for Sunday's return session"}
+  ]},
+  {date:"Sat, June 7",cd:"D–9",subj:"MANAGEMENT",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Explanation",d:"Denis explains core management frameworks and models"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Quiz",d:"Natasha quizzes Denis: frameworks, terminology, application examples"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Gap List",d:"Denis notes gaps and scenarios he couldn't answer"}
+  ]},
+  {date:"Sun, June 8",cd:"D–8",subj:"LAW",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Targeted Explanation",d:"Denis explains only the weak areas flagged from the D–10 session"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Targeted Quiz",d:"Natasha quizzes Denis on previously flagged weak areas only"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Resolve",d:"Denis writes 3 hardest concepts in his own words — close the gaps"}
+  ]},
+  {date:"Mon, June 9",cd:"D–7",subj:"MANAGEMENT",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Applied Concepts",d:"Denis explains management applied to scenarios and case studies"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Applied Quiz",d:"Natasha presents scenarios — Denis answers with frameworks"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Gap List",d:"Denis notes gaps — saves for Wednesday's final management session"}
+  ]},
+  {date:"Tue, June 10",cd:"D–6",subj:"LAW",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Mock Presentation",d:"Denis presents the full law subject from memory — no notes"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Timed Q&A",d:"Natasha runs timed exam-condition questions — strict, no hints"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Self-Score",d:"Denis scores himself, flags any unknowns — one more law session Thursday"}
+  ]},
+  {date:"Wed, June 11",cd:"D–5",subj:"MANAGEMENT",strip:null,phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Mock Presentation",d:"Denis presents the full management subject from memory — no notes"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Timed Q&A",d:"Natasha runs timed exam-condition questions — strict, no hints"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Self-Score",d:"Denis scores himself, flags unknowns — final management session Friday"}
+  ]},
+  {date:"Thu, June 12",cd:"D–4",subj:"LAW",strip:{l:"LAW EXAM",e:"Tuesday June 16"},phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Shaky Areas Only",d:"Denis explains only what was flagged after the mock session"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Final Quiz",d:"Natasha quizzes shaky areas only — no full review"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Written Summary",d:"Denis writes his essential law summary — 1 page max, in his own words"}
+  ]},
+  {date:"Fri, June 13",cd:"D–3",subj:"MANAGEMENT",strip:{l:"MANAGEMENT EXAM",e:"Wednesday June 17"},phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Shaky Areas Only",d:"Denis explains only what was flagged after the mock session"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Final Quiz",d:"Natasha quizzes shaky areas only — no full review"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Written Summary",d:"Denis writes his essential management summary — 1 page max"}
+  ]},
+  {date:"Sat, June 14",cd:"D–2",subj:"COMPUTERS",strip:{l:"COMPUTERS EXAM",e:"Friday June 19"},phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — Terminology Pass",d:"Denis explains key computer science terms — light overview only"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Terms Quiz",d:"Natasha quizzes key terms only — no deep dives, just vocabulary"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Done",d:"No new material. Denis lists anything he wants to confirm once more."}
+  ]},
+  {date:"Sun, June 15",cd:"D–1",subj:"REST",strip:{l:"EXAM WEEK BEGINS TOMORROW",e:"Law Tue · Management Wed · Computers Fri"},phases:[
+    {t:"7:00 – 7:20",h:"Phase 1 — No New Material",d:"Denis talks through what he knows — confidence only, no new topics"},
+    {t:"7:20 – 8:20",h:"Phase 2 — Review Notes",d:"Both review the handwritten summaries from all previous sessions"},
+    {t:"8:20 – 8:40",h:"Phase 3 — Confidence Check",d:"Denis states what he knows cold. Natasha confirms. That's it."}
+  ]}
+];
+
+const SK="dm_checks_v1";
+let ch={};
+try{ch=JSON.parse(localStorage.getItem(SK))||{};}catch(e){}
+function save(){try{localStorage.setItem(SK,JSON.stringify(ch));}catch(e){}}
+
+function upProg(){
+  const tot=D.length*3;
+  const done=Object.values(ch).filter(Boolean).length;
+  document.getElementById("pBar").style.width=Math.round(done/tot*100)+"%";
+  document.getElementById("pCt").textContent=done+" / "+tot+" phases";
+}
+
+function build(){
+  const w=document.getElementById("sched");
+  w.innerHTML="";
+  D.forEach((day,di)=>{
+    const block=document.createElement("div");
+    block.className="day-block";
+
+    const hdr=document.createElement("div");
+    hdr.className="day-hdr";
+    hdr.innerHTML=`<span class="day-date">${day.date}</span><span class="day-cd">${day.cd}</span><span class="chip chip-${day.subj}">${day.subj}</span><span class="tog" id="tog${di}">↓</span>`;
+    hdr.addEventListener("click",()=>tog(di));
+    block.appendChild(hdr);
+
+    if(day.strip){
+      const s=document.createElement("div");
+      s.className="exam-strip";
+      s.innerHTML=`<span>▶ ${day.strip.l}</span><em>${day.strip.e}</em>`;
+      block.appendChild(s);
+    }
+
+    const ph=document.createElement("div");
+    ph.className="phases";
+    ph.id="ph"+di;
+    day.phases.forEach((p,pi)=>{
+      const k=`${di}-${pi}`;
+      const done=!!ch[k];
+      const pd=document.createElement("div");
+      pd.className="phase"+(done?" done":"");
+      pd.innerHTML=`<span class="ph-time">${p.t}</span><div><div class="ph-title">${p.h}</div><div class="ph-desc">${p.d}</div></div><button class="chk${done?" on":""}" aria-label="Mark complete">✓</button>`;
+      pd.querySelector(".chk").addEventListener("click",(e)=>{
+        e.stopPropagation();
+        ch[k]=!ch[k];
+        save();
+        pd.classList.toggle("done",ch[k]);
+        pd.querySelector(".chk").classList.toggle("on",ch[k]);
+        upProg();
+      });
+      ph.appendChild(pd);
+    });
+    block.appendChild(ph);
+    w.appendChild(block);
+  });
+  upProg();
+}
+
+function tog(di){
+  const p=document.getElementById("ph"+di);
+  const t=document.getElementById("tog"+di);
+  const o=p.classList.contains("open");
+  p.classList.toggle("open",!o);
+  t.classList.toggle("open",!o);
+}
+
+build();
+
+const today=new Date();
+const start=new Date("2026-06-04");
+const idx=Math.floor((today-start)/86400000);
+if(idx>=0&&idx<D.length)setTimeout(()=>tog(idx),150);
+</script>
+</body>
+</html>
