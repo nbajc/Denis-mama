@@ -11,81 +11,97 @@
   :root {
     --bg: #F5F0EA; --bg-alt: #EDEAE3; --bg-card: #FFFFFF;
     --text: #111111; --muted: #888888; --rule: #D0C8C0;
-    --gold: #B8943A; --red: #B5271A;
-    --check: #2A6A3A;
-    --mono: 'Courier Prime', 'Courier New', monospace;
-    --serif: 'IM Fell English', Georgia, serif;
+    --gold: #B8943A; --red: #B5271A; --check: #2A6A3A;
+    --note-bg: #FFFDF5; --note-border: #D4B896;
+    --mono: 'Courier Prime','Courier New',monospace;
+    --serif: 'IM Fell English',Georgia,serif;
   }
-  body { background: var(--bg); color: var(--text); font-family: var(--serif); font-size: 16px; line-height: 1.7; min-height: 100vh; }
-  header { border-bottom: 1px solid var(--rule); padding: 2.5rem 4vw 2rem; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  .header-left h1 { font-family: var(--mono); font-size: clamp(1.4rem,4vw,2.6rem); font-weight: 700; letter-spacing: 0.08em; line-height: 1.1; text-transform: uppercase; }
-  .header-left .tagline { font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
-  .status-badge { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); border: 1px solid var(--gold); padding: 0.3rem 0.8rem; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
-  .status-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation: pulse 2s infinite; }
+  body { background:var(--bg); color:var(--text); font-family:var(--serif); font-size:16px; line-height:1.7; min-height:100vh; }
+  header { border-bottom:1px solid var(--rule); padding:2.5rem 4vw 2rem; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+  .header-left h1 { font-family:var(--mono); font-size:clamp(1.4rem,4vw,2.6rem); font-weight:700; letter-spacing:0.08em; line-height:1.1; text-transform:uppercase; }
+  .header-left .tagline { font-family:var(--serif); font-style:italic; color:var(--muted); font-size:0.9rem; margin-top:0.4rem; }
+  .status-badge { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.12em; color:var(--gold); border:1px solid var(--gold); padding:0.3rem 0.8rem; text-transform:uppercase; display:flex; align-items:center; gap:0.5rem; }
+  .status-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  .tz-bar { background: var(--text); color: var(--bg); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; padding: 0.5rem 4vw; display: flex; gap: 3rem; flex-wrap: wrap; }
-  .tz-bar span { opacity: 0.7; } .tz-bar b { opacity: 1; }
-  main { padding: 0 4vw 6rem; max-width: 1200px; margin: 0 auto; }
-  .prog-banner { margin: 2rem 0 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-  .prog-label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
-  .prog-wrap { flex: 1; min-width: 200px; height: 3px; background: var(--rule); }
-  .prog-fill { height: 100%; background: var(--text); transition: width 0.4s; }
-  .prog-ct { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
-  .legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
-  .leg-item { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
-  .leg-dot { width: 10px; height: 10px; flex-shrink: 0; }
-  .day-block { border: 1px solid var(--rule); background: var(--bg-card); margin-bottom: 2px; }
-  .day-hdr { display: grid; grid-template-columns: 120px 70px 1fr auto; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--rule); cursor: pointer; }
-  .day-date { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; }
-  .day-cd { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; color: var(--muted); }
-  .chip { font-family: var(--mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.7rem; display: inline-block; }
-  .chip-LAW { background: #1A1A1A; color: #F5F0EA; }
-  .chip-MANAGEMENT { background: #3D3D3D; color: #F5F0EA; }
-  .chip-COMPUTERS { background: #E8E3DC; color: #1A1A1A; border: 1px solid var(--rule); }
-  .chip-REST { background: transparent; color: var(--muted); border: 1px solid var(--rule); }
-  .tog { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); user-select: none; transition: transform 0.2s; }
-  .tog.open { transform: rotate(180deg); }
-  .phases { display: none; }
-  .phases.open { display: block; }
+  .tz-bar { background:var(--text); color:var(--bg); font-family:var(--mono); font-size:0.72rem; letter-spacing:0.1em; padding:0.5rem 4vw; display:flex; gap:3rem; flex-wrap:wrap; }
+  .tz-bar span { opacity:0.7; } .tz-bar b { opacity:1; }
+  main { padding:0 4vw 6rem; max-width:1200px; margin:0 auto; }
+  .prog-banner { margin:2rem 0 1.5rem; display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+  .prog-label { font-family:var(--mono); font-size:0.75rem; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase; white-space:nowrap; }
+  .prog-wrap { flex:1; min-width:200px; height:3px; background:var(--rule); }
+  .prog-fill { height:100%; background:var(--text); transition:width 0.4s; }
+  .prog-ct { font-family:var(--mono); font-size:0.75rem; color:var(--muted); white-space:nowrap; }
+  .legend { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:1px solid var(--rule); }
+  .leg-item { display:flex; align-items:center; gap:0.5rem; font-family:var(--mono); font-size:0.72rem; letter-spacing:0.06em; color:var(--muted); text-transform:uppercase; }
+  .leg-dot { width:10px; height:10px; flex-shrink:0; }
+  .day-block { border:1px solid var(--rule); background:var(--bg-card); margin-bottom:2px; }
+  .day-hdr { display:grid; grid-template-columns:120px 70px 1fr auto; align-items:center; gap:1rem; padding:0.9rem 1.2rem; border-bottom:1px solid var(--rule); cursor:pointer; }
+  .day-date { font-family:var(--mono); font-size:0.8rem; font-weight:700; letter-spacing:0.05em; }
+  .day-cd { font-family:var(--mono); font-size:0.68rem; letter-spacing:0.08em; color:var(--muted); }
+  .chip { font-family:var(--mono); font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:0.2rem 0.7rem; display:inline-block; }
+  .chip-LAW { background:#1A1A1A; color:#F5F0EA; }
+  .chip-MANAGEMENT { background:#3D3D3D; color:#F5F0EA; }
+  .chip-COMPUTERS { background:#E8E3DC; color:#1A1A1A; border:1px solid var(--rule); }
+  .chip-REST { background:transparent; color:var(--muted); border:1px solid var(--rule); }
+  .tog { font-family:var(--mono); font-size:0.9rem; color:var(--muted); user-select:none; transition:transform 0.2s; }
+  .tog.open { transform:rotate(180deg); }
+  .phases { display:none; }
+  .phases.open { display:block; }
+  .phase { border-top:1px solid var(--rule); }
+  .phase.solo-phase { background:#FAFAF8; }
+  .phase.done { background:#F6FAF6; }
+  .phase-main { display:grid; grid-template-columns:145px 1fr auto; align-items:start; gap:1rem; padding:0.9rem 1.2rem; }
+  .ph-time { font-family:var(--mono); font-size:0.7rem; letter-spacing:0.05em; color:var(--muted); padding-top:0.15rem; white-space:nowrap; }
+  .ph-tag { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem; }
+  .ph-title { font-family:var(--mono); font-size:0.8rem; font-weight:700; letter-spacing:0.04em; margin-bottom:0.2rem; }
+  .ph-desc { font-family:var(--serif); font-size:0.88rem; font-style:italic; color:var(--muted); line-height:1.5; }
+  .ph-desc ul { margin:0.4rem 0 0 1rem; font-style:normal; }
+  .ph-desc ul li { margin-bottom:0.15rem; font-size:0.84rem; }
+  .ph-desc strong { font-style:normal; color:var(--text); font-family:var(--mono); font-size:0.78rem; font-weight:700; letter-spacing:0.02em; }
+  .phase.done .ph-desc { text-decoration:line-through; opacity:0.45; }
+  .chk { width:28px; height:28px; border:1px solid var(--rule); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px; color:transparent; transition:all 0.15s; margin-top:0.1rem; }
+  .chk:hover { border-color:var(--text); }
+  .chk.on { background:var(--check); border-color:var(--check); color:white; }
 
-  /* Phase rows — two types: SOLO and JOINT */
-  .phase { display: grid; grid-template-columns: 145px 1fr auto; align-items: start; gap: 1rem; padding: 0.9rem 1.2rem; border-top: 1px solid var(--rule); }
-  .phase.done { background: #F6FAF6; }
-  .phase.solo-phase { background: #FAFAF8; }
-  .phase.solo-phase.done { background: #F6FAF6; }
-  .ph-time { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; color: var(--muted); padding-top: 0.15rem; white-space: nowrap; }
-  .ph-title { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 0.2rem; }
-  .ph-tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
-  .ph-desc { font-family: var(--serif); font-size: 0.88rem; font-style: italic; color: var(--muted); line-height: 1.5; }
-  .ph-desc ul { margin: 0.4rem 0 0 1rem; font-style: normal; }
-  .ph-desc ul li { margin-bottom: 0.15rem; font-size: 0.84rem; }
-  .ph-desc strong { font-style: normal; color: var(--text); font-family: var(--mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; }
-  .phase.done .ph-desc { text-decoration: line-through; opacity: 0.45; }
-  .chk { width: 28px; height: 28px; border: 1px solid var(--rule); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; color: transparent; transition: all 0.15s; margin-top: 0.1rem; }
-  .chk:hover { border-color: var(--text); }
-  .chk.on { background: var(--check); border-color: var(--check); color: white; }
-  .exam-strip { background: var(--red); color: #F5F0EA; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-  .exam-strip em { opacity: 0.75; font-style: italic; font-family: var(--serif); letter-spacing: 0; text-transform: none; font-size: 0.75rem; }
-  .exams-sec { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 2rem; }
-  .exams-lbl { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 1rem; }
-  .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; }
-  .exam-card { background: var(--bg-card); border: 1px solid var(--rule); padding: 1rem 1.2rem; }
-  .exam-card .subj { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
-  .exam-card .dt { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--red); }
-  .exam-card .note { font-family: var(--mono); font-size: 0.66rem; color: var(--muted); margin-top: 0.4rem; letter-spacing: 0.06em; }
-  footer { border-top: 1px solid var(--rule); padding: 2rem 4vw; font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+  /* ── NOTE LAYER ── */
+  .note-toggle { display:flex; align-items:center; gap:0.5rem; cursor:pointer; padding:0.45rem 1.2rem 0.45rem 160px; border-top:1px dashed var(--note-border); background:var(--note-bg); font-family:var(--mono); font-size:0.68rem; letter-spacing:0.1em; color:var(--note-border); text-transform:uppercase; user-select:none; }
+  .note-toggle:hover { color:var(--gold); }
+  .note-toggle .nt-arr { transition:transform 0.2s; font-size:0.7rem; }
+  .note-toggle.open .nt-arr { transform:rotate(90deg); }
+  .note-panel { display:none; padding:0.8rem 1.2rem 1rem 160px; background:var(--note-bg); border-top:1px dashed var(--note-border); }
+  .note-panel.open { display:block; }
+  .note-panel h4 { font-family:var(--mono); font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.7rem; }
+  .note-item { margin-bottom:0.9rem; }
+  .note-q { font-family:var(--serif); font-size:0.85rem; font-weight:700; font-style:normal; color:var(--text); margin-bottom:0.2rem; }
+  .note-src { font-family:var(--mono); font-size:0.68rem; color:var(--muted); letter-spacing:0.04em; display:flex; align-items:baseline; gap:0.4rem; flex-wrap:wrap; }
+  .note-src a { color:var(--gold); text-decoration:none; border-bottom:1px solid transparent; }
+  .note-src a:hover { border-color:var(--gold); }
+  .note-src .file-tag { background:var(--rule); padding:0.1rem 0.4rem; font-size:0.64rem; }
+  .note-src .slide-tag { color:var(--check); }
+  .note-answer { font-family:var(--serif); font-style:italic; font-size:0.82rem; color:var(--muted); margin-top:0.2rem; border-left:2px solid var(--note-border); padding-left:0.6rem; line-height:1.5; }
+
+  .exam-strip { background:var(--red); color:#F5F0EA; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.35rem 1.2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; }
+  .exam-strip em { opacity:0.75; font-style:italic; font-family:var(--serif); letter-spacing:0; text-transform:none; font-size:0.75rem; }
+  .exams-sec { margin-top:3rem; border-top:1px solid var(--rule); padding-top:2rem; }
+  .exams-lbl { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-bottom:1rem; }
+  .exam-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:2px; }
+  .exam-card { background:var(--bg-card); border:1px solid var(--rule); padding:1rem 1.2rem; }
+  .exam-card .subj { font-family:var(--mono); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.3rem; }
+  .exam-card .dt { font-family:var(--serif); font-style:italic; font-size:1rem; color:var(--red); }
+  .exam-card .enote { font-family:var(--mono); font-size:0.66rem; color:var(--muted); margin-top:0.4rem; letter-spacing:0.06em; }
+  footer { border-top:1px solid var(--rule); padding:2rem 4vw; font-family:var(--mono); font-size:0.7rem; color:var(--muted); letter-spacing:0.08em; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
   @media(max-width:600px){
     .day-hdr{grid-template-columns:1fr auto}
     .day-cd{display:none}
     .chip{grid-column:1;grid-row:2}
     .tog{grid-column:2;grid-row:1;align-self:center}
-    .phase{grid-template-columns:1fr auto}
+    .phase-main{grid-template-columns:1fr auto}
     .ph-time{grid-column:1/-1;font-size:0.66rem}
+    .note-toggle,.note-panel{padding-left:1rem}
   }
 </style>
 </head>
 <body>
-
 <header>
   <div class="header-left">
     <h1>Denis &amp; Mama</h1>
@@ -93,14 +109,12 @@
   </div>
   <div class="status-badge">System Active</div>
 </header>
-
 <div class="tz-bar">
-  <span>Los Angeles: <b>10:00 PM — Midnight</b></span>
-  <span>Belgrade: <b>7:00 — 9:00 AM</b></span>
+  <span>Los Angeles: <b>7:00 — 9:00 AM</b></span>
+  <span>Belgrade: <b>4:00 — 6:00 PM</b></span>
   <span>Duration: <b>2 hours / day</b></span>
   <span>Sessions: <b>12 days</b></span>
 </div>
-
 <main>
   <div class="prog-banner">
     <span class="prog-label">Progress</span>
@@ -111,469 +125,654 @@
     <div class="leg-item"><div class="leg-dot" style="background:#1A1A1A"></div>Law (6 days)</div>
     <div class="leg-item"><div class="leg-dot" style="background:#3D3D3D"></div>Management (5 days)</div>
     <div class="leg-item"><div class="leg-dot" style="background:#D0C8C0;border:1px solid #999"></div>Computers (1 day)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:transparent;border:1px solid #999"></div>Rest</div>
     <div class="leg-item" style="margin-left:auto"><div class="leg-dot" style="background:#FAFAF8;border:1px solid #D0C8C0"></div>Solo prep</div>
     <div class="leg-item"><div class="leg-dot" style="background:#FFFFFF;border:1px solid #D0C8C0"></div>Denis + Mama</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#FFFDF5;border:1px dashed #D4B896"></div>Source notes</div>
   </div>
   <div id="sched"></div>
   <div class="exams-sec">
-    <p class="exams-lbl">04. Exam Dates</p>
+    <p class="exams-lbl">Exam Dates</p>
     <div class="exam-grid">
-      <div class="exam-card"><div class="subj">Law</div><div class="dt">Tuesday, June 16</div><div class="note">6 prep sessions · highest priority</div></div>
-      <div class="exam-card"><div class="subj">Management</div><div class="dt">Wednesday, June 17</div><div class="note">5 prep sessions · second priority</div></div>
-      <div class="exam-card"><div class="subj">English</div><div class="dt">Thursday, June 18</div><div class="note">No prep needed</div></div>
-      <div class="exam-card"><div class="subj">Computers</div><div class="dt">Friday, June 19</div><div class="note">1 session · Word formatting practical</div></div>
+      <div class="exam-card"><div class="subj">Law</div><div class="dt">Tuesday, June 16</div><div class="enote">6 prep sessions · highest priority</div></div>
+      <div class="exam-card"><div class="subj">Management</div><div class="dt">Wednesday, June 17</div><div class="enote">5 prep sessions · second priority</div></div>
+      <div class="exam-card"><div class="subj">English</div><div class="dt">Thursday, June 18</div><div class="enote">No prep needed</div></div>
+      <div class="exam-card"><div class="subj">Computers</div><div class="dt">Friday, June 19</div><div class="enote">1 session · Word formatting practical</div></div>
     </div>
   </div>
 </main>
-
 <footer>
   <span>© 2026 Natasha Bajc · Nexus Hestia Technologies</span>
-  <span>Denis &amp; Mama · denis-mama.vercel.app</span>
+  <span>Denis &amp; Mama Study Schedule</span>
 </footer>
-
 <script>
-const D=[
-  // ─── DAY 1 · FRI JUNE 5 · LAW ───────────────────────────────────────────
-  {date:"Fri, June 5",cd:"D–11",subj:"LAW",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+// FILE REFERENCE MAP — real Google Drive file IDs and names
+const FILES = {
+  L1:  { name:"Lecture 1 — Introduction.pdf", id:"14pscAbU6PG4CQ9VyboqLciS7AqvHJziq" },
+  L2:  { name:"Lecture 2 — Forms of State.pdf", id:"1qkkJUTWAyEca3zh_sTdNJaPdSIA2WQFL" },
+  L3:  { name:"Lecture 3 — Notion of Law, Types, Legal Norm.pdf", id:"1t5S1AbvFrn_YteV7gIADSJTPPAHR7ZbS" },
+  L4:  { name:"Lecture 4 — Legal Act, Types and Hierarchy.pdf", id:"1EI25yU9H15LdDrTFcFUIbmziadH3nL60" },
+  L5:  { name:"Lecture 5 — Regional Integrations and the EU.pdf", id:"1bggGZv18THqS6zIqW0mrFjfONK9JYIF0" },
+  L6:  { name:"Lecture 6 — Legal and Institutional System of the EU.pdf", id:"1d7l4bPZ1E1tl_H81nR6QULLz0Nk7400G" },
+  L7:  { name:"Lecture 7 — Natural and Juridical Person, Legal Capacity.pdf", id:"1U2doYSvJOsfm9CGo6YwDc9GOcS-IXTUF" },
+  L8:  { name:"Lecture 8 — Civil Law and Property Law.pdf", id:"1b8J80mkoeoAznXhyKN_E9Wc8Faq3_fB_" },
+  L9:  { name:"Lecture 9 — Ownership and Possession.pdf", id:"1a32TSgwMa2ytP_OS1tLS8GzzuebA2Nd1" },
+  M1:  { name:"1 Introduction to Management.pdf", id:"1H5DqIjwYSioN2yflyunD5X0QSmhLD3fa" },
+  M2:  { name:"2 Management History.pdf", id:"1heDw7GMqWAfT1efyqOI0wM5fOneyIlME" },
+  M3:  { name:"3 Organizational Culture and Environment.pdf", id:"1HNUMnLhcCL_ooBp5C7CHjE5I6w9jAMAz" },
+  M4:  { name:"4 Ethics and Social Responsibility.pdf", id:"1wtUsoqDCOfm5S_kt08TEC7SgWR7c76dt" },
+  M5:  { name:"5 Communication.pdf", id:"1fKtNNffAiRaEEySoy_s6VNkpxlp__YKF" },
+  M6:  { name:"6 Planning and Decision Making.pdf", id:"1C-8-U98dJ5UMLuuzK4y38B7KBZQuKlom" },
+  M8:  { name:"8 Innovation and Change.pdf", id:"1d-Q6RUebxp_CBCnTiig5BCDNyppXZNf6" },
+  M9:  { name:"9 Organizational Structure.pdf", id:"1Bpuh8AfN_sWBz3sPzNQ3pFowlRbxlySp" },
+  M10: { name:"10 Managing Teams.pdf", id:"1xUc8LRweT-_zcIe8qjb66HLhT1wXVwyu" },
+  M11: { name:"11 Human Resource Management.pdf", id:"1_sCelMHTtkX9e-h43ClWC1EvR4rwQOE2" },
+  M12: { name:"12 Motivation.pdf", id:"1OvpqJV8r8GgAoDAl0NSnz2oFyrUot77F" },
+  M13: { name:"13 Leadership.pdf", id:"1nrro8ZbvKYu3MGCdHD9TdOoUlR86_NI2" },
+  M14: { name:"14 Controlling.pdf", id:"1aC0AJL1Sg3BXkSW-He3emWjxbPkyniCm" },
+};
+function flink(k){ return `https://drive.google.com/file/d/${FILES[k].id}/view`; }
+function ftag(k){ return `<span class="file-tag">${FILES[k].name}</span>`; }
+
+// NOTE DATA — per solo phase, array of {q, file_key, slide, answer}
+const NOTES = {
+  "0-0": [ // Day 1 Solo
+    { q:"What is a state? Name its 3 main elements.",
+      fk:"L1", slide:"Slide 4 — Topics we will learn about",
+      ans:"State = territory + population + sovereignty. Covered in the course aims slide as the first topic: 'State — notion and main elements; Legal state and rule of law.'" },
+    { q:"What makes Serbia a unitary state?",
+      fk:"L2", slide:"Slide 3 — Unitary State",
+      ans:"'It is a state governed as a single entity in which the central government is the supreme authority. One constitution, one legislative power, single citizenship and one sovereignty.' Serbia is listed as an example." },
+    { q:"What is a federation? How does sovereignty differ from a unitary state?",
+      fk:"L2", slide:"Slide 4 — Federation",
+      ans:"'Sovereignty doesn't belong to federal units (republics), but to the Federation itself.' Examples: USA, Former Yugoslavia, Russia." },
+    { q:"What is a confederation? How is it different from a federation?",
+      fk:"L2", slide:"Slide 7 — Confederation",
+      ans:"'A union of sovereign groups or states united for purposes of dealing with critical issues… Each of the states keeps its autonomy.' Examples listed: Belgium, Canada, The European Union." },
+    { q:"Advantages and disadvantages of unitary state vs federation.",
+      fk:"L2", slide:"Slides 5–6 — Advantages and Disadvantages",
+      ans:"Unitary advantages: solidarity, cheaper to administer, fewer constitutional complications. Unitary disadvantages: minority interests not served, bureaucratic tendencies. Federation advantages: minority interests, local initiative. Federation disadvantages: power clashes, high admin costs, duplication." },
+  ],
+  "1-0": [ // Day 2 Solo
+    { q:"What are the 4 types of social norms and what happens when you break each?",
+      fk:"L3", slide:"Slide 4 — Types of social norms",
+      ans:"Social conventions → social condemnation. Customs → social condemnation. Moral norms → inner guilt / social condemnation. Legal rules → state punishment (fine, prison)." },
+    { q:"What separates a legal norm from all other social norms?",
+      fk:"L3", slide:"Slide 4 — Legal rules",
+      ans:"'Legal rules are mandatory. They are set by legislator governmental authority (state). Disobeying legal rules leads to sentencing and punishment executed by the state.'" },
+    { q:"What is natural law vs positive law?",
+      fk:"L3", slide:"Slide 8 — Types of law according to nature",
+      ans:"Natural law: 'exists in nature, created spontaneously… law based on moral order.' Positive law: 'created by the state and its organs, people have to behave as prescribed; law separate from moral order.'" },
+    { q:"What is the hierarchy of legal sources in Serbia from top to bottom?",
+      fk:"L4", slide:"Slide 5 — Hierarchy of legal sources in Serbia",
+      ans:"1. Constitution → 2. National laws & ratified international agreements → 3. Sub-legal acts & provincial/local statutory law → 4. Customs → 5. Individual legal acts (e.g. court decisions)." },
+    { q:"What is a general legal act vs an individual legal act?",
+      fk:"L4", slide:"Slide 3 — Types of legal acts",
+      ans:"General: 'unrestricted as to time, applicable throughout entire territory, applies to all persons in the same class.' Example: law on mandatory military service. Individual: 'single act of law application, intended for a specific entity.' Example: administrative decision for a specific person's military service date." },
+    { q:"What is the Constitution and why is it at the top?",
+      fk:"L4", slide:"Slide 6 — Constitution as the supreme legal act",
+      ans:"'The supreme legal act of the state; all laws and other general acts enacted in Serbia must be in compliance with the constitution.' Hard vs soft constitutions: hard = some parts cannot be changed by ordinary procedure." },
+  ],
+  "2-0": [ // Day 3 Solo
+    { q:"What is regional integration? What are its stages?",
+      fk:"L5", slide:"Slide 2 — Notion of regional integration",
+      ans:"'The process by which two or more nation-states agree to co-operate and work closely together.' Stages: free trade area → customs union → single market (midpoint) → political integration → full integration (new country)." },
+    { q:"What are the 4 freedoms of the EU single market?",
+      fk:"L5", slide:"Slide 4 — The single market",
+      ans:"Free movement of: workers, services, goods, and capital. Citizens can study, live, shop, work and retire in any member state." },
+    { q:"ECSC 1951 — who signed, why was it created?",
+      fk:"L6", slide:"Slide 4 — Origins of the EU - 1",
+      ans:"Six countries: Belgium, France, Italy, Luxembourg, Netherlands, West Germany. Created after WWII to achieve economic growth, military security, and reconciliation between France and Germany. Free trade area for coal, coke, steel, scrap, iron ore." },
+    { q:"What did the Treaties of Rome (1957) create?",
+      fk:"L6", slide:"Slide 5 — Origins of the EU - 2",
+      ans:"Two treaties: Euratom (atomic energy cooperation) and EEC (European Economic Community — common market). EEC established four governing institutions: commission, ministerial council, assembly, court." },
+    { q:"What is 'sui generis' and why does it apply to the EU?",
+      fk:"L6", slide:"Slide 2 — European Union today",
+      ans:"'The EU has often been described as a sui generis political entity (without precedent or comparison) combining the characteristics of both a federation and a confederation.'" },
+    { q:"What did the Maastricht Treaty (1992) establish?",
+      fk:"L6", slide:"Slide 6 — Creation and evolution of the EU - 1",
+      ans:"Created the EU. Three pillars: European Communities + common foreign and security policy + cooperation in home affairs and justice. Also established EU citizenship: right to vote and run for office in local elections in any member state." },
+    { q:"Why did the EU Constitution fail in 2005?",
+      fk:"L6", slide:"Slide 7 — Creation and evolution of the EU - 2",
+      ans:"'Voters in France and the Netherlands rejected it in 2005, thereby scuttling the constitution.' It would have created a full-time president, EU foreign minister, public prosecutor, and charter of fundamental rights." },
+  ],
+  "3-0": [ // Day 4 Solo
+    { q:"Natural person vs juridical person — definition and examples.",
+      fk:"L7", slide:"Slides 3–4 — Natural person / Juridical person",
+      ans:"Natural person: 'a human being considered as a subject of rights and obligations.' Juridical person: 'a non-human legal entity recognized by law as a legal person.' Examples of juridical persons: state, international organizations, NGOs, corporations, associations, foundations." },
+    { q:"Passive vs active legal capacity — when does each begin and end?",
+      fk:"L7", slide:"Slide 6 — Active and passive legal capacity of a natural person",
+      ans:"Passive capacity: begins with live birth, ends with death — all natural persons have it fully. Active capacity: full at age 18 (if mentally capable). Restricted for: minors (need parent/guardian authorization) and persons with permanent mental disorder." },
+    { q:"What are the 4 basic principles of civil law?",
+      fk:"L8", slide:"Slide 5 — Basic principles of civil law",
+      ans:"1. Equality of parties (no subordination). 2. Autonomous will (parties arrange relations as they please, within limits). 3. Sanctions affect property, not a person. 4. Rights are mostly transferable." },
+    { q:"What are the 3 categories of the Napoleonic Code (1804)?",
+      fk:"L8", slide:"Slide 3 — Civil law divisions",
+      ans:"1. Law of persons. 2. Property law. 3. Commercial law." },
+    { q:"What are the 5 parts of the German Civil Code (BGB, 1900)?",
+      fk:"L8", slide:"Slide 3 — Civil law divisions",
+      ans:"1. General Part (personal rights, legal personality). 2. Obligations (debt, sale, contract). 3. Things / property law. 4. Domestic relations / family law. 5. Succession / estate law." },
+    { q:"Where in the world is civil law used?",
+      fk:"L8", slide:"Slide 2 — Civil law notion",
+      ans:"'Civil law systems are found on all continents and cover about 60% of the world.' Continental Europe, Central/South America, Scotland, Quebec, Louisiana, parts of Asia (Japan, Indonesia, Lebanon), parts of Africa (Egypt, South Africa)." },
+  ],
+  "4-0": [ // Day 5 Solo
+    { q:"What are the 4 rights of the owner (usus, fructus, abusus, possession)?",
+      fk:"L9", slide:"Slide 2 — Ownership — notion",
+      ans:"'The owner has the rights of possession, usus (right to control property and use it according to its nature), fructus (to collect the fruits, i.e. profits from the property) and abusus (to dispose — transfer rights by sale, lending, giving away — or destroy the property).'" },
+    { q:"What does 'absolute' (erga omnes) mean in ownership?",
+      fk:"L9", slide:"Slide 2 — Ownership — notion",
+      ans:"'Absolute (erga omnes) — the owner is the only one who has all the legally permitted rights over his/her property, and everyone has the duty not to disturb the owner in exercising rights over his/her property.'" },
+    { q:"What is co-ownership? Can a co-owner sell without asking others?",
+      fk:"L9", slide:"Slide 4 — Co-ownership",
+      ans:"'Several persons have the right of co-ownership over an undivided thing where each person's share is defined in proportion to the entirety.' A co-owner CAN dispose of his/her share without consent of other co-owners. BUT: statutory pre-emption right — other co-owners have the right to buy first." },
+    { q:"What is community (joint) ownership? How is it different from co-ownership?",
+      fk:"L9", slide:"Slide 5 — Community (joint) ownership",
+      ans:"'Ownership over an undivided thing where the shares are definable but not defined.' Key difference: in community ownership shares are NOT determined and cannot be individually disposed of. Examples: husband and wife, inheritance." },
+    { q:"What is a condominium?",
+      fk:"L9", slide:"Slide 6 — Condominium",
+      ans:"'Ownership right that belongs to owners of units of a real estate (apartment house or commercial building), whereas each owner can use and access common areas and facilities: yard, hallways, heating, elevators, garage.' Managed by association of owners." },
+  ],
+  "6-0": [ // Day 7 Solo — Management Block 1
+    { q:"What is the definition of management? Efficiency vs effectiveness.",
+      fk:"M1", slide:"Slide 2 — What is Management?",
+      ans:"'Coordinating and overseeing the work of others so that their activities are completed efficiently and effectively.' Efficiency = 'doing things right, getting the most output from least inputs.' Effectiveness = 'doing the right things, attaining organizational goals.'" },
+    { q:"What are the 4 management functions?",
+      fk:"M1", slide:"Slide 7 — Management Functions",
+      ans:"Planning (defining goals, establishing strategies). Organizing (arranging and structuring work). Leading (working with people to accomplish goals). Controlling (monitoring, comparing, correcting work)." },
+    { q:"What are the 3 levels of managers and what does each do?",
+      fk:"M1", slide:"Slide 5–6 — Classifying Managers",
+      ans:"First-line managers: manage non-managerial employees, involved in producing products/services (supervisor, shift manager). Middle managers: manage first-line managers (regional manager, project leader). Top managers: organization-wide decisions, establish goals (CEO, CFO, president)." },
+    { q:"What are Mintzberg's 3 management role categories and roles within each?",
+      fk:"M1", slide:"Slide 9 — Management Roles (Mintzberg)",
+      ans:"Interpersonal (ceremonial/symbolic): figurehead, leader, liaison. Informational (collecting/sharing info): monitor, disseminator, spokesperson. Decisional (making choices): entrepreneur, disturbance handler, resource allocator, negotiator." },
+    { q:"Who is Frederick Taylor and what did he do?",
+      fk:"M2", slide:"Slides 5–6 — Scientific Management / Frederick Taylor",
+      ans:"'Father of scientific management.' Published Principles of Scientific Management (1911). Used time-and-motion studies (stopwatch) to find 'one best way' for each job. Introduced incentive pay = standard wage + bonus. Management's job: know what you want workers to do, then see they do it in the best and cheapest way." },
+    { q:"What are Fayol's 14 principles of management?",
+      fk:"M2", slide:"Slide 10 — Fayol's 14 Principles",
+      ans:"1.Division of work 2.Authority 3.Discipline 4.Unity of command 5.Unity of direction 6.Subordination of individual to general interest 7.Remuneration 8.Centralization 9.Scalar chain 10.Order 11.Equity 12.Stability of tenure 13.Initiative 14.Esprit de corps." },
+    { q:"What did the Hawthorne Studies discover?",
+      fk:"M2", slide:"Slide 13 — The Hawthorne Studies",
+      ans:"Experiments at Western Electric 1924–1932. 'Productivity unexpectedly increased under imposed adverse working conditions. The effect of incentive plans was less than expected. Social norms, group standards and attitudes influence individual output more strongly than monetary incentives.'" },
+    { q:"What is organizational culture? Strong vs weak culture.",
+      fk:"M3", slide:"Slides 10–14 — Organizational Culture",
+      ans:"'A system of shared values, traditions, principles, meanings and ways of doing things that influence how organizational members act.' Strong culture: key values intensely held and widely shared → high organizational performance. Employees learn culture through: stories/heroes, rituals, material symbols, language." },
+    { q:"What is SWOT and PEST?",
+      fk:"M3", slide:"Slide 5 — General environmental factors / Slide 9 — SWOT",
+      ans:"PEST = Political/legal, Economic, Sociocultural, Technological trends (general environment analysis). SWOT = Strengths, Weaknesses (internal) + Opportunities, Threats (external). Used for environmental scanning." },
+  ],
+  "7-0": [ // Day 8 Solo — Management Block 2
+    { q:"Classical view vs socioeconomic view of social responsibility.",
+      fk:"M4", slide:"Slides 7–8 — What Is Social Responsibility?",
+      ans:"Classical (shareholder model): 'Management's only social responsibility is to maximize profits… expending resources on social good unjustifiably increases costs.' Socioeconomic (stakeholder model): 'responsibility goes beyond making profits to include protecting and improving society's welfare.'" },
+    { q:"Carroll's pyramid of social responsibility — 4 levels.",
+      fk:"M4", slide:"Slide 9 — Carroll's pyramid",
+      ans:"1. Economic (be profitable). 2. Legal (obey the law). 3. Ethical (be ethical beyond law). 4. Discretionary (be a good corporate citizen, give back). Companies are responsible to: shareholders, employees, customers, government, local community, environment, general public." },
+    { q:"What are the 4 ways to encourage ethical behavior in an organization?",
+      fk:"M4", slide:"Slide 5 — Encouraging Ethical Behaviour",
+      ans:"1. Hire individuals with high ethical standards (integrity tests). 2. Establish codes of ethics and decision rules. 3. Provide ethics training. 4. Create an ethical climate." },
+    { q:"Draw the interpersonal communication model — all components.",
+      fk:"M5", slide:"Slides 7–8 — Interpersonal Communication Process",
+      ans:"Sender → Encoding (message converted to symbolic form) → Channel (medium) → Message → Decoding (receiver retranslates) → Receiver → Feedback. Noise = disturbances that interfere anywhere (illegible print, phone static, inattention, background sounds)." },
+    { q:"What is selective perception? What is the fundamental attribution error?",
+      fk:"M5", slide:"Slides 3–6 — Perception / Attribution Theory",
+      ans:"Selective perception: 'tendency to notice and accept objects and information consistent with our values, beliefs, expectations while ignoring inconsistent information.' Fundamental attribution error: 'tendency to underestimate the influence of external factors and overestimate internal/personal factors when judging others.' Self-serving bias: attribute own successes to internal factors, failures to external." },
+    { q:"What are the 3 types of plans and which manager uses each?",
+      fk:"M6", slide:"Slide 8 — Types of Plans",
+      ans:"Strategic plans: top management, 2–5 years, entire organization. Tactical plans: middle management, 6 months–2 years, how resources will be used. Operational plans: first-line managers, day-to-day, specify details of how goals are achieved." },
+    { q:"What is MBO (Management by Objectives)? Key elements.",
+      fk:"M6", slide:"Slide 9 — Management By Objectives",
+      ans:"'Specific performance goals are jointly determined by employees and managers. Progress toward accomplishing goals is periodically reviewed. Rewards are allocated based on progress.' Key elements: goal specificity, participative decision making, explicit time period, performance feedback." },
+    { q:"What is bounded rationality in decision-making?",
+      fk:"M6", slide:"Slide 15 — Decision Making / Bounded Rationality",
+      ans:"Managers cannot process all available information, so they 'satisfice' — choose a good-enough solution rather than the optimal one. Planning can create a 'false sense of certainty' — listed as a disadvantage of planning on slide 3." },
+  ],
+  "8-0": [ // Day 9 Solo — Management Block 3
+    { q:"What is the S-curve of innovation? Revolutionary vs incremental change.",
+      fk:"M8", slide:"Slide 5–7 — S-curve / Types of change",
+      ans:"S-curve: 'slow initial progress, then rapid progress, then slow progress again as technology matures and reaches its limits.' Revolutionary change: breakthrough in performance, different design, aim is much better performance. Incremental change: lowering costs and improving the dominant design. Example: Kodak, Video→DVD→Blu-ray." },
+    { q:"Why do people resist change? 4 reasons.",
+      fk:"M8", slide:"Slide 11 — Why People Resist Change",
+      ans:"1. Ambiguity and uncertainty that change introduces. 2. Comfort of old habits. 3. Concern over personal loss of status, money, authority, friendships, personal convenience. 4. Perception that change is incompatible with goals and interest of the organization." },
+    { q:"What is Lewin's 3-step change model?",
+      fk:"M8", slide:"Slide 12 — Kurt Lewin",
+      ans:"1. Unfreezing the status quo (creating motivation to change). 2. Changing to a new state. 3. Refreezing to make the change permanent (embedding it into culture, norms, procedures)." },
+    { q:"What are the 6 key elements of organizational design?",
+      fk:"M9", slide:"Slide 4 — Designing Organizational Structure",
+      ans:"1. Departmentalization. 2. Chain of command. 3. Span of control. 4. Centralization and decentralization. 5. Work specialization. 6. Formalization." },
+    { q:"What are the 5 types of departmentalization? Pros and cons of each.",
+      fk:"M9", slide:"Slides 6–11 — Departmentalization by Type",
+      ans:"Functional (by function: + specialization, - poor cross-communication). Product (by product line: + expertise, - duplication). Geographical (by territory: + regional fit, - duplication). Customer (by customer type: + customer focus, - duplication). Matrix (hybrid, usually product+functional: + cooperation, - two bosses)." },
+    { q:"What is chain of command? Unity of command?",
+      fk:"M9", slide:"Slide 12 — Organizational Authority",
+      ans:"Chain of command: 'the continuous line of authority that extends from upper to lowest levels and clarifies who reports to whom.' Authority: rights inherent in a managerial position to tell people what to do. Unity of command: 'a person should have one boss and should report only to that person.'" },
+    { q:"What are Tuckman's 5 stages of group development?",
+      fk:"M10", slide:"Slide 8 — Stages of Group Development",
+      ans:"1. Forming: members join, define purpose, structure, leadership. 2. Storming: intragroup conflict over control. 3. Norming: close relationships develop, group becomes cohesive, norms established. 4. Performing: fully functional, focus on task. 5. Adjourning: group prepares to disband (for temporary/project teams)." },
+    { q:"What is groupthink? What are team norms and cohesiveness?",
+      fk:"M10", slide:"Slide 3–7 — Teams: Pros and Cons / Work team characteristics",
+      ans:"Groupthink is listed under team CONS: pressure to conform suppresses dissent, leads to poor decisions. Norms: 'informally agreed-upon standards that regulate team behavior.' Cohesiveness: 'extent to which team members are attracted to a team and motivated to remain in it.' Optimal team size: 6–9." },
+  ],
+  "9-0": [ // Day 10 Solo — Management Block 4 (HRM, Motivation, Leadership, Controlling)
+    { q:"What is the difference between a job description and a job specification?",
+      fk:"M11", slide:"Slide 5 — Current Assessment",
+      ans:"Job description: 'a written description of the basic tasks, duties, and responsibilities required of an employee holding a particular job (job content, environment, conditions).' Job specification: 'a written statement of the minimum qualifications that a person must possess to perform a given job successfully.'" },
+    { q:"What is validity vs reliability in selection?",
+      fk:"M11", slide:"Slide 8 — Validity and Reliability",
+      ans:"Validity: 'a proven relationship between the selection device used and some relevant criterion for successful performance — high test scores equate to high job performance.' Reliability: 'the degree of consistency with which a selection device measures the same thing — scores are consistent over multiple testing instances.'" },
+    { q:"What are Maslow's 5 levels of needs?",
+      fk:"M12", slide:"Slides 4–5 — Maslow's Hierarchy of Needs",
+      ans:"(bottom to top): 1. Physiological (food, water). 2. Safety. 3. Social (belongingness). 4. Esteem. 5. Self-actualization. Lower-order needs are external; higher-order are internal. 'Satisfied needs will no longer motivate.' Note: 'No empirical support' — this is the main criticism." },
+    { q:"What is McClelland's Three-Needs Theory?",
+      fk:"M12", slide:"Slide 6 — Three-Needs Theory",
+      ans:"Three acquired (not innate) needs: Need for Achievement (drive to excel; high achievers avoid very easy and very difficult tasks). Need for Power (need to influence others' behavior). Need for Affiliation (desire for interpersonal relationships)." },
+    { q:"What is Equity Theory? What are inputs and outcomes?",
+      fk:"M12", slide:"Slides 9–10 — Equity Theory",
+      ans:"'People will be motivated at work when they perceive that they are being treated fairly.' Inputs: contributions to organization (education, training, intelligence, experience, effort, hours, ability). Outcomes: rewards received (pay, benefits, status symbols, job titles). Referents: others with whom people compare themselves." },
+    { q:"What is Fiedler's Contingency Theory? What does LPC measure?",
+      fk:"M13", slide:"Slides 6–7 — Fiedler's Contingency Theory",
+      ans:"'Effective group performance depends upon the proper match between the leader's style and the degree of control and influence in the situation.' LPC (Least-Preferred Co-worker) questionnaire: 18 pairs of contrasting adjectives. High score (≥64) = relationship-oriented leader. Low score (≤57) = task-oriented leader. Situational factors: leader-member relations, task structure, position power." },
+    { q:"What are the 3 types of control: feedforward, concurrent, feedback?",
+      fk:"M14", slide:"Slide 7 — Feedforward, Concurrent, Feedback Control",
+      ans:"Feedforward control: 'prevents anticipated problems before actual occurrences.' Concurrent control: 'takes place while a work activity is in progress.' Feedback control: 'takes place after an activity is done.' The 4-step control process: 1.Set standards → 2.Measure actual performance → 3.Compare against standard → 4.Take corrective action." },
+    { q:"What is a Balanced Scorecard?",
+      fk:"M14", slide:"Slide 11 — Balanced Scorecard",
+      ans:"'A measurement tool that uses goals set by managers in four areas to measure a company's performance: Financial (cash flow, balance sheet, income statement). Customer (customer defections). Internal processes (quality & value). People/innovation/growth assets (waste, pollution).'" },
+  ],
+};
+
+const D = [
+  { date:"Fri, June 5", cd:"D–11", subj:"LAW", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"0-0", d:`
       <strong>READ:</strong> Lecture 1 (Introduction) + Lecture 2 (Forms of State).<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
         <li>What is a state? Name its 3 main elements (territory, population, sovereignty).</li>
-        <li>What is the rule of law / legal state?</li>
         <li>Unitary state: definition + 3 examples + 2 advantages + 2 disadvantages.</li>
-        <li>Federation: definition + 3 examples + how it differs from unitary.</li>
-        <li>Confederation: definition + 3 examples + difference from federation.</li>
-        <li>Draw a simple table: Unitary vs Federation vs Confederation — 3 rows of difference.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: what the state is, the 3 forms, definitions and examples. Mama listens, does not interrupt. Denis teaches as if Mama knows nothing."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>What makes Serbia a unitary state? Could it become a federation?</li>
-        <li>Former Yugoslavia — was it a federation or confederation? Why?</li>
-        <li>Is the EU a federation, confederation, or neither? Explain in detail.</li>
+        <li>Federation: definition + 3 examples + key difference from unitary (sovereignty).</li>
+        <li>Confederation: definition + 3 examples + difference from federation (keeps autonomy).</li>
+        <li>Draw a table: Unitary vs Federation vs Confederation — 3 rows of difference.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: what the state is, the 3 forms, definitions and examples. Mama listens, does not interrupt."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>What makes Serbia a unitary state?</li>
+        <li>Former Yugoslavia — federation or confederation? Why?</li>
+        <li>Is the EU a federation, confederation, or neither? Explain.</li>
         <li>What is sovereignty and who holds it in a federation vs confederation?</li>
         <li>What is the rule of law? Give a real-life example of it being violated.</li>
-        <li>What are the advantages and disadvantages of a unitary state?</li>
-        <li>Can a federal government abolish a state? Why or why not?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Gap List",d:"Denis writes: 3 things he could not answer confidently. These carry to Day 2."}
+        <li>Advantages and disadvantages of unitary state vs federation.</li>
+        <li>Can a federal government abolish a state/republic?</li>
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes 3 things he could not answer confidently. These carry to Day 2."}
   ]},
-
-  // ─── DAY 2 · SAT JUNE 6 · LAW ───────────────────────────────────────────
-  {date:"Sat, June 6",cd:"D–10",subj:"LAW",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+  { date:"Sat, June 6", cd:"D–10", subj:"LAW", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"1-0", d:`
       <strong>READ:</strong> Lecture 3 (Notion of Law, Types, Legal Norm) + Lecture 4 (Legal Acts & Hierarchy).<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>4 types of social norms — social convention, custom, moral norm, legal rule. One example of each. What happens if you break each one?</li>
-        <li>What is "positive law" vs "natural law"? Which philosophers defined natural law?</li>
-        <li>What is public law vs private law — 2 examples of each.</li>
-        <li>Draw the hierarchy of legal sources in Serbia from top to bottom (5 levels).</li>
-        <li>What is a general legal act? What is an individual legal act? One example each.</li>
-        <li>What is the Constitution and why is it at the top of the hierarchy?</li>
-        <li>Hard (rigid) constitution vs soft (flexible) constitution — examples of each.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: types of norms, what makes a rule legally binding, public vs private law, hierarchy of sources in Serbia from constitution down to individual acts."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>You arrive late to a dinner — which norm did you break? What is the consequence?</li>
-        <li>You run a red light — which norm? What consequence?</li>
-        <li>You feel guilty after lying to a friend — which norm?</li>
+        <li>4 types of social norms + consequence of breaking each.</li>
+        <li>Natural law vs positive law — who defined each?</li>
+        <li>Public law vs private law — 2 examples of each.</li>
+        <li>Draw the 5-level hierarchy of legal sources in Serbia top to bottom.</li>
+        <li>General legal act vs individual legal act — one example each.</li>
+        <li>Hard (rigid) constitution vs soft (flexible) constitution — one example each.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: types of norms, what makes a rule legally binding, public vs private law, hierarchy of sources from constitution down to individual acts."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>You arrive late to a dinner — which norm? Consequence?</li>
+        <li>You run a red light — which norm? Consequence?</li>
+        <li>You feel guilty after lying — which norm?</li>
         <li>What separates a legal norm from all other social norms?</li>
-        <li>What is the Golden Rule and does it exist in law?</li>
-        <li>Name the 5 levels of the Serbian legal hierarchy in order.</li>
+        <li>Name the 5 levels of Serbian legal hierarchy in order.</li>
         <li>Can a court verdict be a formal legal source in Serbia? When?</li>
-        <li>What is the difference between a written and unwritten constitution? Examples of each.</li>
-        <li>What does "enacted by the people" mean for a constitution?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Gap List",d:"Denis adds to his running gap list. Any unanswered questions from Day 1 get reviewed first 5 minutes."}
+        <li>Difference between written and unwritten constitution — examples?</li>
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis adds to running gap list. Day 1 gaps reviewed first 5 minutes."}
   ]},
-
-  // ─── DAY 3 · SUN JUNE 7 · LAW ───────────────────────────────────────────
-  {date:"Sun, June 7",cd:"D–9",subj:"LAW",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+  { date:"Sun, June 7", cd:"D–9", subj:"LAW", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"2-0", d:`
       <strong>READ:</strong> Lecture 5 (Regional Integration) + Lecture 6 (EU Legal & Institutional System).<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Timeline: ECSC 1951 → EEC + Euratom 1957 → Maastricht 1992 → Amsterdam 1997 → Nice 2001 → Lisbon 2007. One sentence per event.</li>
-        <li>What are the 4 freedoms of the EU single market?</li>
-        <li>What does "sui generis" mean and why is it applied to the EU?</li>
-        <li>Name the 5 main EU institutions and write one sentence about what each does: European Parliament, European Council, Council of the EU, European Commission, Court of Justice.</li>
-        <li>What is EU citizenship? What rights does it give you?</li>
-        <li>What is the difference between economic integration and political integration?</li>
-        <li>What is a customs union? What is a single market?</li>
+        <li>Timeline: ECSC 1951 → EEC+Euratom 1957 → Maastricht 1992 → Amsterdam 1997 → Nice 2001 → Lisbon 2007. One sentence per event.</li>
+        <li>4 freedoms of the EU single market.</li>
+        <li>What does "sui generis" mean and why does it apply to the EU?</li>
+        <li>5 main EU institutions — one sentence each: Parliament, Council, Commission, European Council, Court of Justice.</li>
+        <li>EU citizenship — what rights does it give?</li>
         <li>Why did the EU Constitution fail in 2005?</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: regional integration concept, the EU from ECSC origins through Lisbon Treaty, the 5 institutions, EU citizenship, why the EU is sui generis."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>Why was the ECSC created after WWII? Which 6 countries signed?</li>
-        <li>What did the Treaties of Rome (1957) create?</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: regional integration concept, EU from ECSC through Lisbon, 5 institutions, EU citizenship, why the EU is sui generis."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>Why was the ECSC created? Which 6 countries signed?</li>
+        <li>What did the Treaties of Rome create?</li>
         <li>What 3 pillars did Maastricht create?</li>
-        <li>What is the difference between the EU Council and the Council of Europe?</li>
+        <li>Difference between EU Council and Council of Europe?</li>
         <li>Can an EU citizen vote in local elections in a country where they are not a citizen?</li>
-        <li>What is the difference between a free trade area and a customs union?</li>
-        <li>Name 3 advantages and 3 disadvantages of regional integration.</li>
+        <li>Free trade area vs customs union — what is the difference?</li>
         <li>Serbia is not in the EU — what is its relationship with the EU?</li>
-        <li>What would change for Serbia if it joined the EU tomorrow?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Gap List",d:"Denis writes EU institutions and their roles from memory — no notes — as final check."}
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes EU institutions and their roles from memory — no notes — as final check."}
   ]},
-
-  // ─── DAY 4 · MON JUNE 8 · LAW ───────────────────────────────────────────
-  {date:"Mon, June 8",cd:"D–8",subj:"LAW",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+  { date:"Mon, June 8", cd:"D–8", subj:"LAW", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"3-0", d:`
       <strong>READ:</strong> Lecture 7 (Natural & Juridical Persons, Legal Capacity) + Lecture 8 (Civil Law & Property Law).<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Natural person vs juridical person — definition of each, 4 examples of juridical persons.</li>
-        <li>Passive legal capacity: when does it begin and end for a natural person?</li>
-        <li>Active legal capacity: when is it full? When is it restricted? Two cases of restriction.</li>
-        <li>What elements identify a natural person? (name, residence, citizenship, ID number)</li>
-        <li>What elements identify a juridical person? (business name, registration number, tax ID, registered address)</li>
-        <li>Civil law: definition, origins in Roman law, where it is used in the world (60% of countries).</li>
-        <li>Napoleonic Code (1804): 3 main categories. German BGB (1900): 5 parts — list them.</li>
-        <li>4 basic principles of civil law: equality, autonomous will, sanctions affect property, rights are transferable.</li>
-        <li>Objects of civil law: 4 types (tangible property, human actions, personal goods, intangible property). One example each.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: legal subjects (natural vs juridical), legal capacity (active vs passive), civil law origins, principles, Napoleonic Code vs BGB structure."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>Is a 15-year-old a legal subject? What can they do legally, and what can they not?</li>
+        <li>Natural person vs juridical person — definition + 4 examples of juridical persons.</li>
+        <li>Passive legal capacity: when does it begin and end?</li>
+        <li>Active legal capacity: when is it full? Two cases when it is restricted.</li>
+        <li>4 basic principles of civil law.</li>
+        <li>Napoleonic Code (1804): 3 categories.</li>
+        <li>German BGB (1900): 5 parts — list all 5.</li>
+        <li>Objects of civil law: 4 types + one example each.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: legal subjects (natural vs juridical), legal capacity (active vs passive), civil law origins, 4 principles, Napoleonic Code vs BGB structure."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>Is a 15-year-old a legal subject? What can they do legally and what not?</li>
         <li>Can a company own property? Sue someone? Get married?</li>
-        <li>What rights are exclusive to natural persons — not available to companies?</li>
-        <li>What does "sanctions affect property, not a person" mean? Give an example.</li>
+        <li>What rights are exclusive to natural persons?</li>
+        <li>What does "sanctions affect property, not a person" mean? Example.</li>
         <li>I buy bread from a bakery — is this a civil law relationship? Who are the parties? What is the object?</li>
-        <li>What is the principle of "autonomous will" in civil law? Are there limits to it?</li>
-        <li>Name 3 countries that use civil law systems. Name 2 that do not.</li>
-        <li>What is the difference between public law and private law — which side is civil law on?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Gap List",d:"Denis writes the German BGB 5 parts from memory. Any blanks become priority for Day 5."}
+        <li>Name 3 countries with civil law systems. Name 2 that do not.</li>
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes the German BGB 5 parts from memory. Blanks = priority for Day 5."}
   ]},
-
-  // ─── DAY 5 · TUE JUNE 9 · LAW ───────────────────────────────────────────
-  {date:"Tue, June 9",cd:"D–7",subj:"LAW",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+  { date:"Tue, June 9", cd:"D–7", subj:"LAW", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"4-0", d:`
       <strong>READ:</strong> Lecture 9 (Ownership & Possession) — final Law lecture.<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Ownership definition. The 4 rights of the owner: <em>possessio</em> (physical control), <em>usus</em> (use it), <em>fructus</em> (collect profits from it), <em>abusus</em> (transfer or destroy it).</li>
-        <li>What does "absolute" mean in ownership (erga omnes)? What does "exclusive" mean?</li>
+        <li>Ownership definition. The 4 rights of the owner: possessio, usus, fructus, abusus — one sentence each.</li>
+        <li>What does "absolute" (erga omnes) mean in ownership?</li>
         <li>3 modalities of ownership in Serbia: co-ownership, community (joint) ownership, condominium. Definition + example of each.</li>
-        <li>Co-ownership: can a co-owner sell their share without asking others? What is pre-emption right?</li>
-        <li>Community ownership: examples — husband and wife, inheritance. Key difference from co-ownership: shares are NOT defined.</li>
-        <li>Condominium: apartment building, common areas — who manages them?</li>
-        <li>Possession vs ownership: what is the difference? Can you possess something you don't own? Example.</li>
-        <li>Acquisitive prescription: becoming owner through long-term possession — what are the conditions?</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: ownership, the 4 rights (usus/fructus/abusus/possession), 3 types of ownership, co-ownership rules, difference between ownership and possession."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>I own an apartment. Name all 4 rights I have over it. Now tell me which one I use when I rent it out.</li>
-        <li>I own 40% of a house with two siblings. Which type of ownership? Can I sell my share without asking them? What right do they have?</li>
-        <li>Husband and wife — which type of ownership applies to shared property? What is different about it?</li>
+        <li>Co-ownership: can a co-owner sell without asking others? What is pre-emption right?</li>
+        <li>Community ownership: key difference from co-ownership (shares not defined).</li>
+        <li>Condominium: what do all owners share in common?</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: ownership, 4 rights (usus/fructus/abusus/possession), 3 types of ownership, co-ownership rules, difference between ownership and possession."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>I own an apartment. Name all 4 rights. Which one am I using when I rent it out?</li>
+        <li>I own 40% of a house with two siblings. Which type? Can I sell without asking them? What right do they have?</li>
+        <li>Husband and wife — which type of ownership? What is different?</li>
         <li>I live in an apartment building. I own my flat. What do I own with the other residents?</li>
-        <li>I have been living in an abandoned house for 10 years — what legal concept might apply?</li>
-        <li>What does "erga omnes" mean in practice — who has an obligation toward the owner?</li>
+        <li>What does "erga omnes" mean in practice?</li>
         <li>Can the state take your property? Under what conditions?</li>
-        <li>Denis writes a full 1-page summary of all 9 Law lectures from memory — 20 minutes.</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Final Law Gap List",d:"Denis writes every Law concept he is not 100% confident on. This list drives the mock exam on Day 6."}
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Final Law Gap List", d:"Denis writes every Law concept he is not 100% confident on. This drives the mock exam on Day 6."}
   ]},
-
-  // ─── DAY 6 · WED JUNE 10 · LAW MOCK ────────────────────────────────────
-  {date:"Wed, June 10",cd:"D–6",subj:"LAW",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo: Written Summary",d:`
+  { date:"Wed, June 10", cd:"D–6", subj:"LAW", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo: Written Summary", d:`
       <strong>NO NOTES. Write from memory only.</strong>
       <ul>
-        <li>One A4 page maximum. Cover all 9 lectures in your own words.</li>
-        <li>Must include: state elements · 3 forms of state · hierarchy of legal sources · natural vs juridical person · active vs passive capacity · civil law principles · Napoleonic Code vs BGB · EU timeline + 5 institutions · 3 ownership types · 4 owner rights.</li>
-        <li>Any blank = top priority for the joint session. Bring the written page.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:15",h:"Phase 2 — Denis Presents From Memory",d:"Denis talks through the full Law subject in 15 minutes with no notes. Mama listens and marks what sounds unsure."},
-    {solo:false, t:"7:15 – 8:15",h:"Phase 3 — Timed Mock Exam (Mama runs it)",d:`
-      Strict exam conditions. No hints. 2–3 minutes per question.
-      <ul>
+        <li>One A4 page. Cover all 9 lectures: state elements · 3 forms of state · hierarchy of legal sources · natural vs juridical person · active vs passive capacity · civil law principles · Napoleonic Code vs BGB · EU timeline + 5 institutions · 3 ownership types · 4 owner rights.</li>
+        <li>Any blank = top priority for joint session. Bring the written page.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:15", h:"Phase 2 — Denis Presents From Memory", d:"Denis talks through the full Law subject in 15 minutes, no notes. Mama marks what sounds unsure."},
+    { solo:false, t:"4:15 – 5:15", h:"Phase 3 — Timed Mock Exam", d:`Strict. No hints. 2–3 minutes per question.<ul>
         <li>Define the state. Name its 3 elements.</li>
-        <li>What is the difference between a federation and a confederation?</li>
-        <li>Explain the hierarchy of legal sources in Serbia from top to bottom.</li>
-        <li>What is the difference between a legal norm and a moral norm?</li>
-        <li>What are the 3 pillars of the Maastricht Treaty?</li>
+        <li>Difference between federation and confederation.</li>
+        <li>Hierarchy of legal sources in Serbia — top to bottom.</li>
+        <li>Difference between legal norm and moral norm.</li>
+        <li>3 pillars of the Maastricht Treaty.</li>
         <li>Name 4 EU institutions and one function of each.</li>
         <li>What is active legal capacity? When is it restricted?</li>
-        <li>What are the 5 parts of the German Civil Code (BGB)?</li>
+        <li>5 parts of the German Civil Code (BGB).</li>
         <li>What are the 4 rights of an owner?</li>
-        <li>What is the difference between co-ownership and community ownership?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:15 – 8:40",h:"Phase 4 — Self-Score + Weak List",d:"Denis marks every question he hesitated on. These are the only things to review on Day 12 (final sweep before exam)."}
+        <li>Difference between co-ownership and community ownership.</li>
+      </ul>`},
+    { solo:false, t:"5:15 – 5:40", h:"Phase 4 — Self-Score + Weak List", d:"Denis marks every question he hesitated on. This list drives Day 12 final sweep."}
   ]},
-
-  // ─── DAY 7 · THU JUNE 11 · MANAGEMENT ──────────────────────────────────
-  {date:"Thu, June 11",cd:"D–5",subj:"MANAGEMENT",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+  { date:"Thu, June 11", cd:"D–5", subj:"MANAGEMENT", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"6-0", d:`
       <strong>READ:</strong> L1 (Intro to Management) + L2 (Management History) + L3 (Org Culture & Environment).<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Management definition: coordinating and overseeing others. Efficiency ("doing things right") vs effectiveness ("doing the right things") — one real example of each.</li>
-        <li>3 levels of managers: first-line (supervisors), middle (regional managers), top (CEO, CFO). What does each level focus on?</li>
-        <li>4 management functions (Fayol): Planning · Organizing · Leading · Controlling. One sentence each.</li>
-        <li>Mintzberg's 3 role categories: Interpersonal (figurehead, leader, liaison) · Informational (monitor, disseminator, spokesperson) · Decisional (entrepreneur, disturbance handler, resource allocator, negotiator).</li>
-        <li>3 management skills: technical, human, conceptual. Which level needs which most?</li>
-        <li>Frederick Taylor — scientific management: time-and-motion studies, "one best way," incentive pay. Year: 1911.</li>
-        <li>Fayol's 14 principles — memorize at least: division of work, authority, unity of command, unity of direction, scalar chain, esprit de corps.</li>
-        <li>Max Weber — bureaucracy: rationality, predictability, impersonality, technical competence.</li>
-        <li>Hawthorne Studies (1924–1932): social norms matter more than lighting or incentives.</li>
-        <li>Organizational culture: "the way we do things around here." Strong vs weak culture. How culture is transmitted: stories, rituals, symbols, language.</li>
-        <li>SWOT analysis: Strengths · Weaknesses · Opportunities · Threats. PEST: Political · Economic · Sociocultural · Technological.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: what management is, 4 functions, 3 manager levels, history (Taylor, Fayol, Weber, Hawthorne), organizational culture, SWOT/PEST."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>What is the difference between efficiency and effectiveness? Can you be efficient but not effective?</li>
+        <li>Management definition: efficiency vs effectiveness — one real example of each.</li>
+        <li>3 levels of managers — what does each level focus on?</li>
+        <li>4 management functions (Fayol/Robbins) — one sentence each.</li>
+        <li>Mintzberg's 3 role categories + all roles within each (10 total).</li>
+        <li>3 management skills — which level needs which most?</li>
+        <li>Frederick Taylor — what problem, what solution, what year.</li>
+        <li>Fayol's 14 principles — memorize all 14 in order.</li>
+        <li>Hawthorne Studies — what was discovered.</li>
+        <li>Organizational culture — strong vs weak, 4 ways employees learn it.</li>
+        <li>SWOT + PEST — what each letter stands for.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: what management is, 4 functions, 3 manager levels, history (Taylor, Fayol, Weber, Hawthorne), organizational culture, SWOT/PEST."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>Efficiency vs effectiveness — can you be efficient but not effective?</li>
         <li>A factory supervisor — what level of manager? What skills matter most?</li>
         <li>What problem was Taylor trying to solve in 1911?</li>
         <li>What did the Hawthorne studies discover that surprised everyone?</li>
-        <li>Fayol said "unity of command." What does that mean? Why is it important?</li>
+        <li>Fayol said "unity of command" — what does that mean and why does it matter?</li>
         <li>What is organizational culture — can you see it? How?</li>
-        <li>What is a SWOT analysis? Do one for Nexus Hestia (Mama helps Denis apply it to a real company).</li>
-        <li>Name 3 management roles from Mintzberg's decisional category.</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Gap List",d:"Denis writes what he could not answer. Particularly: Mintzberg roles and Fayol's principles tend to be difficult — note any blanks."}
+        <li>Do a SWOT for a company Denis knows (e.g. Singidunum University).</li>
+        <li>Name 3 roles from Mintzberg's decisional category.</li>
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes what he could not answer. Mintzberg roles and Fayol's 14 principles are most commonly blank — note every gap."}
   ]},
-
-  // ─── DAY 8 · FRI JUNE 12 · MANAGEMENT ──────────────────────────────────
-  {date:"Fri, June 12",cd:"D–4",subj:"MANAGEMENT",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+  { date:"Fri, June 12", cd:"D–4", subj:"MANAGEMENT", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"7-0", d:`
       <strong>READ:</strong> L4 (Ethics & Social Responsibility) + L5 (Communication) + L6 (Planning & Decision Making).<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Ethics: principles that define right/wrong behavior. Factors affecting ethical behavior: issue intensity · individual moral development · organizational culture.</li>
-        <li>4 ways to encourage ethics: hire ethical people · code of ethics · ethics training · ethical climate.</li>
-        <li>Social responsibility — Classical/shareholder view (maximize profit only) vs Socioeconomic/stakeholder view (responsibility to society). Carroll's pyramid: Economic → Legal → Ethical → Discretionary.</li>
-        <li>Communication model: Sender → Encoding → Channel → Message → Decoding → Receiver → Feedback. Noise = disturbance anywhere in the process.</li>
-        <li>Selective perception: ignoring information that contradicts your beliefs. Fundamental attribution error: blame others' failures on personality, own failures on circumstance.</li>
-        <li>Formal vs informal communication. Downward (orders) · Upward (feedback, reports) · Lateral (between peers). The Grapevine = informal network.</li>
-        <li>Planning: choosing a goal and a method to achieve it. 3 types: Strategic (2–5 years, top management) · Tactical (6 months–2 years, middle) · Operational (daily, first-line).</li>
-        <li>SMART goals: Specific · Measurable · Attainable · Realistic · Timely.</li>
-        <li>MBO (Management by Objectives): jointly set goals, periodic review, reward based on progress.</li>
-        <li>Decision-making process: identify problem → identify criteria → weight criteria → generate alternatives → evaluate → choose → implement → evaluate.</li>
-        <li>Bounded rationality: we cannot process all information, so we "satisfice" — choose good enough, not optimal.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: ethics and social responsibility, the full communication model, planning types, SMART goals, MBO, decision-making process."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>What is the classical view of social responsibility? Who argued for it? What are its limits?</li>
-        <li>What is a code of ethics? Does having one guarantee ethical behavior?</li>
+        <li>Classical view vs socioeconomic view of social responsibility — who argued for each.</li>
+        <li>Carroll's pyramid — 4 levels in order from bottom.</li>
+        <li>4 ways to encourage ethical behavior in an organization.</li>
+        <li>Draw the communication model: all 7 components + noise.</li>
+        <li>Selective perception definition + example. Fundamental attribution error definition + example.</li>
+        <li>3 types of plans + which manager level uses each + timeframe.</li>
+        <li>SMART — what each letter means + create one SMART goal for studying.</li>
+        <li>MBO — 4 key elements.</li>
+        <li>The 8-step decision-making process in order.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: ethics and social responsibility, full communication model, planning types, SMART goals, MBO, decision-making process."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>What is the classical view of social responsibility? Who argued for it?</li>
+        <li>What is a code of ethics — does having one guarantee ethical behavior?</li>
         <li>Draw the communication model from memory and explain what "noise" is.</li>
-        <li>What is selective perception? Give an example from work or daily life.</li>
         <li>What is the fundamental attribution error? Why does it happen?</li>
-        <li>What is the difference between a strategic plan and an operational plan? Which manager uses each?</li>
-        <li>What does SMART mean? Create a SMART goal for Denis's exam preparation.</li>
+        <li>Difference between strategic and operational plan? Which manager uses each?</li>
+        <li>Create a SMART goal for Denis's exam preparation.</li>
         <li>What is bounded rationality? When do managers use it?</li>
         <li>What is MBO — why does it motivate employees?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Gap List",d:"Denis writes all gaps. Particular attention: communication model steps in order, the full decision-making process sequence."}
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes all gaps. Particular attention: communication model steps in order, 8-step decision-making process sequence."}
   ]},
-
-  // ─── DAY 9 · SAT JUNE 13 · MANAGEMENT ──────────────────────────────────
-  {date:"Sat, June 13",cd:"D–3",subj:"MANAGEMENT",strip:null,phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
+  { date:"Sat, June 13", cd:"D–3", subj:"MANAGEMENT", strip:null, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"8-0", d:`
       <strong>READ:</strong> L8 (Innovation & Change) + L9 (Organizational Structure) + L10 (Managing Teams).<br>
-      <strong>WRITE IN YOUR OWN WORDS:</strong>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Organizational change: any alteration in people, structure, or technology. External forces: market, laws, technology, economy. Internal forces: strategy changes, workforce, new equipment, attitudes.</li>
-        <li>S-curve of innovation: slow start → rapid growth → plateau as technology matures. Revolutionary change (breakthrough) vs incremental change (cost reduction). Example: Kodak, DVD→Blu-ray.</li>
-        <li>Why people resist change: uncertainty · comfort of old habits · fear of losing status/money/friendships · incompatibility with goals.</li>
-        <li>Lewin's 3-step change model: Unfreeze (create motivation to change) → Change (move to new state) → Refreeze (make it permanent).</li>
-        <li>Organizational design — 6 key elements: departmentalization · chain of command · span of control · centralization/decentralization · work specialization · formalization.</li>
-        <li>5 types of departmentalization: Functional · Product · Geographical · Customer · Matrix. Pros and cons of each.</li>
-        <li>Chain of command: who reports to whom. Authority: right to tell people what to do. Unity of command: one boss only.</li>
-        <li>Span of control: how many employees one manager oversees. Wide vs narrow — tradeoffs.</li>
-        <li>Tuckman's 5 stages of group development: Forming → Storming → Norming → Performing → Adjourning.</li>
-        <li>Team types: Cross-functional · Virtual · Project teams.</li>
-        <li>Team characteristics: norms · cohesiveness · optimal size (6–9) · a-type conflict (affective, bad) vs c-type conflict (cognitive, productive).</li>
-        <li>Groupthink: pressure to conform, suppressing dissent. Why it is dangerous.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:20",h:"Phase 2 — Denis Explains",d:"Denis presents: change and innovation (S-curve, resistance, Lewin), org structure (6 elements, 5 departmentalization types), team types and stages."},
-    {solo:false, t:"7:20 – 8:20",h:"Phase 3 — Mama Quizzes Denis",d:`
-      <ul>
-        <li>What is the S-curve of innovation? Where is a company most vulnerable on that curve?</li>
-        <li>Name 4 reasons people resist change. Which do you think is the most powerful?</li>
-        <li>Walk me through Lewin's 3 steps. Give a real example (e.g., changing a school's grading system).</li>
-        <li>What is matrix departmentalization? What are its advantages and the famous disadvantage?</li>
+        <li>S-curve: slow start → rapid growth → plateau. Revolutionary vs incremental change — definition + example of each.</li>
+        <li>4 reasons people resist change.</li>
+        <li>Lewin's 3-step model: unfreeze → change → refreeze. One sentence each step.</li>
+        <li>6 key elements of organizational design.</li>
+        <li>5 types of departmentalization: name + one advantage + one disadvantage each.</li>
+        <li>Chain of command + unity of command — definitions.</li>
+        <li>Tuckman's 5 stages of group development in order — one sentence each.</li>
+        <li>Groupthink definition + why it is dangerous.</li>
+        <li>3 special kinds of teams: cross-functional, virtual, project.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: change and innovation (S-curve, resistance, Lewin), org structure (6 elements, 5 departmentalization types), team types and stages."},
+    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
+        <li>Where is a company most vulnerable on the S-curve?</li>
+        <li>Name 4 reasons people resist change. Which is most powerful?</li>
+        <li>Walk through Lewin's 3 steps with a real example.</li>
+        <li>What is matrix departmentalization? Advantage and the famous disadvantage?</li>
         <li>What is "span of control"? When would a manager want a narrow span?</li>
-        <li>Name the 5 stages of team development. What typically happens at Storming?</li>
-        <li>What is groupthink? How can a team leader prevent it?</li>
-        <li>What is the difference between a cross-functional team and a project team?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Gap List",d:"Denis notes gaps — especially Tuckman stages in order and the 6 elements of org design."}
+        <li>Name the 5 stages of team development in order. What happens at Storming?</li>
+        <li>What is groupthink? How can a leader prevent it?</li>
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis notes gaps — especially Tuckman stages in order and the 6 elements of org design."}
   ]},
-
-  // ─── DAY 10 · SUN JUNE 14 · COMPUTERS ──────────────────────────────────
-  {date:"Sun, June 14",cd:"D–2",subj:"COMPUTERS",strip:{l:"COMPUTERS EXAM",e:"Friday June 19"},phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo Prep",d:`
-      <strong>THIS IS A PRACTICAL WORD FORMATTING EXAM. You must know how to execute each task, not just describe it.</strong><br>
-      Study the exam PDF carefully. Write down the exact settings for each task:<br><br>
-      <strong>SECTION 1 — Page Layout & Styles:</strong>
-      <ul>
-        <li>Paper: A4 · Orientation: Portrait · Margins: Left 2.4cm · Right 2.4cm · Top 2.1cm · Bottom 2.1cm.</li>
-        <li>Header from top: 1.2cm · Footer from bottom: 0.8cm · First page different: YES.</li>
-        <li>Style Heading 1: Times New Roman 14pt · Heading 2: Times New Roman 13pt · Heading 3: Times New Roman 12pt. Other formatting as shown in the exam document (bold/italic/underline as shown).</li>
-        <li>Style Normal: Times New Roman 12pt · Justify alignment (text from left margin to right margin).</li>
-        <li>Multilevel enumeration in paragraph 1.1 — know how to set multilevel list (1 / 1.1 / 1.1.1 format).</li>
-      </ul>
-      <strong>SECTION 2 — Functions:</strong>
-      <ul>
-        <li>Page color and page border: Page Layout → Page Color + Page Borders. Choose your own but know the steps.</li>
-        <li>Paragraph 2.1.1 — Big First Letter (Drop Cap): line spacing 1.3cm · first row indent 1.2cm · drop cap = 2 lines high · 0.3cm from text. (Insert → Drop Cap → Options)</li>
-        <li>Paragraph 2.1.2 — Reduced desktop (hanging indent): remaining rows recessed 2.1cm from left · reduce text area 0.6cm left + 1.3cm right margin.</li>
-        <li>Text Effects (2.2.1): strikethrough · expanded character spacing · shadow/outline · subscript · superscript — know where each is (Home → Font dialog).</li>
-        <li>Symbols (2.2.2): Insert → Symbol → Special Characters: TradeMark ™ · Copyright © · Registered ®</li>
-        <li>Picture (2.3): Insert → Picture · resize to 2.1cm × 2.0cm · insert hyperlink on picture: right-click → Hyperlink → www.singidunum.ac.rs</li>
-        <li>Table (2.4): Insert → Table. Row 1 height 0.6cm width 4cm · Row 2 height 1.2cm width 4cm. 3+ different cell colors. 3+ different border styles. (Table Tools → Design → Borders + Shading)</li>
-        <li>Organization Chart (2.5): Insert → SmartArt → Hierarchy. Structure: General Manager → Marketing Manager, Financial Manager, Sales Manager, HR Manager. Each manager has subordinates as shown in the exam.</li>
-        <li>Table of Contents: References → Table of Contents → Automatic. Requires Heading styles to be applied first. Will auto-generate all headings with page numbers.</li>
-        <li>Footnote: References → Insert Footnote. Appears at bottom of page with a number in superscript in the text.</li>
-      </ul>
-      <strong>KNOW THESE KEYBOARD SHORTCUTS:</strong> Ctrl+S (save) · Ctrl+Z (undo) · Ctrl+Enter (page break) · Ctrl+Shift+P (font size) · Ctrl+E (center) · Ctrl+J (justify) · Ctrl+L (left align).
-    `},
-    {solo:false, t:"7:00 – 7:30",h:"Phase 2 — Denis Explains All Tasks",d:"Denis walks through every task from the exam PDF in sequence. For each one: names the task, says where the menu/dialog is, and describes the exact settings. Mama follows along."},
-    {solo:false, t:"7:30 – 8:20",h:"Phase 3 — Mama Quizzes Denis: Terminology + Steps",d:`
-      <ul>
-        <li>Where do you change paper size and orientation in Word?</li>
-        <li>What is a "style" in Word? What is the difference between Heading 1 and Normal style?</li>
-        <li>How do you change the margin settings for a document? Where is that menu?</li>
+  { date:"Sun, June 14", cd:"D–2", subj:"COMPUTERS", strip:{l:"COMPUTERS EXAM", e:"Friday June 19"}, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", d:`
+      <strong>PRACTICAL WORD FORMATTING EXAM. Know how to execute every task.</strong><br>
+      Study the exam PDF. Memorize exact settings:<br><br>
+      <strong>Page Layout:</strong> A4 · Portrait · Margins: Left 2.4cm · Right 2.4cm · Top 2.1cm · Bottom 2.1cm · Header from top 1.2cm · Footer from bottom 0.8cm · First page different: YES.<br><br>
+      <strong>Styles:</strong> Heading 1 = Times New Roman 14pt · Heading 2 = 13pt · Heading 3 = 12pt · Normal = Times New Roman 12pt Justify.<br><br>
+      <strong>Paragraph tasks:</strong> Drop Cap (Insert → Drop Cap → Options): 2 lines high · 0.3cm from text · first row indent 1.2cm · line spacing 1.3cm. Hanging indent: remaining rows recessed 2.1cm · reduce text area 0.6cm left + 1.3cm right.<br><br>
+      <strong>Text effects:</strong> Strikethrough · expanded character spacing · shadow/outline · subscript · superscript → all in Home → Font dialog.<br><br>
+      <strong>Symbols:</strong> Insert → Symbol → Special Characters: ™ · © · ®<br><br>
+      <strong>Picture:</strong> Insert → Picture · resize to 2.1cm × 2.0cm · hyperlink: right-click → Hyperlink → www.singidunum.ac.rs<br><br>
+      <strong>Table:</strong> Row 1: height 0.6cm width 4cm · Row 2: height 1.2cm width 4cm · 3+ colors · 3+ border styles → Table Tools → Design.<br><br>
+      <strong>SmartArt org chart:</strong> Insert → SmartArt → Hierarchy. General Manager → Marketing/Financial/Sales/HR Managers → their subordinates.<br><br>
+      <strong>Table of Contents:</strong> References → Table of Contents → Automatic. Requires Heading styles applied first.<br><br>
+      <strong>Footnote:</strong> References → Insert Footnote.<br><br>
+      <strong>Shortcuts:</strong> Ctrl+S · Ctrl+Z · Ctrl+Enter (page break) · Ctrl+J (justify) · Ctrl+E (center).`},
+    { solo:false, t:"4:00 – 4:30", h:"Phase 2 — Denis Explains All Tasks", d:"Denis walks through every task from the exam PDF in sequence — names the task, says the menu path, describes the exact settings. Mama follows along."},
+    { solo:false, t:"4:30 – 5:20", h:"Phase 3 — Mama Quizzes: Terminology + Menu Paths", d:`<ul>
+        <li>Where do you change paper size and orientation?</li>
+        <li>What is a "style" — difference between Heading 1 and Normal?</li>
         <li>What is a Drop Cap? How many steps to insert one? What settings did the exam require?</li>
-        <li>What is a "hanging indent"? How is it different from a first-line indent?</li>
-        <li>Where do you find Strikethrough in Word? And superscript?</li>
-        <li>How do you insert a Trademark symbol ™? Two ways.</li>
+        <li>What is a hanging indent? How is it different from first-line indent?</li>
+        <li>Where do you find Strikethrough? Superscript?</li>
+        <li>How do you insert the ™ symbol? Two ways.</li>
         <li>How do you add a hyperlink to a picture?</li>
         <li>How do you set a specific row height in a Word table?</li>
-        <li>What is SmartArt? Where do you find it? Which category for an org chart?</li>
+        <li>What is SmartArt? Which category for an org chart?</li>
         <li>How do you insert a Table of Contents? What must be true for it to work?</li>
         <li>What is a footnote? How is it different from an endnote?</li>
-        <li>If you change a heading style after generating the TOC — what must you do?</li>
-      </ul>
-    `},
-    {solo:false, t:"8:20 – 8:40",h:"Phase 4 — Rapid Fire + Done",d:"Mama names a task, Denis says the exact menu path. 10 tasks in 20 minutes. Then done — Computers is closed."}
+      </ul>`},
+    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Rapid Fire", d:"Mama names a task, Denis says the exact menu path. 10 tasks in 20 minutes. Computers closed."}
   ]},
-
-  // ─── DAY 11 · MON JUNE 15 · MANAGEMENT MOCK ────────────────────────────
-  {date:"Mon, June 15",cd:"D–1",subj:"MANAGEMENT",strip:{l:"MANAGEMENT EXAM",e:"Wednesday June 17"},phases:[
-    {solo:true, t:"Before session",h:"Phase 1 — Denis Solo: Written Summary",d:`
-      <strong>NO NOTES. Write from memory only.</strong>
+  { date:"Mon, June 15", cd:"D–1", subj:"MANAGEMENT", strip:{l:"MANAGEMENT EXAM", e:"Wednesday June 17"}, phases:[
+    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"9-0", d:`
+      <strong>READ:</strong> L11 (HRM) + L12 (Motivation) + L13 (Leadership) + L14 (Controlling).<br>
+      <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>One A4 page. Cover all Management lectures.</li>
-        <li>Must include: management definition · efficiency vs effectiveness · 4 functions · 3 manager levels · Taylor/Fayol/Weber/Hawthorne · org culture · SWOT/PEST · social responsibility · communication model · planning types · SMART · MBO · change + Lewin · 5 departmentalization types · Tuckman stages · motivation theories (Maslow, McClelland, equity, expectancy) · Fiedler LPC · control process.</li>
-        <li>Any blank = top priority for joint session.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:15",h:"Phase 2 — Denis Presents From Memory",d:"Denis presents all of Management in 15 minutes. No notes. Mama marks any hesitations."},
-    {solo:false, t:"7:15 – 8:15",h:"Phase 3 — Timed Mock Exam",d:`
-      Strict exam conditions. No hints.
-      <ul>
+        <li>Job description vs job specification — exact definitions.</li>
+        <li>Validity vs reliability in selection — exact definitions.</li>
+        <li>Maslow's 5 levels bottom to top + main criticism.</li>
+        <li>McClelland's 3 needs — name each + one sentence.</li>
+        <li>Equity theory: inputs definition + outcomes definition + referents.</li>
+        <li>Fiedler LPC: what it measures + high score vs low score thresholds (≥64 / ≤57).</li>
+        <li>3 types of control: feedforward / concurrent / feedback — one sentence each.</li>
+        <li>4-step control process in order.</li>
+        <li>Balanced Scorecard — 4 areas.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:15", h:"Phase 2 — Denis Presents Full Management From Memory", d:"Denis presents entire Management subject in 15 minutes. No notes. Mama marks hesitations."},
+    { solo:false, t:"4:15 – 5:15", h:"Phase 3 — Timed Mock Exam", d:`Strict. No hints.<ul>
         <li>What are the 4 management functions? One sentence each.</li>
         <li>Who is Frederick Taylor and what is his contribution?</li>
         <li>What did the Hawthorne studies discover?</li>
         <li>What is organizational culture? How does a new employee learn it?</li>
         <li>Draw the communication model and label every component.</li>
-        <li>What is the difference between a strategic plan and an operational plan?</li>
-        <li>Explain Maslow's hierarchy of needs. What is its main criticism?</li>
+        <li>Difference between strategic and operational plan?</li>
+        <li>Maslow's 5 levels — what is the main criticism?</li>
         <li>What is equity theory? What are inputs and outcomes?</li>
-        <li>What is Fiedler's contingency theory? What does the LPC score measure?</li>
+        <li>What is Fiedler's LPC questionnaire and what does it measure?</li>
         <li>Walk through the control process — 4 steps in order.</li>
         <li>What is the S-curve of innovation?</li>
         <li>Name the 5 stages of group development in order.</li>
-      </ul>
-    `},
-    {solo:false, t:"8:15 – 8:40",h:"Phase 4 — Final Gap List",d:"Denis marks every weak point. Tomorrow is final sweep before Law exam."}
+      </ul>`},
+    { solo:false, t:"5:15 – 5:40", h:"Phase 4 — Final Gap List", d:"Denis marks every weak point. Tomorrow is final sweep before Law exam."}
   ]},
-
-  // ─── DAY 12 · TUE JUNE 16 · FINAL SWEEP ────────────────────────────────
-  {date:"Tue, June 16",cd:"D–0",subj:"REST",strip:{l:"LAW EXAM TODAY",e:"Management exam tomorrow"},phases:[
-    {solo:true, t:"Morning",h:"Phase 1 — Weak Areas Only",d:`
+  { date:"Tue, June 16", cd:"D–0", subj:"REST", strip:{l:"LAW EXAM TODAY", e:"Management exam tomorrow"}, phases:[
+    { solo:true, t:"Morning", h:"Phase 1 — Weak Areas Only", d:`
       <strong>NO NEW MATERIAL.</strong>
       <ul>
-        <li>Review only what was flagged in Denis's gap lists from Days 6 and 11.</li>
-        <li>Read those specific points only. Re-write them once in your own words. Close the notes.</li>
-        <li>Do not start any new topic. Confidence, not coverage.</li>
-      </ul>
-    `},
-    {solo:false, t:"7:00 – 7:40",h:"Phase 2 — Final Confidence Check",d:"Mama asks only the flagged weak questions from both subjects. Denis answers. If he answers correctly: move on. If not: write it once, move on. No spiralling."},
-    {solo:false, t:"7:40 – 8:00",h:"Phase 3 — Done",d:"Denis states what he knows cold. Mama confirms. Rest. The work is done."}
-  ]}
+        <li>Review only what was flagged from Days 6 and 11 gap lists.</li>
+        <li>Read those specific points only. Re-write once. Close the notes.</li>
+      </ul>`},
+    { solo:false, t:"4:00 – 4:40", h:"Phase 2 — Final Confidence Check", d:"Mama asks only the flagged weak questions from both subjects. Denis answers. If correct: move on. If not: write it once, move on. No spiralling."},
+    { solo:false, t:"4:40 – 5:00", h:"Phase 3 — Done", d:"Denis states what he knows cold. Mama confirms. Rest. The work is done."}
+  ]},
 ];
 
-const SK="dm_checks_v2";
-let ch={};
-try{ch=JSON.parse(localStorage.getItem(SK))||{};}catch(e){}
-function save(){try{localStorage.setItem(SK,JSON.stringify(ch));}catch(e){}}
+const SK = "dm_checks_v3";
+let ch = {};
+try { ch = JSON.parse(localStorage.getItem(SK)) || {}; } catch(e){}
+function save(){ try { localStorage.setItem(SK, JSON.stringify(ch)); } catch(e){} }
 
 function upProg(){
-  let tot=0; D.forEach(d=>tot+=d.phases.length);
-  const done=Object.values(ch).filter(Boolean).length;
-  document.getElementById("pBar").style.width=Math.round(done/tot*100)+"%";
-  document.getElementById("pCt").textContent=done+" / "+tot+" phases";
+  let tot = 0;
+  D.forEach(d => tot += d.phases.length);
+  const done = Object.values(ch).filter(Boolean).length;
+  document.getElementById("pBar").style.width = Math.round(done/tot*100) + "%";
+  document.getElementById("pCt").textContent = done + " / " + tot + " phases";
+}
+
+function buildNotes(nk){
+  const items = NOTES[nk];
+  if(!items) return "";
+  let html = `<div class="note-panel" id="np_${nk}">
+    <h4>📂 Where Denis finds the answers — source notes</h4>`;
+  items.forEach((n,i)=>{
+    html += `<div class="note-item">
+      <div class="note-q">${i+1}. ${n.q}</div>
+      <div class="note-src">
+        <a href="${flink(n.fk)}" target="_blank">${ftag(n.fk)}</a>
+        <span class="slide-tag">▸ ${n.slide}</span>
+      </div>
+      <div class="note-answer">${n.ans}</div>
+    </div>`;
+  });
+  html += `</div>`;
+  return html;
 }
 
 function build(){
-  const w=document.getElementById("sched");
-  w.innerHTML="";
-  D.forEach((day,di)=>{
-    const block=document.createElement("div");
-    block.className="day-block";
+  const w = document.getElementById("sched");
+  w.innerHTML = "";
+  D.forEach((day, di) => {
+    const block = document.createElement("div");
+    block.className = "day-block";
 
-    const hdr=document.createElement("div");
-    hdr.className="day-hdr";
-    hdr.innerHTML=`<span class="day-date">${day.date}</span><span class="day-cd">${day.cd}</span><span class="chip chip-${day.subj}">${day.subj}</span><span class="tog" id="tog${di}">▼</span>`;
-    hdr.addEventListener("click",()=>tog(di));
+    const hdr = document.createElement("div");
+    hdr.className = "day-hdr";
+    hdr.innerHTML = `<span class="day-date">${day.date}</span><span class="day-cd">${day.cd}</span><span class="chip chip-${day.subj}">${day.subj}</span><span class="tog" id="tog${di}">▼</span>`;
+    hdr.addEventListener("click", () => togDay(di));
     block.appendChild(hdr);
 
     if(day.strip){
-      const s=document.createElement("div");
-      s.className="exam-strip";
-      s.innerHTML=`<span>▶ ${day.strip.l}</span><em>${day.strip.e}</em>`;
+      const s = document.createElement("div");
+      s.className = "exam-strip";
+      s.innerHTML = `<span>▶ ${day.strip.l}</span><em>${day.strip.e}</em>`;
       block.appendChild(s);
     }
 
-    const ph=document.createElement("div");
-    ph.className="phases";
-    ph.id="ph"+di;
-    day.phases.forEach((p,pi)=>{
-      const k=`${di}-${pi}`;
-      const done=!!ch[k];
-      const pd=document.createElement("div");
-      pd.className="phase"+(done?" done":"")+(p.solo?" solo-phase":"");
-      pd.innerHTML=`<span class="ph-time">${p.t}</span><div><div class="ph-tag">${p.solo?"◆ DENIS SOLO":"◈ DENIS + MAMA"}</div><div class="ph-title">${p.h}</div><div class="ph-desc">${p.d}</div></div><button class="chk${done?" on":""}" aria-label="Mark complete">✓</button>`;
-      pd.querySelector(".chk").addEventListener("click",(e)=>{
+    const ph = document.createElement("div");
+    ph.className = "phases";
+    ph.id = "ph" + di;
+
+    day.phases.forEach((p, pi) => {
+      const k = `${di}-${pi}`;
+      const done = !!ch[k];
+      const wrapper = document.createElement("div");
+      wrapper.className = "phase" + (done ? " done" : "") + (p.solo ? " solo-phase" : "");
+
+      const main = document.createElement("div");
+      main.className = "phase-main";
+      main.innerHTML = `<span class="ph-time">${p.t}</span><div><div class="ph-tag">${p.solo ? "◆ DENIS SOLO" : "◈ DENIS + MAMA"}</div><div class="ph-title">${p.h}</div><div class="ph-desc">${p.d}</div></div><button class="chk${done ? " on" : ""}" aria-label="Mark complete">✓</button>`;
+      main.querySelector(".chk").addEventListener("click", (e) => {
         e.stopPropagation();
-        ch[k]=!ch[k];
+        ch[k] = !ch[k];
         save();
-        pd.classList.toggle("done",ch[k]);
-        pd.querySelector(".chk").classList.toggle("on",ch[k]);
+        wrapper.classList.toggle("done", ch[k]);
+        main.querySelector(".chk").classList.toggle("on", ch[k]);
         upProg();
       });
-      ph.appendChild(pd);
+      wrapper.appendChild(main);
+
+      // Note layer — only on solo phases that have source notes
+      if(p.solo && p.nk && NOTES[p.nk]){
+        const nt = document.createElement("div");
+        nt.className = "note-toggle";
+        nt.id = "nt_" + p.nk;
+        nt.innerHTML = `<span class="nt-arr">▶</span> Source notes — where to find each answer`;
+        nt.addEventListener("click", () => {
+          nt.classList.toggle("open");
+          document.getElementById("np_" + p.nk).classList.toggle("open");
+        });
+        wrapper.appendChild(nt);
+        const np = document.createElement("div");
+        np.innerHTML = buildNotes(p.nk);
+        wrapper.appendChild(np.firstChild);
+      }
+
+      ph.appendChild(wrapper);
     });
     block.appendChild(ph);
     w.appendChild(block);
@@ -581,20 +780,19 @@ function build(){
   upProg();
 }
 
-function tog(di){
-  const p=document.getElementById("ph"+di);
-  const t=document.getElementById("tog"+di);
-  const o=p.classList.contains("open");
-  p.classList.toggle("open",!o);
-  t.classList.toggle("open",!o);
+function togDay(di){
+  const p = document.getElementById("ph" + di);
+  const t = document.getElementById("tog" + di);
+  const o = p.classList.contains("open");
+  p.classList.toggle("open", !o);
+  t.classList.toggle("open", !o);
 }
 
 build();
-
-const today=new Date();
-const start=new Date("2026-06-05");
-const idx=Math.floor((today-start)/86400000);
-if(idx>=0&&idx<D.length)setTimeout(()=>tog(idx),150);
+const today = new Date();
+const start = new Date("2026-06-05");
+const idx = Math.floor((today - start) / 86400000);
+if(idx >= 0 && idx < D.length) setTimeout(() => togDay(idx), 150);
 </script>
 </body>
 </html>
