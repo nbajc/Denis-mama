@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Denis & Mama — Study Schedule</title>
+<title>Denis & Mama — Management Accounting Test 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -38,11 +38,10 @@
   .day-hdr { display:grid; grid-template-columns:120px 70px 1fr auto; align-items:center; gap:1rem; padding:0.9rem 1.2rem; border-bottom:1px solid var(--rule); cursor:pointer; }
   .day-date { font-family:var(--mono); font-size:0.8rem; font-weight:700; letter-spacing:0.05em; }
   .day-cd { font-family:var(--mono); font-size:0.68rem; letter-spacing:0.08em; color:var(--muted); }
-  .chip { font-family:var(--mono); font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:0.2rem 0.7rem; display:inline-block; }
-  .chip-LAW { background:#1A1A1A; color:#F5F0EA; }
-  .chip-MANAGEMENT { background:#3D3D3D; color:#F5F0EA; }
-  .chip-COMPUTERS { background:#E8E3DC; color:#1A1A1A; border:1px solid var(--rule); }
-  .chip-REST { background:transparent; color:var(--muted); border:1px solid var(--rule); }
+  .chip { font-family:var(--mono); font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:0.2rem 0.7rem; display:inline-block; justify-self:start; }
+  .chip-CORE { background:#1A1A1A; color:#F5F0EA; }
+  .chip-NEW { background:#E8E3DC; color:#1A1A1A; border:1px solid var(--rule); }
+  .chip-EXAM { background:transparent; color:var(--red); border:1px solid var(--red); }
   .tog { font-family:var(--mono); font-size:0.9rem; color:var(--muted); user-select:none; transition:transform 0.2s; }
   .tog.open { transform:rotate(180deg); }
   .phases { display:none; }
@@ -51,12 +50,12 @@
   .phase.solo-phase { background:#FAFAF8; }
   .phase.done { background:#F6FAF6; }
   .phase-main { display:grid; grid-template-columns:145px 1fr auto; align-items:start; gap:1rem; padding:0.9rem 1.2rem; }
-  .ph-time { font-family:var(--mono); font-size:0.7rem; letter-spacing:0.05em; color:var(--muted); padding-top:0.15rem; white-space:nowrap; }
+  .ph-time { font-family:var(--mono); font-size:0.7rem; letter-spacing:0.05em; color:var(--muted); padding-top:0.15rem; }
   .ph-tag { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem; }
   .ph-title { font-family:var(--mono); font-size:0.8rem; font-weight:700; letter-spacing:0.04em; margin-bottom:0.2rem; }
   .ph-desc { font-family:var(--serif); font-size:0.88rem; font-style:italic; color:var(--muted); line-height:1.5; }
-  .ph-desc ul { margin:0.4rem 0 0 1rem; font-style:normal; }
-  .ph-desc ul li { margin-bottom:0.15rem; font-size:0.84rem; }
+  .ph-desc ul, .ph-desc ol { margin:0.4rem 0 0 1.2rem; font-style:normal; }
+  .ph-desc li { margin-bottom:0.15rem; font-size:0.84rem; }
   .ph-desc strong { font-style:normal; color:var(--text); font-family:var(--mono); font-size:0.78rem; font-weight:700; letter-spacing:0.02em; }
   .phase.done .ph-desc { text-decoration:line-through; opacity:0.45; }
   .chk { width:28px; height:28px; border:1px solid var(--rule); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px; color:transparent; transition:all 0.15s; margin-top:0.1rem; }
@@ -77,19 +76,25 @@
   .note-src a { color:var(--gold); text-decoration:none; border-bottom:1px solid transparent; }
   .note-src a:hover { border-color:var(--gold); }
   .note-src .file-tag { background:var(--rule); padding:0.1rem 0.4rem; font-size:0.64rem; }
+  .note-src .extra-tag { background:var(--text); color:var(--bg); padding:0.1rem 0.4rem; font-size:0.64rem; }
   .note-src .slide-tag { color:var(--check); }
   .note-answer { font-family:var(--serif); font-style:italic; font-size:0.82rem; color:var(--muted); margin-top:0.2rem; border-left:2px solid var(--note-border); padding-left:0.6rem; line-height:1.5; }
+  .note-answer b { color:var(--text); font-style:normal; }
+  .calc { font-family:var(--mono); font-style:normal; font-size:0.74rem; color:var(--text); background:#FBF6E6; border:1px solid var(--note-border); padding:0.5rem 0.7rem; margin:0.35rem 0; white-space:pre-wrap; line-height:1.55; overflow-x:auto; }
 
   .exam-strip { background:var(--red); color:#F5F0EA; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.35rem 1.2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; }
   .exam-strip em { opacity:0.75; font-style:italic; font-family:var(--serif); letter-spacing:0; text-transform:none; font-size:0.75rem; }
   .exams-sec { margin-top:3rem; border-top:1px solid var(--rule); padding-top:2rem; }
   .exams-lbl { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-bottom:1rem; }
-  .exam-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:2px; }
+  .exam-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2px; }
   .exam-card { background:var(--bg-card); border:1px solid var(--rule); padding:1rem 1.2rem; }
   .exam-card .subj { font-family:var(--mono); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.3rem; }
   .exam-card .dt { font-family:var(--serif); font-style:italic; font-size:1rem; color:var(--red); }
   .exam-card .enote { font-family:var(--mono); font-size:0.66rem; color:var(--muted); margin-top:0.4rem; letter-spacing:0.06em; }
+  .exam-card .fx { font-family:var(--mono); font-size:0.74rem; line-height:1.6; color:var(--text); margin-top:0.3rem; }
+  .exam-card .fx i { font-family:var(--serif); color:var(--muted); font-size:0.8rem; }
   footer { border-top:1px solid var(--rule); padding:2rem 4vw; font-family:var(--mono); font-size:0.7rem; color:var(--muted); letter-spacing:0.08em; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+  footer a { color:var(--gold); text-decoration:none; }
   @media(max-width:600px){
     .day-hdr{grid-template-columns:1fr auto}
     .day-cd{display:none}
@@ -105,583 +110,631 @@
 <header>
   <div class="header-left">
     <h1>Denis &amp; Mama</h1>
-    <p class="tagline">Study Schedule — June 5–16, 2026 · Exams: Law Tue 16 · Mgmt Wed 17 · Computers Fri 19</p>
+    <p class="tagline">Management Accounting — Test 1 · Core material Mon Oct 5 + Tue Oct 6 · New lectures added daily · Test: Friday Oct 9 (Belgrade time) · Target: 90%+</p>
   </div>
   <div class="status-badge">System Active</div>
 </header>
 <div class="tz-bar">
   <span>Los Angeles: <b>7:00 — 9:00 AM</b></span>
   <span>Belgrade: <b>4:00 — 6:00 PM</b></span>
-  <span>Duration: <b>2 hours / day</b></span>
-  <span>Sessions: <b>12 days</b></span>
+  <span>Duration: <b>2 hours / day + solo prep</b></span>
+  <span>Plan: <b>2 core days + new material daily</b></span>
 </div>
 <main>
   <div class="prog-banner">
     <span class="prog-label">Progress</span>
     <div class="prog-wrap"><div class="prog-fill" id="pBar" style="width:0%"></div></div>
-    <span class="prog-ct" id="pCt">0 / 36 phases</span>
+    <span class="prog-ct" id="pCt">0 / 0 phases</span>
   </div>
   <div class="legend">
-    <div class="leg-item"><div class="leg-dot" style="background:#1A1A1A"></div>Law (6 days)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#3D3D3D"></div>Management (5 days)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#D0C8C0;border:1px solid #999"></div>Computers (1 day)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#1A1A1A"></div>Core material (Mon + Tue)</div>
+    
+    <div class="leg-item"><div class="leg-dot" style="background:#D0C8C0;border:1px solid #999"></div>New material (Wed + Thu)</div>
     <div class="leg-item" style="margin-left:auto"><div class="leg-dot" style="background:#FAFAF8;border:1px solid #D0C8C0"></div>Solo prep</div>
     <div class="leg-item"><div class="leg-dot" style="background:#FFFFFF;border:1px solid #D0C8C0"></div>Denis + Mama</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#FFFDF5;border:1px dashed #D4B896"></div>Source notes</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#FFFDF5;border:1px dashed #D4B896"></div>Source notes / answer keys</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#111"></div>★ = +20%, only if time</div>
   </div>
   <div id="sched"></div>
+
   <div class="exams-sec">
-    <p class="exams-lbl">Exam Dates</p>
+    <p class="exams-lbl">Formula sheet — Denis writes this from memory every day</p>
     <div class="exam-grid">
-      <div class="exam-card"><div class="subj">Law</div><div class="dt">Tuesday, June 16</div><div class="enote">6 prep sessions · highest priority</div></div>
-      <div class="exam-card"><div class="subj">Management</div><div class="dt">Wednesday, June 17</div><div class="enote">5 prep sessions · second priority</div></div>
-      <div class="exam-card"><div class="subj">English</div><div class="dt">Thursday, June 18</div><div class="enote">No prep needed</div></div>
-      <div class="exam-card"><div class="subj">Computers</div><div class="dt">Friday, June 19</div><div class="enote">1 session · Word formatting practical</div></div>
+      <div class="exam-card"><div class="subj">Cost statement</div><div class="fx">
+        Direct material<br>+ Direct labour<br>+ Direct expenses <i>(e.g. designer fee)</i><br>= PRIME COST<br>+ Production overhead<br>= PRODUCTION COST<br>+ Other overhead <i>(= period cost)</i><br>= TOTAL COST</div></div>
+      <div class="exam-card"><div class="subj">Material — FIFO / AVCO</div><div class="fx">
+        FIFO: oldest layers leave first; closing stock = newest prices<br>
+        Weighted AVCO = total cost ÷ total units<br>
+        Simple AVCO = sum of prices ÷ number of prices<br>
+        DM cost = rate × units issued<br>
+        LIFO = banned under IFRS/IAS</div></div>
+      <div class="exam-card"><div class="subj">Traditional overhead</div><div class="fx">
+        OH rate = total production OH ÷ total driver units <i>(labour hrs or machine hrs)</i><br>
+        OH per unit = OH rate × hours per unit<br>
+        Unit production cost = DM + DL + OH per unit</div></div>
+      <div class="exam-card"><div class="subj">ABC — two stages</div><div class="fx">
+        1. Pool: overhead → activities<br>
+        2. Driver rate = activity cost ÷ total driver volume<br>
+        OH to product = Σ (driver rate × driver units the product consumed)<br>
+        Check: products add back to the pool total</div></div>
+      <div class="exam-card"><div class="subj">Variance</div><div class="fx">
+        Variance = actual − budget<br>
+        % = variance ÷ budget<br>
+        Revenue below budget = unfavourable<br>
+        Cost above budget = unfavourable</div></div>
+      <div class="exam-card"><div class="subj">Apportionment drivers</div><div class="fx">
+        Rent, insurance, cleaning → floor area<br>
+        Canteen, supervisor salary → headcount<br>
+        Machine depreciation → machinery value<br>
+        Machine maintenance → number of call-outs</div></div>
+    </div>
+  </div>
+
+  <div class="exams-sec">
+    <p class="exams-lbl">Read before the test — numbers in the handouts that do not add up</p>
+    <div class="exam-grid">
+      <div class="exam-card"><div class="subj">Socks E-01 overhead</div><div class="enote">03 Product costing · slides 9–15</div><div class="fx">The five factory items listed add to 2,057, but the professor's solution (and her quiz) uses 2,187 → production cost 13,593 → total 14,925. <i>On the test use her figures; ask her which item differs (a repair cost of 198 instead of 68 would explain it).</i></div></div>
+      <div class="exam-card"><div class="subj">ABC case: $113,000</div><div class="enote">04 ABC · slides 9–11</div><div class="fx">The three pools shown (45,000 + 25,000 + 4,000) add to 74,000, and A + B = 74,000. The 113,000 ÷ 5,000 h = $22.60 is the traditional rate on the full budget. <i>Rates $15 / $5 / $160 are correct.</i></div></div>
+      <div class="exam-card"><div class="subj">Solidago orders</div><div class="enote">04 ABC · slide 20</div><div class="fx">19,000 orders in total, but A (10,000) + B (8,000) = 18,000. Rate is still $10 per order → A $100,000, B $80,000; $10,000 stays with the other 1,000 orders.</div></div>
+      <div class="exam-card"><div class="subj">Rembrandt total</div><div class="enote">03 Product costing · slides 36–37</div><div class="fx">Text says both 14,550,000 and 14,500,000. Solution slide uses 14,550,000 and a rounded $90.9 rate (7,272,000). Exact rate 90.9375 gives 7,275,000 / 5,820,000 / 1,455,000.</div></div>
+      <div class="exam-card"><div class="subj">"Simple" vs "weighted" AVCO</div><div class="enote">FIFO and AVCO sheets</div><div class="fx">The professor uses both words. If the task says simple: average the prices. If weighted: total cost ÷ total units. <i>If unsure, show both and label them.</i></div></div>
+      <div class="exam-card"><div class="subj">Fayol slide</div><div class="enote">02 Theory · slide 6</div><div class="fx">"Unity of Direction" is printed twice. There are still 14 principles: 3 structure + 5 command + 6 human.</div></div>
+    </div>
+  </div>
+
+  <div class="exams-sec">
+    <p class="exams-lbl">Test + incoming lectures</p>
+    <div class="exam-grid">
+      <div class="exam-card"><div class="subj">Management Accounting — Test 1</div><div class="dt">Friday, October 9 · Belgrade time</div><div class="enote">Covers what is in folder "1" so far: 6 decks + 5 exercise sheets</div></div>
+      <div class="exam-card"><div class="subj">More lectures arriving daily</div><div class="dt">Blocks held Wed + Thu</div><div class="enote">This page is amended each day — one block per new lecture</div></div>
+      <div class="exam-card"><div class="subj">Homework named in the slides</div><div class="dt">Textbook 1.4 · 1.5 · 1.6 · 3.4 · 4.5</div><div class="enote">3.4 (Swift Metals) is solved here on Tuesday. The others need the textbook.</div></div>
     </div>
   </div>
 </main>
 <footer>
   <span>© 2026 Natasha Bajc · Nexus Hestia Technologies</span>
-  <span>Denis &amp; Mama Study Schedule</span>
+  <span>Denis &amp; Mama — Accounting Test 1 · <a href="june-2026.html">June 2026 schedule</a></span>
 </footer>
 <script>
-// FILE REFERENCE MAP — real Google Drive file IDs and names
+// FILE REFERENCE MAP — lecture files (kept offline, not in the repo)
+
 const FILES = {
-  L1:  { name:"Lecture 1 — Introduction.pdf", id:"14pscAbU6PG4CQ9VyboqLciS7AqvHJziq" },
-  L2:  { name:"Lecture 2 — Forms of State.pdf", id:"1qkkJUTWAyEca3zh_sTdNJaPdSIA2WQFL" },
-  L3:  { name:"Lecture 3 — Notion of Law, Types, Legal Norm.pdf", id:"1t5S1AbvFrn_YteV7gIADSJTPPAHR7ZbS" },
-  L4:  { name:"Lecture 4 — Legal Act, Types and Hierarchy.pdf", id:"1EI25yU9H15LdDrTFcFUIbmziadH3nL60" },
-  L5:  { name:"Lecture 5 — Regional Integrations and the EU.pdf", id:"1bggGZv18THqS6zIqW0mrFjfONK9JYIF0" },
-  L6:  { name:"Lecture 6 — Legal and Institutional System of the EU.pdf", id:"1d7l4bPZ1E1tl_H81nR6QULLz0Nk7400G" },
-  L7:  { name:"Lecture 7 — Natural and Juridical Person, Legal Capacity.pdf", id:"1U2doYSvJOsfm9CGo6YwDc9GOcS-IXTUF" },
-  L8:  { name:"Lecture 8 — Civil Law and Property Law.pdf", id:"1b8J80mkoeoAznXhyKN_E9Wc8Faq3_fB_" },
-  L9:  { name:"Lecture 9 — Ownership and Possession.pdf", id:"1a32TSgwMa2ytP_OS1tLS8GzzuebA2Nd1" },
-  M1:  { name:"1 Introduction to Management.pdf", id:"1H5DqIjwYSioN2yflyunD5X0QSmhLD3fa" },
-  M2:  { name:"2 Management History.pdf", id:"1heDw7GMqWAfT1efyqOI0wM5fOneyIlME" },
-  M3:  { name:"3 Organizational Culture and Environment.pdf", id:"1HNUMnLhcCL_ooBp5C7CHjE5I6w9jAMAz" },
-  M4:  { name:"4 Ethics and Social Responsibility.pdf", id:"1wtUsoqDCOfm5S_kt08TEC7SgWR7c76dt" },
-  M5:  { name:"5 Communication.pdf", id:"1fKtNNffAiRaEEySoy_s6VNkpxlp__YKF" },
-  M6:  { name:"6 Planning and Decision Making.pdf", id:"1C-8-U98dJ5UMLuuzK4y38B7KBZQuKlom" },
-  M8:  { name:"8 Innovation and Change.pdf", id:"1d-Q6RUebxp_CBCnTiig5BCDNyppXZNf6" },
-  M9:  { name:"9 Organizational Structure.pdf", id:"1Bpuh8AfN_sWBz3sPzNQ3pFowlRbxlySp" },
-  M10: { name:"10 Managing Teams.pdf", id:"1xUc8LRweT-_zcIe8qjb66HLhT1wXVwyu" },
-  M11: { name:"11 Human Resource Management.pdf", id:"1_sCelMHTtkX9e-h43ClWC1EvR4rwQOE2" },
-  M12: { name:"12 Motivation.pdf", id:"1OvpqJV8r8GgAoDAl0NSnz2oFyrUot77F" },
-  M13: { name:"13 Leadership.pdf", id:"1nrro8ZbvKYu3MGCdHD9TdOoUlR86_NI2" },
-  M14: { name:"14 Controlling.pdf", id:"1aC0AJL1Sg3BXkSW-He3emWjxbPkyniCm" },
+  W1:  { name:"01 Week-2026.pptx" },
+  AI:  { name:"01- AI_Man Acc 2026.pptx" },
+  TH:  { name:"02 Theory -2026.pptx" },
+  ETH: { name:"02 Ethics notbook-2026.pptx" },
+  PC:  { name:"03 Product costing new-2026.pptx" },
+  ABC: { name:"04 ABC new-2026.pptx" },
+  X1:  { name:"Chapter 03- exercise traditional cost accounting smartphones (1).docx" },
+  X2:  { name:"chapter 03- FIFO and AVCO 2026-1.docx" },
+  X3:  { name:"chapter 03- FIFO and AVCO 2026.docx" },
+  X4:  { name:"chapter 03-smartphone production.docx" },
+  QZ:  { name:"Chapter 03.docx" },
 };
-function flink(k){ return `https://drive.google.com/file/d/${FILES[k].id}/view`; }
+
 function ftag(k){ return `<span class="file-tag">${FILES[k].name}</span>`; }
 
-// NOTE DATA — per solo phase, array of {q, file_key, slide, answer}
+// NOTE DATA — per phase, array of {q, fk, slide, ans}. fk:null = beyond the slides (+20%).
 const NOTES = {
-  "0-0": [ // Day 1 Solo
-    { q:"What is a state? Name its 3 main elements.",
-      fk:"L1", slide:"Slide 4 — Topics we will learn about",
-      ans:"State = territory + population + sovereignty. Covered in the course aims slide as the first topic: 'State — notion and main elements; Legal state and rule of law.'" },
-    { q:"What makes Serbia a unitary state?",
-      fk:"L2", slide:"Slide 3 — Unitary State",
-      ans:"'It is a state governed as a single entity in which the central government is the supreme authority. One constitution, one legislative power, single citizenship and one sovereignty.' Serbia is listed as an example." },
-    { q:"What is a federation? How does sovereignty differ from a unitary state?",
-      fk:"L2", slide:"Slide 4 — Federation",
-      ans:"'Sovereignty doesn't belong to federal units (republics), but to the Federation itself.' Examples: USA, Former Yugoslavia, Russia." },
-    { q:"What is a confederation? How is it different from a federation?",
-      fk:"L2", slide:"Slide 7 — Confederation",
-      ans:"'A union of sovereign groups or states united for purposes of dealing with critical issues… Each of the states keeps its autonomy.' Examples listed: Belgium, Canada, The European Union." },
-    { q:"Advantages and disadvantages of unitary state vs federation.",
-      fk:"L2", slide:"Slides 5–6 — Advantages and Disadvantages",
-      ans:"Unitary advantages: solidarity, cheaper to administer, fewer constitutional complications. Unitary disadvantages: minority interests not served, bureaucratic tendencies. Federation advantages: minority interests, local initiative. Federation disadvantages: power clashes, high admin costs, duplication." },
+
+  /* ───────────── DAY 1 · MON — FOUNDATIONS ───────────── */
+  "0-0": [
+    { q:"Define management accounting (two definitions).", fk:"W1", slide:"Slides 3–5 — Definition / CIMA / Strategic Compass",
+      ans:`Simple: accounting carried out within a business for its <b>internal</b> purposes; it assists management in <b>controlling the business and making business decisions</b>. CIMA: the application of the principles of accounting and financial management to <b>create, protect, preserve and increase value</b> for stakeholders of for-profit and not-for-profit enterprises. Image to remember: a <b>compass</b> guiding the organisation through financial decisions and strategic planning.` },
+    { q:"Characteristics of management accounting information.", fk:"W1", slide:"Slides 6–9 — Information Radar / Data Donut",
+      ans:`<b>Frequency</b> — as frequent as necessary (daily, weekly, monthly). <b>Time focus</b> — oriented to both the future and the past. <b>Timeliness</b> — minimal delay. <b>Level of detail (granularity)</b> — as detailed as management needs. <b>Non-financial information</b> — units in kg, metres, tons, hours; also qualitative data. Data donut: financial metrics 50% · physical metrics 35% · qualitative data 15% (morale, customer satisfaction, market trends).` },
+    { q:"Managerial vs financial accounting — the five-row matrix.", fk:"W1", slide:"Slide 14 — The Diagnostic Matrix",
+      ans:`<b>Audience:</b> internal (managers) vs external (investors, regulators). <b>Regulation:</b> none, flexible vs highly regulated (GAAP / IFRS). <b>Risk:</b> riskiest — forecasts vs safest — historical, audited facts. <b>Frequency:</b> frequent / on demand vs annually / quarterly. <b>Output:</b> variance and cost reports vs balance sheet and income statement.` },
+    { q:"The three pillars of management accounting.", fk:"W1", slide:"Slides 16–17, 20 — Core Engine / Cost Object",
+      ans:`<b>1. Cost accounting</b> — gathering cost information and attaching it to cost objects. <b>2. Planning</b> — setting objectives, choosing strategies, building budgets. <b>3. Controlling</b> — comparing budgets with actual results and finding variances. A <b>cost object</b> is anything we need the cost of: a product, project, department.` },
+    { q:"The planning and control cycle.", fk:"W1", slide:"Slide 22 — Pillars 2 & 3",
+      ans:`Planning (setting objectives, choosing strategies) <b>produces budgets and special reports</b> → results are recognised in the financial accounting system → Controlling (implementation of the plan, evaluation) <b>produces performance reports</b> → corrections and revisions of plans and actions feed back into planning.` },
+    { q:"Variance example to know by heart.", fk:"W1", slide:"Slide 23 — The Variance Alert",
+      ans:`Advertising revenue: actual $3,860,800 vs budget $4,160,000.<div class="calc">Variance = 4,160,000 − 3,860,800 = 299,200  UNFAVOURABLE
+%        = 299,200 ÷ 4,160,000    = 7.2%</div>Variance analysis is the core of controlling: it triggers corrective action.` },
+    { q:"The iPhone cost examples.", fk:"W1", slide:"Slides 11, 18–19, 24",
+      ans:`iPhone 16 Pro Max 256GB: total production cost about <b>$485</b> (display ~$80, rear camera ~$80, processor ~$45, plus storage, RAM, packaging, assembly). iPhone 18 Pro: bill of materials about <b>$726</b>, +38% vs 17 Pro; DRAM $145 (was $39); A20 Pro chip ~$280; OLED panel ~$70; memory = 34–42% of component cost. Flow: costing ($485) → planning (budget built on $485) → controlling (variance).` },
+    { q:"AI and management accounting.", fk:"AI", slide:"Slides 1–8 — whole deck",
+      ans:`AI turns accountants from historical record-keepers into strategic decision-makers. Traditional = backward (calculating variance, preparing budgets, recording historical costs); AI-powered = forward (predictive analysis, prescriptive actions, strategic foresight). <b>Predictive</b> = what is likely to happen? <b>Prescriptive</b> = what should we do about it? <b>Three pillars:</b> predictive and prescriptive analytics · automated costing and price optimisation (streamlines ABC) · advanced risk management (flags fraud). <b>Table:</b> historical variance analysis → predictive anomaly detection; static annual budgets → rolling, dynamic forecasting; manual cost allocation → automated cost-driver mapping; data collection → strategic insight. <b>Symbiosis:</b> data collection (AI automation) → pattern recognition (machine learning) → strategic interpretation (management accountants). AI does <b>not</b> make accountants obsolete — it frees them to be the Strategic Business Partner: asking the right questions, contextualising AI outputs, data governance.` },
+    { q:"Organisational theory: the two schools.", fk:"TH", slide:"Slides 2–3",
+      ans:`Organisational theory rests on <b>structure</b> (task and authority relationships — how we connect), <b>culture</b> (values and shared behaviours — how we act) and <b>design</b> (optimising processes — how we improve). <b>Mechanical school:</b> organisation as a machine — centralised authority, clear lines of command, specialisation, rigid rules (classical theorists). <b>Human relations school:</b> organisation as a living ecosystem — people, delegation, autonomy, trust, openness.` },
+    { q:"Taylor, Weber, Fayol.", fk:"TH", slide:"Slides 4–6",
+      ans:`<b>Taylor — scientific management:</b> systematic redesign of work to maximise efficiency; flaw: jobs become dull and boring. <b>Weber — bureaucracy:</b> a formal system to ensure effectiveness — written rules/SOPs, clearly specified hierarchy of authority, clearly specified task relationships, fair selection and evaluation. <b>Fayol — administrative theory:</b> combines administrative procedures with the human element; 14 principles. Structure: division of labour, centralisation, order. Command: authority and responsibility, unity of command (one boss), unity of direction (one plan), line of authority, discipline. Human: equity, initiative, remuneration, stability of tenure, subordination of individual interest, esprit de corps.` },
+    { q:"Hawthorne, McGregor, Herzberg.", fk:"TH", slide:"Slides 7–9, 14",
+      ans:`<b>Hawthorne (Elton Mayo, Western Electric, 1924–1932):</b> tested lighting and fatigue; productivity rose whether lights went up or down. Hawthorne effect = people change behaviour when observed. Legacy: performance depends on feelings and group dynamics. <b>McGregor:</b> Theory X — employees are lazy, avoid work → close supervision, strict rules, rewards and punishments (thrives: vaccine packing line). Theory Y — employees enjoy work and take responsibility → decentralised authority, self-direction (thrives: Google, Tesla, Singidunum). <b>Herzberg two-factor:</b> motivators (growth, recognition, meaningful work, promotion) push people; hygiene factors (pay, fringe benefits, working conditions, company policies) only prevent dissatisfaction. You cannot motivate with recognition if fair pay is missing.` },
+    { q:"Agency theory and the capstone table.", fk:"TH", slide:"Slides 10–13",
+      ans:`<b>Jensen and Meckling, mid-1970s.</b> Conflict from separating ownership and control. Principal (shareholders) wants maximum corporate profit; agent (management) wants power, prestige, personal wealth. Agency costs are incurred to resolve it. <b>Remedies:</b> monitoring (board of directors) · transparency (independent auditors, removes information asymmetry) · compensation (shares / equity bonuses). <b>Capstone:</b> Taylor–classical–task efficiency; Weber–classical–bureaucracy and rules; Fayol–transitional–14 principles; Mayo–human relations–group dynamics; McGregor–human relations–X/Y; Herzberg–human relations–two-factor; Jensen/Meckling–governance–principal vs agent. <b>Trend:</b> manufacturing past (classical fits) → service and knowledge present (human relations fits); the <b>boundaryless organisation</b>: temporary contracts, project groups, outsourcing, open boundaries.` },
   ],
-  "1-0": [ // Day 2 Solo
-    { q:"What are the 4 types of social norms and what happens when you break each?",
-      fk:"L3", slide:"Slide 4 — Types of social norms",
-      ans:"Social conventions → social condemnation. Customs → social condemnation. Moral norms → inner guilt / social condemnation. Legal rules → state punishment (fine, prison)." },
-    { q:"What separates a legal norm from all other social norms?",
-      fk:"L3", slide:"Slide 4 — Legal rules",
-      ans:"'Legal rules are mandatory. They are set by legislator governmental authority (state). Disobeying legal rules leads to sentencing and punishment executed by the state.'" },
-    { q:"What is natural law vs positive law?",
-      fk:"L3", slide:"Slide 8 — Types of law according to nature",
-      ans:"Natural law: 'exists in nature, created spontaneously… law based on moral order.' Positive law: 'created by the state and its organs, people have to behave as prescribed; law separate from moral order.'" },
-    { q:"What is the hierarchy of legal sources in Serbia from top to bottom?",
-      fk:"L4", slide:"Slide 5 — Hierarchy of legal sources in Serbia",
-      ans:"1. Constitution → 2. National laws & ratified international agreements → 3. Sub-legal acts & provincial/local statutory law → 4. Customs → 5. Individual legal acts (e.g. court decisions)." },
-    { q:"What is a general legal act vs an individual legal act?",
-      fk:"L4", slide:"Slide 3 — Types of legal acts",
-      ans:"General: 'unrestricted as to time, applicable throughout entire territory, applies to all persons in the same class.' Example: law on mandatory military service. Individual: 'single act of law application, intended for a specific entity.' Example: administrative decision for a specific person's military service date." },
-    { q:"What is the Constitution and why is it at the top?",
-      fk:"L4", slide:"Slide 6 — Constitution as the supreme legal act",
-      ans:"'The supreme legal act of the state; all laws and other general acts enacted in Serbia must be in compliance with the constitution.' Hard vs soft constitutions: hard = some parts cannot be changed by ordinary procedure." },
+  "0-2": [
+    { q:"1. Define management accounting. Which statement on the quiz slide is wrong?", fk:"W1", slide:"Slide 28 — System Diagnostic I",
+      ans:`Wrong: A) "for its <b>external</b> purposes". Correct: B assists management in controlling and deciding, C internal purposes, D create/protect/preserve/increase value, E a compass.` },
+    { q:"2. Managerial accounting components — pick from A–F.", fk:"W1", slide:"Slide 31 — Quiz",
+      ans:`<b>A) Cost accounting, C) Planning, F) Controlling.</b> Not: redefining objectives, actualising, manufacturing.` },
+    { q:"3. Pencil company: A, B, C — planning, controlling or cost accounting?", fk:"W1", slide:"Slides 32–33",
+      ans:`A) unit cost of labour, design, material, assembly = <b>cost accounting</b>. B) strategy to raise revenue 10% next year = <b>planning</b>. C) actual $12,000 vs budget $13,000 = <b>controlling</b>.<div class="calc">Variance = 12,000 − 13,000 = −1,000 UNFAVOURABLE = 1,000 ÷ 13,000 = 7.7%</div>` },
+    { q:"4. Why is managerial accounting the 'riskiest' and financial the 'safest'?", fk:"W1", slide:"Slide 14",
+      ans:`Managerial relies on future predictions and forecasts with no regulation; financial reports historical facts that are audited and regulated by GAAP/IFRS.` },
+    { q:"5. Which pillar produces budgets? Which produces performance reports?", fk:"W1", slide:"Slide 22",
+      ans:`Planning → budgets and special reports. Controlling → performance reports.` },
+    { q:"6. Name three ways AI transforms management accounting.", fk:"AI", slide:"Slides 4–5 (asked on Week-1 key points slide 27)",
+      ans:`Predictive and prescriptive analytics (forecast demand, optimise inventory) · automated costing and price optimisation (ABC tracking, dynamic pricing) · advanced risk management (fraud and anomaly detection in real time). Also rolling forecasts replace static annual budgets.` },
+    { q:"7. Predictive vs prescriptive analytics?", fk:"AI", slide:"Slide 3",
+      ans:`Predictive: what is likely to happen? Prescriptive: what should we do about it? Both beat linear trends because they use external variables (commodity prices, market trends, weather, macro indicators).` },
+    { q:"8. Taylor's core idea and its flaw. Weber's four features.", fk:"TH", slide:"Slide 4",
+      ans:`Taylor: redesign work scientifically for efficiency; over-focus on tasks makes jobs dull. Weber: written rules/SOPs · hierarchy of authority · specified task relationships · fair selection and evaluation.` },
+    { q:"9. What surprised the Hawthorne researchers?", fk:"TH", slide:"Slide 7",
+      ans:`Productivity rose regardless of the lighting level — because workers knew they were observed. People, feelings and group dynamics matter more than physical conditions.` },
+    { q:"10. Is pay a motivator according to Herzberg?", fk:"TH", slide:"Slide 9",
+      ans:`No — pay is a <b>hygiene factor</b>. It prevents dissatisfaction but does not motivate. Motivators are growth, recognition, meaningful work, promotion.` },
+    { q:"11. Agency theory: who, when, the conflict, three remedies.", fk:"TH", slide:"Slides 10–11",
+      ans:`Jensen and Meckling, mid-1970s. Shareholders (principal) vs managers (agent), each maximising own utility. Remedies: monitoring (board), transparency (auditors), compensation (equity).` },
+    { q:"12. Reflection: what does agency theory imply for management and cost accounting?", fk:"TH", slide:"Slide 15 — Critical Reflection",
+      ans:`Model answer: managers paid on reported results are tempted to shape cost and profit figures (for example moving costs into inventory, or recognising revenue early). So cost reports need objective rules, independent checking and ethical accountants; budgets and variance reports become monitoring tools for owners; bonus schemes should be tied to measures managers cannot easily manipulate. This is exactly what the ethics cases show.` },
   ],
-  "2-0": [ // Day 3 Solo
-    { q:"What is regional integration? What are its stages?",
-      fk:"L5", slide:"Slide 2 — Notion of regional integration",
-      ans:"'The process by which two or more nation-states agree to co-operate and work closely together.' Stages: free trade area → customs union → single market (midpoint) → political integration → full integration (new country)." },
-    { q:"What are the 4 freedoms of the EU single market?",
-      fk:"L5", slide:"Slide 4 — The single market",
-      ans:"Free movement of: workers, services, goods, and capital. Citizens can study, live, shop, work and retire in any member state." },
-    { q:"ECSC 1951 — who signed, why was it created?",
-      fk:"L6", slide:"Slide 4 — Origins of the EU - 1",
-      ans:"Six countries: Belgium, France, Italy, Luxembourg, Netherlands, West Germany. Created after WWII to achieve economic growth, military security, and reconciliation between France and Germany. Free trade area for coal, coke, steel, scrap, iron ore." },
-    { q:"What did the Treaties of Rome (1957) create?",
-      fk:"L6", slide:"Slide 5 — Origins of the EU - 2",
-      ans:"Two treaties: Euratom (atomic energy cooperation) and EEC (European Economic Community — common market). EEC established four governing institutions: commission, ministerial council, assembly, court." },
-    { q:"What is 'sui generis' and why does it apply to the EU?",
-      fk:"L6", slide:"Slide 2 — European Union today",
-      ans:"'The EU has often been described as a sui generis political entity (without precedent or comparison) combining the characteristics of both a federation and a confederation.'" },
-    { q:"What did the Maastricht Treaty (1992) establish?",
-      fk:"L6", slide:"Slide 6 — Creation and evolution of the EU - 1",
-      ans:"Created the EU. Three pillars: European Communities + common foreign and security policy + cooperation in home affairs and justice. Also established EU citizenship: right to vote and run for office in local elections in any member state." },
-    { q:"Why did the EU Constitution fail in 2005?",
-      fk:"L6", slide:"Slide 7 — Creation and evolution of the EU - 2",
-      ans:"'Voters in France and the Netherlands rejected it in 2005, thereby scuttling the constitution.' It would have created a full-time president, EU foreign minister, public prosecutor, and charter of fundamental rights." },
+  "0-3": [
+    { q:"★ Favourable or unfavourable? Read a real management report.", fk:"W1", slide:"Slide 10 — Example of Man. Acc. report (extended)",
+      ans:`Rule: for <b>revenue</b>, actual below budget = unfavourable. For <b>costs</b>, actual above budget = unfavourable.<div class="calc">Sales product X (month): 41,000 vs 50,000 → −9,000 = −18%  U
+Rent (month):           22,000 vs 20,000 → +2,000 = +10%  U
+Marketing (month):      13,000 vs 10,000 → +3,000 = +30%  U
+IT costs (year to date): 28,000 vs 30,000 → −2,000 = −7%   F</div>A good report also explains why (the Comment column): "new factory opened", "marketing push".` },
+    { q:"★ The four levels of analytics.", fk:null, slide:"Extends AI deck slide 3",
+      ans:`Descriptive (what happened?) → diagnostic (why did it happen?) → predictive (what will happen?) → prescriptive (what should we do?). Traditional management accounting sits in the first two; AI adds the last two.` },
+    { q:"★ What exactly are 'agency costs'?", fk:null, slide:"Extends Theory deck slide 10",
+      ans:`Three kinds in Jensen and Meckling's 1976 paper: <b>monitoring costs</b> (audits, board), <b>bonding costs</b> (what managers spend to prove they are trustworthy, such as reporting and contractual limits), and <b>residual loss</b> (value still lost because interests never align perfectly).` },
+    { q:"★ Who is CIMA?", fk:null, slide:"Extends Week 1 slide 4",
+      ans:`The Chartered Institute of Management Accountants, the UK-based professional body. The US counterpart is the IMA (Institute of Management Accountants). Both publish ethics codes for management accountants.` },
+    { q:"★ Apply it: is Singidunum's exam office Theory X or Theory Y? Mechanical or human relations?", fk:null, slide:"Application of Theory deck slides 3, 8, 14",
+      ans:`No single right answer — the test rewards the reasoning. Exam administration is rule-bound (Weber's bureaucracy, Theory X style compliance); teaching and research need autonomy (Theory Y). One organisation can use both.` },
   ],
-  "3-0": [ // Day 4 Solo
-    { q:"Natural person vs juridical person — definition and examples.",
-      fk:"L7", slide:"Slides 3–4 — Natural person / Juridical person",
-      ans:"Natural person: 'a human being considered as a subject of rights and obligations.' Juridical person: 'a non-human legal entity recognized by law as a legal person.' Examples of juridical persons: state, international organizations, NGOs, corporations, associations, foundations." },
-    { q:"Passive vs active legal capacity — when does each begin and end?",
-      fk:"L7", slide:"Slide 6 — Active and passive legal capacity of a natural person",
-      ans:"Passive capacity: begins with live birth, ends with death — all natural persons have it fully. Active capacity: full at age 18 (if mentally capable). Restricted for: minors (need parent/guardian authorization) and persons with permanent mental disorder." },
-    { q:"What are the 4 basic principles of civil law?",
-      fk:"L8", slide:"Slide 5 — Basic principles of civil law",
-      ans:"1. Equality of parties (no subordination). 2. Autonomous will (parties arrange relations as they please, within limits). 3. Sanctions affect property, not a person. 4. Rights are mostly transferable." },
-    { q:"What are the 3 categories of the Napoleonic Code (1804)?",
-      fk:"L8", slide:"Slide 3 — Civil law divisions",
-      ans:"1. Law of persons. 2. Property law. 3. Commercial law." },
-    { q:"What are the 5 parts of the German Civil Code (BGB, 1900)?",
-      fk:"L8", slide:"Slide 3 — Civil law divisions",
-      ans:"1. General Part (personal rights, legal personality). 2. Obligations (debt, sale, contract). 3. Things / property law. 4. Domestic relations / family law. 5. Succession / estate law." },
-    { q:"Where in the world is civil law used?",
-      fk:"L8", slide:"Slide 2 — Civil law notion",
-      ans:"'Civil law systems are found on all continents and cover about 60% of the world.' Continental Europe, Central/South America, Scotland, Quebec, Louisiana, parts of Asia (Japan, Indonesia, Lebanon), parts of Africa (Egypt, South Africa)." },
+
+  /* ───────────── DAY 2 · TUE — ETHICS + COSTING I ───────────── */
+  "1-0": [
+    { q:"Ethics in management accounting — definition and core obligation.", fk:"ETH", slide:"Slides 2–3",
+      ans:`Ethics = the principles, values and standards that govern the conduct of professionals in the field. <b>Core obligation:</b> an overriding, non-negotiable obligation to the organisation they serve, above personal gain or interpersonal pressure. Cost of failure: organisations lose an estimated <b>5% of annual revenue</b> to fraud; damage to shareholder trust, legal liability, organisational culture.` },
+    { q:"The four pillars of professional conduct.", fk:"ETH", slide:"Slide 4",
+      ans:`<b>Competence</b> — maintain expertise, prepare clear and complete reports after appropriate analysis, obey laws and regulations. <b>Integrity</b> — avoid and report conflicts of interest, do not subvert legitimate objectives, do the right thing when nobody is watching. <b>Objectivity</b> — communicate information fairly, disclose all relevant information. <b>Confidentiality</b> — never use confidential information for personal advantage; stop subordinates from disclosing data.` },
+    { q:"Ethical dilemma: definition, four red flags, three-step protocol.", fk:"ETH", slide:"Slides 5–6",
+      ans:`<b>Dilemma:</b> a problem in decision-making where a professional is forced between two options, neither acceptable ethically. <b>Red flags:</b> pressure to meet arbitrary financial targets · requests to re-categorise assets or expenses · conflict between personal relationships and professional duty · opportunity for unauthorised personal gain. <b>Protocol:</b> 1) Refute the paradox — is it really a dilemma? 2) Value theory approach — choose the greater good / lesser evil. 3) Alternative engineering — find a new, compliant solution.` },
+    { q:"The four case files — which principle each one tests.", fk:"ETH", slide:"Slides 7–10",
+      ans:`<b>01 Balance sheet shift</b> (raise iPhone production cost by $5 so the cost parks in inventory and profit looks higher; violates US GAAP) → <b>Competence</b>. <b>02 Executive bonus</b> (spouse is CEO; manipulate cost report so spouse gets a bonus) → <b>Integrity</b>. <b>03 Premature revenue</b> (CEO wants $100,000 of next year's sales booked now to hit +10%) → <b>Objectivity</b>. <b>04 Competitor's advantage</b> (leaving Company B, could sell its secrets to Company Y) → <b>Confidentiality</b> — duty outlasts employment.` },
+    { q:"Triage and the diagnostic matrix.", fk:"ETH", slide:"Slides 11–12",
+      ans:`<b>Not dilemmas:</b> setting an aggressive +10% profit target (strategic goal); authorising a $10,000 investment (capital allocation). <b>Breaches:</b> recognising $20,000 revenue early (objectivity); attempting a complex report without the skill or telling superiors (competence); selling product information for $100,000 (confidentiality and integrity). <b>Matrix:</b> top-down target pressure → objectivity → refuse manipulation. Personal gain and nepotism → integrity and confidentiality → disclose conflicts, wall off information. Lack of training → competence → recognise limits, request training or delegate.` },
+    { q:"Cost anatomy — the building blocks.", fk:"PC", slide:"Slides 3, 5–8",
+      ans:`Direct material + direct labour (+ direct expenses such as designer costs) = <b>prime cost</b>, directly related to the product. + <b>Production overhead</b> (indirect costs incurred in the factory that cannot be traced to a product: electricity, heating, engineers monitoring machines) = <b>production cost</b>. + <b>Other overhead</b> = period cost = other indirect cost (R&D, general and administrative, marketing, delivery — incurred in other departments) = <b>total cost</b>.` },
+    { q:"The cost classification matrix (greeting card maker).", fk:"PC", slide:"Slide 4",
+      ans:`Question to ask: can this cost be traced directly to the product? <b>Direct costs:</b> paper, ink, design, press worker wages. <b>Production overheads:</b> factory rent, machine repair, supervisor salary — must be allocated. <b>Period costs:</b> marketing, shipping, office supplies — do not enter inventory; written off in the period.` },
+    { q:"Key terms: cost, cost driver, cost object.", fk:"PC", slide:"Slide 29",
+      ans:`<b>Cost</b> — the $ value of material, labour and machines used in production. <b>Cost driver</b> — the level of activity that causes changes in costs. <b>Cost object</b> — anything for which we need to know the cost (product, student, sales territory).` },
+    { q:"E-01 Socks — the model cost statement.", fk:"PC", slide:"Slides 9–15",
+      ans:`<div class="calc">Direct material: wool 4,850 + labels 93 + ties 133   =  5,076
+Direct labour:   machine operator wages               =  6,330
+PRIME COST                                            = 11,406
+Production OH:   depreciation, repair, factory
+                 electricity, factory rent, cleaner   =  2,187 *
+PRODUCTION COST                                       = 13,593
+Other OH:        office electricity 38 + secretary 540
+                 + stationery 21 + telephone 83
+                 + delivery 436 + other office 214    =  1,332
+TOTAL COST                                            = 14,925</div>* The listed factory items add to 2,057 (420 + 68 + 216 + 1,230 + 123). The professor's slide and quiz use 2,187 — use hers. See the warning card at the bottom of the page.` },
+    { q:"FIFO, AVCO, LIFO — definitions.", fk:"PC", slide:"Slide 18",
+      ans:`<b>FIFO:</b> first purchased materials are used first; closing stock reflects the newest prices. <b>AVCO:</b> every new purchase shifts the average price; costs are spread evenly. <b>LIFO:</b> prohibited under IFRS/IAS — in inflation it artificially reduces reported profit and distorts balance-sheet stock values.` },
+    { q:"Porter Farrington — the exam-style FIFO/AVCO case.", fk:"PC", slide:"Slides 19, 38 (textbook 3.3)",
+      ans:`30 units @ $3.00, then 50 @ $3.30; 40 transferred to production.<div class="calc">FIFO   DM cost  = 30 × 3.00 + 10 × 3.30        = 123.00
+       Closing  = 40 × 3.30                    = 132.00  → answer d)
+AVCO   Average  = (90 + 165) ÷ 80              = 3.1875 (slide shows 3.18)
+       DM cost  = 40 × 3.1875                  = 127.50
+       Closing  = 40 × 3.1875                  = 127.50</div>Conclusion: with rising prices FIFO gives <b>lower material cost, higher profit and higher closing inventory</b>.` },
+    { q:"Slide E-01 materials: 1,000 @ $10, 1,000 @ $15, 1,000 @ $20; 2,500 issued.", fk:"PC", slide:"Slides 20–22",
+      ans:`<div class="calc">FIFO  = 1,000×10 + 1,000×15 + 500×20 = 35,000   closing 500×20 = 10,000
+AVCO  = 45,000 ÷ 3,000 = 15 per unit
+      = 2,500 × 15                   = 37,500   closing 500×15 =  7,500</div>Trap on slide 21: "2,500 × $10 = 25,000" is the wrong approach — only 1,000 units cost $10.` },
   ],
-  "4-0": [ // Day 5 Solo
-    { q:"What are the 4 rights of the owner (usus, fructus, abusus, possession)?",
-      fk:"L9", slide:"Slide 2 — Ownership — notion",
-      ans:"'The owner has the rights of possession, usus (right to control property and use it according to its nature), fructus (to collect the fruits, i.e. profits from the property) and abusus (to dispose — transfer rights by sale, lending, giving away — or destroy the property).'" },
-    { q:"What does 'absolute' (erga omnes) mean in ownership?",
-      fk:"L9", slide:"Slide 2 — Ownership — notion",
-      ans:"'Absolute (erga omnes) — the owner is the only one who has all the legally permitted rights over his/her property, and everyone has the duty not to disturb the owner in exercising rights over his/her property.'" },
-    { q:"What is co-ownership? Can a co-owner sell without asking others?",
-      fk:"L9", slide:"Slide 4 — Co-ownership",
-      ans:"'Several persons have the right of co-ownership over an undivided thing where each person's share is defined in proportion to the entirety.' A co-owner CAN dispose of his/her share without consent of other co-owners. BUT: statutory pre-emption right — other co-owners have the right to buy first." },
-    { q:"What is community (joint) ownership? How is it different from co-ownership?",
-      fk:"L9", slide:"Slide 5 — Community (joint) ownership",
-      ans:"'Ownership over an undivided thing where the shares are definable but not defined.' Key difference: in community ownership shares are NOT determined and cannot be individually disposed of. Examples: husband and wife, inheritance." },
-    { q:"What is a condominium?",
-      fk:"L9", slide:"Slide 6 — Condominium",
-      ans:"'Ownership right that belongs to owners of units of a real estate (apartment house or commercial building), whereas each owner can use and access common areas and facilities: yard, hallways, heating, elevators, garage.' Managed by association of owners." },
+  "1-2": [
+    { q:"1. Apex Tech — classify 18 costs and build the cost statement (10,000 phones).", fk:"X4", slide:"Whole sheet",
+      ans:`<div class="calc">DIRECT MATERIAL
+  OLED displays 800,000 + chips 1,200,000
+  + protective film 10,000 + retail boxes 40,000    = 2,050,000
+DIRECT LABOUR
+  Cleanroom assembly technicians                    =   350,000
+PRIME COST                                          = 2,400,000
+PRODUCTION OVERHEAD
+  machine depreciation 45,000 + robot maintenance 25,000
+  + factory rent 60,000 + plant electricity 30,000
+  + factory supervisor 18,000 + security/cleaning 15,000
+  + factory consumables 8,000                       =   201,000
+PRODUCTION COST                                     = 2,601,000
+  per smartphone = 2,601,000 ÷ 10,000               =    260.10
+OTHER OVERHEAD
+  HQ electricity 12,000 + delivery 55,000
+  + office wages 75,000 + stationery 3,500
+  + internet/phone 5,000 + advertising 200,000      =   350,500
+TOTAL COST                                          = 2,951,500</div>Judgement call: film and boxes are treated as direct material, following the professor's socks solution (labels and ties were direct material). If she calls packaging an overhead, DM = 2,000,000 and production OH = 251,000 — production cost is unchanged.` },
+    { q:"2. Nova Manufacturing — 550 units issued.", fk:"X2", slide:"Exercise 1",
+      ans:`200 @ $10, 300 @ $12, 250 @ $15 → 750 units, total value 9,350.<div class="calc">FIFO      DM = 200×10 + 300×12 + 50×15 = 6,350    closing 200×15 = 3,000
+Weighted  avg = 9,350 ÷ 750 = 12.4667
+          DM = 550 × 12.4667            = 6,856.67 closing        = 2,493.33
+Simple    avg = (10+12+15) ÷ 3 = 12.3333
+          DM = 550 × 12.3333            = 6,783.33 closing 200 × 12.3333 = 2,466.67</div>` },
+    { q:"3. Nova Manufacturing — 230 units issued (other version of the sheet).", fk:"X3", slide:"Exercise 1",
+      ans:`<div class="calc">FIFO      DM = 200×10 + 30×12           = 2,360
+          closing = 270×12 + 250×15     = 6,990
+Weighted  DM = 230 × 12.4667            = 2,867.33 closing 520 × 12.4667 = 6,482.67
+Simple    DM = 230 × 12.3333            = 2,836.67 closing 520 × 12.3333 = 6,413.33</div>` },
+    { q:"4. Apex display panels — 1,000 @ $40, 2,000 @ $45; 2,200 issued.", fk:"X2", slide:"Exercise 2",
+      ans:`<div class="calc">FIFO        DM = 1,000×40 + 1,200×45 = 94,000   closing 800×45   = 36,000
+Simple AVCO avg = (40+45) ÷ 2 = 42.50
+            DM = 2,200 × 42.50       = 93,500   closing 800×42.5 = 34,000
+Weighted    avg = 130,000 ÷ 3,000 = 43.3333
+            DM = 2,200 × 43.3333     = 95,333.33 closing         = 34,666.67</div><b>Difference:</b> simple AVCO averages the unit prices and ignores how many units were bought at each price; weighted AVCO divides total cost by total units, so the bigger purchase counts more. Only weighted adds back to the real total (130,000).` },
+    { q:"5. Slide E-03 — 1,250 @ $100, 1,350 @ $110, 2,150 @ $150; 3,600 issued.", fk:"PC", slide:"Slide 24",
+      ans:`<div class="calc">FIFO      DM = 1,250×100 + 1,350×110 + 1,000×150
+             = 125,000 + 148,500 + 150,000 = 423,500
+          closing = 1,150 × 150            = 172,500
+Weighted  avg = 596,000 ÷ 4,750 = 125.4737
+          DM = 3,600 × 125.4737            = 451,705.26  closing = 144,294.74
+Simple    avg = (100+110+150) ÷ 3 = 120    DM = 432,000</div>` },
+    { q:"6. Match: office stationery $120 · marketing $120 · delivery $100.", fk:"PC", slide:"Slides 41–43",
+      ans:`All three are <b>period costs / other overhead</b>. None is a product cost, direct cost or production overhead.` },
+    { q:"7. Quiz: prime cost formula? Period cost? Freelance designer fee? Banned method?", fk:"QZ", slide:"Questions 1–4",
+      ans:`Q1 → <b>C</b> direct materials + direct labour + direct expenses. Q2 → <b>D</b> office stationery. Q3 → <b>D</b> direct expense. Q4 → <b>A</b> LIFO.` },
+    { q:"8. Quiz: production cost with 5,076 / 6,330 / 2,187 / 1,332? May FIFO question?", fk:"QZ", slide:"Questions 8–9",
+      ans:`Q8 → <b>B $13,593</b> (5,076 + 6,330 + 2,187; the 1,332 is administrative, not production; 14,925 is total cost). Q9 → DM cost <b>$123</b>, closing inventory <b>$132</b> (answer C). FIFO: lower material cost, higher profit, higher closing inventory.` },
+    { q:"9. Ethics: your boss asks you to book next year's sales now. Principle? What do you do?", fk:"ETH", slide:"Slides 9, 12",
+      ans:`Objectivity. Refuse the manipulation; shareholders must receive fair data. Protocol: first check whether it is really a dilemma (the rules are clear — it is not), then look for a compliant alternative.` },
+    { q:"10. Ethics: is 'increase next year's profit by 10%' an ethical dilemma?", fk:"ETH", slide:"Slide 11",
+      ans:`No — it is a strategic goal, routine operations. It becomes a breach only when someone manipulates numbers to reach it.` },
   ],
-  "6-0": [ // Day 7 Solo — Management Block 1
-    { q:"What is the definition of management? Efficiency vs effectiveness.",
-      fk:"M1", slide:"Slide 2 — What is Management?",
-      ans:"'Coordinating and overseeing the work of others so that their activities are completed efficiently and effectively.' Efficiency = 'doing things right, getting the most output from least inputs.' Effectiveness = 'doing the right things, attaining organizational goals.'" },
-    { q:"What are the 4 management functions?",
-      fk:"M1", slide:"Slide 7 — Management Functions",
-      ans:"Planning (defining goals, establishing strategies). Organizing (arranging and structuring work). Leading (working with people to accomplish goals). Controlling (monitoring, comparing, correcting work)." },
-    { q:"What are the 3 levels of managers and what does each do?",
-      fk:"M1", slide:"Slide 5–6 — Classifying Managers",
-      ans:"First-line managers: manage non-managerial employees, involved in producing products/services (supervisor, shift manager). Middle managers: manage first-line managers (regional manager, project leader). Top managers: organization-wide decisions, establish goals (CEO, CFO, president)." },
-    { q:"What are Mintzberg's 3 management role categories and roles within each?",
-      fk:"M1", slide:"Slide 9 — Management Roles (Mintzberg)",
-      ans:"Interpersonal (ceremonial/symbolic): figurehead, leader, liaison. Informational (collecting/sharing info): monitor, disseminator, spokesperson. Decisional (making choices): entrepreneur, disturbance handler, resource allocator, negotiator." },
-    { q:"Who is Frederick Taylor and what did he do?",
-      fk:"M2", slide:"Slides 5–6 — Scientific Management / Frederick Taylor",
-      ans:"'Father of scientific management.' Published Principles of Scientific Management (1911). Used time-and-motion studies (stopwatch) to find 'one best way' for each job. Introduced incentive pay = standard wage + bonus. Management's job: know what you want workers to do, then see they do it in the best and cheapest way." },
-    { q:"What are Fayol's 14 principles of management?",
-      fk:"M2", slide:"Slide 10 — Fayol's 14 Principles",
-      ans:"1.Division of work 2.Authority 3.Discipline 4.Unity of command 5.Unity of direction 6.Subordination of individual to general interest 7.Remuneration 8.Centralization 9.Scalar chain 10.Order 11.Equity 12.Stability of tenure 13.Initiative 14.Esprit de corps." },
-    { q:"What did the Hawthorne Studies discover?",
-      fk:"M2", slide:"Slide 13 — The Hawthorne Studies",
-      ans:"Experiments at Western Electric 1924–1932. 'Productivity unexpectedly increased under imposed adverse working conditions. The effect of incentive plans was less than expected. Social norms, group standards and attitudes influence individual output more strongly than monetary incentives.'" },
-    { q:"What is organizational culture? Strong vs weak culture.",
-      fk:"M3", slide:"Slides 10–14 — Organizational Culture",
-      ans:"'A system of shared values, traditions, principles, meanings and ways of doing things that influence how organizational members act.' Strong culture: key values intensely held and widely shared → high organizational performance. Employees learn culture through: stories/heroes, rituals, material symbols, language." },
-    { q:"What is SWOT and PEST?",
-      fk:"M3", slide:"Slide 5 — General environmental factors / Slide 9 — SWOT",
-      ans:"PEST = Political/legal, Economic, Sociocultural, Technological trends (general environment analysis). SWOT = Strengths, Weaknesses (internal) + Opportunities, Threats (external). Used for environmental scanning." },
+  "1-3": [
+    { q:"★ Why does Case File 01 work? Product cost vs period cost on the income statement.", fk:null, slide:"Links Ethics slide 7 to Product costing slide 4",
+      ans:`Product costs (DM, DL, production OH) are stored in <b>inventory on the balance sheet</b> and reach the income statement only when the unit is <b>sold</b> (cost of goods sold). Period costs hit profit immediately. So pushing an extra $5 into "production cost" on unsold phones delays the expense and inflates this year's profit.` },
+    { q:"★ Two different ways to slice costs.", fk:null, slide:"Extends Product costing slide 4",
+      ans:`<b>Direct / indirect</b> = can it be traced to the product? <b>Product / period</b> = when is it expensed? A third axis, <b>fixed / variable</b> = does it change with output? (Factory rent is indirect, product and fixed. Wool is direct, product and variable.) <b>Conversion cost</b> = direct labour + production overhead.` },
+    { q:"★ What if prices are falling?", fk:null, slide:"Extends slide 19 conclusion",
+      ans:`Everything reverses: FIFO sends the expensive old layers to production first → higher material cost, lower profit, lower closing inventory than AVCO.` },
+    { q:"★ LIFO — work it once so you can explain why it is banned.", fk:null, slide:"Extends slide 18 (Porter Farrington numbers)",
+      ans:`<div class="calc">LIFO DM cost = 40 × 3.30 = 132     closing = 30×3.00 + 10×3.30 = 123</div>Material cost is highest, profit lowest, and the balance sheet shows old prices. IAS 2 prohibits it; US GAAP still allows it.` },
+    { q:"★ Moving average: an issue between two purchases.", fk:null, slide:"Extends AVCO",
+      ans:`If stock is issued <b>before</b> a later purchase arrives, average only what is in the warehouse at that moment. Example: 200 @ $10, 300 @ $12, issue 100, then buy 250 @ $15.<div class="calc">Average before issue = 5,600 ÷ 500 = 11.20 → DM = 1,120
+Left: 400 @ 11.20 = 4,480; + 250 @ 15 = 3,750 → new average 8,230 ÷ 650 = 12.66</div>` },
+    { q:"★ New drill — fresh numbers.", fk:null, slide:"Extra practice",
+      ans:`400 @ $5, 600 @ $6, 500 @ $8; issue 1,100.<div class="calc">FIFO     = 400×5 + 600×6 + 100×8 = 6,400   closing 400×8 = 3,200
+Weighted = 9,600 ÷ 1,500 = 6.40 → 7,040    closing       = 2,560
+Simple   = 19 ÷ 3 = 6.3333      → 6,966.67</div>` },
   ],
-  "7-0": [ // Day 8 Solo — Management Block 2
-    { q:"Classical view vs socioeconomic view of social responsibility.",
-      fk:"M4", slide:"Slides 7–8 — What Is Social Responsibility?",
-      ans:"Classical (shareholder model): 'Management's only social responsibility is to maximize profits… expending resources on social good unjustifiably increases costs.' Socioeconomic (stakeholder model): 'responsibility goes beyond making profits to include protecting and improving society's welfare.'" },
-    { q:"Carroll's pyramid of social responsibility — 4 levels.",
-      fk:"M4", slide:"Slide 9 — Carroll's pyramid",
-      ans:"1. Economic (be profitable). 2. Legal (obey the law). 3. Ethical (be ethical beyond law). 4. Discretionary (be a good corporate citizen, give back). Companies are responsible to: shareholders, employees, customers, government, local community, environment, general public." },
-    { q:"What are the 4 ways to encourage ethical behavior in an organization?",
-      fk:"M4", slide:"Slide 5 — Encouraging Ethical Behaviour",
-      ans:"1. Hire individuals with high ethical standards (integrity tests). 2. Establish codes of ethics and decision rules. 3. Provide ethics training. 4. Create an ethical climate." },
-    { q:"Draw the interpersonal communication model — all components.",
-      fk:"M5", slide:"Slides 7–8 — Interpersonal Communication Process",
-      ans:"Sender → Encoding (message converted to symbolic form) → Channel (medium) → Message → Decoding (receiver retranslates) → Receiver → Feedback. Noise = disturbances that interfere anywhere (illegible print, phone static, inattention, background sounds)." },
-    { q:"What is selective perception? What is the fundamental attribution error?",
-      fk:"M5", slide:"Slides 3–6 — Perception / Attribution Theory",
-      ans:"Selective perception: 'tendency to notice and accept objects and information consistent with our values, beliefs, expectations while ignoring inconsistent information.' Fundamental attribution error: 'tendency to underestimate the influence of external factors and overestimate internal/personal factors when judging others.' Self-serving bias: attribute own successes to internal factors, failures to external." },
-    { q:"What are the 3 types of plans and which manager uses each?",
-      fk:"M6", slide:"Slide 8 — Types of Plans",
-      ans:"Strategic plans: top management, 2–5 years, entire organization. Tactical plans: middle management, 6 months–2 years, how resources will be used. Operational plans: first-line managers, day-to-day, specify details of how goals are achieved." },
-    { q:"What is MBO (Management by Objectives)? Key elements.",
-      fk:"M6", slide:"Slide 9 — Management By Objectives",
-      ans:"'Specific performance goals are jointly determined by employees and managers. Progress toward accomplishing goals is periodically reviewed. Rewards are allocated based on progress.' Key elements: goal specificity, participative decision making, explicit time period, performance feedback." },
-    { q:"What is bounded rationality in decision-making?",
-      fk:"M6", slide:"Slide 15 — Decision Making / Bounded Rationality",
-      ans:"Managers cannot process all available information, so they 'satisfice' — choose a good-enough solution rather than the optimal one. Planning can create a 'false sense of certainty' — listed as a disadvantage of planning on slide 3." },
+
+  /* ───────────── DAY 3 · WED — COSTING II ───────────── */
+  "2-0": [
+    { q:"The direct labour equation — and what is excluded.", fk:"PC", slide:"Slide 26",
+      ans:`Fixed base rate + high-production bonuses = <b>direct labour cost</b>. <b>Not counted:</b> idle time, machine breakdowns, indirect tasks such as machine cleaning. These are inefficiencies — booked to overheads or period costs, never directly to the product.` },
+    { q:"Why are overheads the hardest problem?", fk:"PC", slide:"Slide 28",
+      ans:`They are all the costs that occur within the factory but cannot be traced to individual units (electricity, heating, machine maintenance, depreciation). They must be allocated proportionally using <b>cost drivers</b> through an allocation system.` },
+    { q:"Cost driver mapping.", fk:"PC", slide:"Slide 30",
+      ans:`A cost driver is any activity that causes a change in costs. Rent, insurance, building maintenance, cleaning → <b>floor area</b>. Machine depreciation → <b>machinery value</b>. Canteen costs, supervisor salary → <b>headcount</b>. Machine maintenance → <b>number of call-outs</b>.` },
+    { q:"The traditional allocation pipeline — four steps.", fk:"PC", slide:"Slide 31",
+      ans:`1) Total overhead pool — collect all indirect costs ($100,000). 2) Identify the driver — machine or labour hours (1,000 machine hours). 3) Calculate the OH rate — $100,000 ÷ 1,000 = $100 per hour. 4) Absorb into the product — rate × hours required (800 h → $80,000).` },
+    { q:"Sock factory — same overhead, two drivers.", fk:"PC", slide:"Slide 32",
+      ans:`<div class="calc">Total OH = 16,000
+A  Machine hours: 16,000 ÷ 1,000 = $16.00/h; 2 pairs per hour → 16 ÷ 2 = $8.00 per pair
+B  Labour hours:  16,000 ÷ 10,000 = $1.60/h; 3 pairs per hour → 1.60 ÷ 3 = $0.53 per pair</div>Conclusion: the choice of allocation base changes how profitable a product looks.` },
+    { q:"Product B — full unit cost.", fk:"PC", slide:"Slide 33 (= quiz question 11)",
+      ans:`<div class="calc">OH rate    = 50,000 ÷ 1,000 labour hours = $50 per hour
+Absorbed   = $50 × 2 hours               = $100
+Unit cost  = DM 50 + DL 20 + OH 100      = $170   (prime cost = 70)</div>` },
+    { q:"Rembrandt Hotel & Casino — allocate $14,550,000.", fk:"PC", slide:"Slides 36–37",
+      ans:`<div class="calc">METHOD 1  Floor area: 14,550,000 ÷ 160,000 sq ft = $90.9375
+  Hotel       80,000 → 7,275,000   (slide, rounded rate 90.9: 7,272,000)
+  Casino      64,000 → 5,820,000   (slide: 5,817,600)
+  Restaurant  16,000 → 1,455,000   (slide: 1,454,400)
+METHOD 2  Headcount: 14,550,000 ÷ 500 = $29,100 per employee
+  Hotel   200 → 5,820,000 · Casino 250 → 7,275,000 · Restaurant 50 → 1,455,000</div>The hotel carries the most under floor area, the casino under headcount. Be ready to recommend one and say why.` },
+    { q:"Swift Metals — the overhead apportionment schedule (textbook 3.4 homework).", fk:"PC", slide:"Slide 35",
+      ans:`<div class="calc">                      Rate            Prep     Tooling  Finishing    Total
+Factory costs   £35 per sq m       245,000   315,000   140,000   700,000
+Canteen         £544 per employee    8,704     6,528     3,264    18,496
+Depreciation    £0.10 per £ value    2,600    11,200     3,850    17,650
+Maintenance     £329 per call-out      658     1,974       329     2,961
+Supervisors     £687 per employee   10,992     8,244     4,122    23,358
+TOTAL                              267,954   342,946   151,565   762,465</div>Bases: floor area 7,000 / 9,000 / 4,000 · employees 16 / 12 / 6 · machinery 26,000 / 112,000 / 38,500 · call-outs 2 / 6 / 1.` },
+    { q:"Apex Mobile — labour hours or machine hours?", fk:"X1", slide:"Whole sheet",
+      ans:`Production overhead $1,200,000; 20,000 labour hours; 30,000 machine hours.<div class="calc">Rate A = 1,200,000 ÷ 20,000 DLH = $60 per labour hour
+Rate B = 1,200,000 ÷ 30,000 MH  = $40 per machine hour
+
+                 DM    DL    OH (labour basis)      Unit cost
+Apex Lite        80    30    60 × 1.5 = 90            200
+Apex Pro        220    10    60 × 0.5 = 30            260
+
+                 DM    DL    OH (machine basis)     Unit cost
+Apex Lite        80    30    40 × 0.5 = 20            130
+Apex Pro        220    10    40 × 2.5 = 100           330</div><b>Short answer:</b> machine hours fit a modern automated plant, because overhead (depreciation, robot maintenance, power) is caused by machines, not hands. On the labour basis the <b>Lite is overcosted</b> ($200 vs $130) because it uses a lot of labour, and the <b>Pro is undercosted</b> ($260 vs $330) although it uses most of the machine time.` },
   ],
-  "8-0": [ // Day 9 Solo — Management Block 3
-    { q:"What is the S-curve of innovation? Revolutionary vs incremental change.",
-      fk:"M8", slide:"Slide 5–7 — S-curve / Types of change",
-      ans:"S-curve: 'slow initial progress, then rapid progress, then slow progress again as technology matures and reaches its limits.' Revolutionary change: breakthrough in performance, different design, aim is much better performance. Incremental change: lowering costs and improving the dominant design. Example: Kodak, Video→DVD→Blu-ray." },
-    { q:"Why do people resist change? 4 reasons.",
-      fk:"M8", slide:"Slide 11 — Why People Resist Change",
-      ans:"1. Ambiguity and uncertainty that change introduces. 2. Comfort of old habits. 3. Concern over personal loss of status, money, authority, friendships, personal convenience. 4. Perception that change is incompatible with goals and interest of the organization." },
-    { q:"What is Lewin's 3-step change model?",
-      fk:"M8", slide:"Slide 12 — Kurt Lewin",
-      ans:"1. Unfreezing the status quo (creating motivation to change). 2. Changing to a new state. 3. Refreezing to make the change permanent (embedding it into culture, norms, procedures)." },
-    { q:"What are the 6 key elements of organizational design?",
-      fk:"M9", slide:"Slide 4 — Designing Organizational Structure",
-      ans:"1. Departmentalization. 2. Chain of command. 3. Span of control. 4. Centralization and decentralization. 5. Work specialization. 6. Formalization." },
-    { q:"What are the 5 types of departmentalization? Pros and cons of each.",
-      fk:"M9", slide:"Slides 6–11 — Departmentalization by Type",
-      ans:"Functional (by function: + specialization, - poor cross-communication). Product (by product line: + expertise, - duplication). Geographical (by territory: + regional fit, - duplication). Customer (by customer type: + customer focus, - duplication). Matrix (hybrid, usually product+functional: + cooperation, - two bosses)." },
-    { q:"What is chain of command? Unity of command?",
-      fk:"M9", slide:"Slide 12 — Organizational Authority",
-      ans:"Chain of command: 'the continuous line of authority that extends from upper to lowest levels and clarifies who reports to whom.' Authority: rights inherent in a managerial position to tell people what to do. Unity of command: 'a person should have one boss and should report only to that person.'" },
-    { q:"What are Tuckman's 5 stages of group development?",
-      fk:"M10", slide:"Slide 8 — Stages of Group Development",
-      ans:"1. Forming: members join, define purpose, structure, leadership. 2. Storming: intragroup conflict over control. 3. Norming: close relationships develop, group becomes cohesive, norms established. 4. Performing: fully functional, focus on task. 5. Adjourning: group prepares to disband (for temporary/project teams)." },
-    { q:"What is groupthink? What are team norms and cohesiveness?",
-      fk:"M10", slide:"Slide 3–7 — Teams: Pros and Cons / Work team characteristics",
-      ans:"Groupthink is listed under team CONS: pressure to conform suppresses dissent, leads to poor decisions. Norms: 'informally agreed-upon standards that regulate team behavior.' Cohesiveness: 'extent to which team members are attracted to a team and motivated to remain in it.' Optimal team size: 6–9." },
+  "2-2": [
+    { q:"1. Quiz: how is idle time during a machine breakdown treated?", fk:"QZ", slide:"Question 5 + Product costing slide 26",
+      ans:`<b>D</b> — excluded from the (direct) cost of production. It is an inefficiency, booked to overheads or period costs — never added to direct labour, prime cost or materials.` },
+    { q:"2. Quiz: best driver for canteen costs? For machinery depreciation?", fk:"QZ", slide:"Questions 6–7",
+      ans:`Canteen → <b>A, number of employees</b>. Depreciation → <b>C, machinery value</b>.` },
+    { q:"3. Quiz: $16,000 overhead, 1,000 machine hours — rate?", fk:"QZ", slide:"Question 10",
+      ans:`<b>B, $16 per machine hour.</b>` },
+    { q:"4. Quiz: Product B, DM $50, DL $20, rate $50 per labour hour, 2 hours.", fk:"QZ", slide:"Question 11",
+      ans:`<b>A, $170</b> = 50 + 20 + 50 × 2.` },
+    { q:"5. Redo Apex Mobile on paper — both rates, four unit costs, verdict.", fk:"X1", slide:"Whole sheet",
+      ans:`$60/DLH and $40/MH. Lite 200 / Pro 260 on labour; Lite 130 / Pro 330 on machines. Check: 10,000 × 90 + 10,000 × 30 = 1,200,000 ✓ and 10,000 × 20 + 10,000 × 100 = 1,200,000 ✓. Machine hours is the right base.` },
+    { q:"6. Redo Rembrandt — two methods.", fk:"PC", slide:"Slides 36–37",
+      ans:`Floor area: 7,275,000 / 5,820,000 / 1,455,000 (hotel / casino / restaurant). Headcount: 5,820,000 / 7,275,000 / 1,455,000.` },
+    { q:"7. Redo two rows of Swift Metals: canteen and depreciation.", fk:"PC", slide:"Slide 35",
+      ans:`Canteen 18,496 ÷ 34 = 544 → 8,704 / 6,528 / 3,264. Depreciation 17,650 ÷ 176,500 = 0.10 → 2,600 / 11,200 / 3,850.` },
+    { q:"8. Sock factory: why $8.00 on one basis and $0.53 on the other?", fk:"PC", slide:"Slide 32",
+      ans:`Same $16,000 divided by a small base (1,000 machine hours) gives a high rate; divided by a big base (10,000 labour hours) gives a low one. Then divide by pairs made per hour (2 and 3).` },
+    { q:"9. Name the four steps of traditional allocation.", fk:"PC", slide:"Slides 31, 39",
+      ans:`Identify the overhead pool → find the correct driver → calculate the absorption rate → absorb proportionally into the product.` },
+    { q:"10. Which costs become inventory and which are written off immediately?", fk:"PC", slide:"Slide 39 — Strategy Guide",
+      ans:`Production costs (direct + production overhead) become inventory. Period costs are written off immediately.` },
   ],
-  "9-0": [ // Day 10 Solo — Management Block 4 (HRM, Motivation, Leadership, Controlling)
-    { q:"What is the difference between a job description and a job specification?",
-      fk:"M11", slide:"Slide 5 — Current Assessment",
-      ans:"Job description: 'a written description of the basic tasks, duties, and responsibilities required of an employee holding a particular job (job content, environment, conditions).' Job specification: 'a written statement of the minimum qualifications that a person must possess to perform a given job successfully.'" },
-    { q:"What is validity vs reliability in selection?",
-      fk:"M11", slide:"Slide 8 — Validity and Reliability",
-      ans:"Validity: 'a proven relationship between the selection device used and some relevant criterion for successful performance — high test scores equate to high job performance.' Reliability: 'the degree of consistency with which a selection device measures the same thing — scores are consistent over multiple testing instances.'" },
-    { q:"What are Maslow's 5 levels of needs?",
-      fk:"M12", slide:"Slides 4–5 — Maslow's Hierarchy of Needs",
-      ans:"(bottom to top): 1. Physiological (food, water). 2. Safety. 3. Social (belongingness). 4. Esteem. 5. Self-actualization. Lower-order needs are external; higher-order are internal. 'Satisfied needs will no longer motivate.' Note: 'No empirical support' — this is the main criticism." },
-    { q:"What is McClelland's Three-Needs Theory?",
-      fk:"M12", slide:"Slide 6 — Three-Needs Theory",
-      ans:"Three acquired (not innate) needs: Need for Achievement (drive to excel; high achievers avoid very easy and very difficult tasks). Need for Power (need to influence others' behavior). Need for Affiliation (desire for interpersonal relationships)." },
-    { q:"What is Equity Theory? What are inputs and outcomes?",
-      fk:"M12", slide:"Slides 9–10 — Equity Theory",
-      ans:"'People will be motivated at work when they perceive that they are being treated fairly.' Inputs: contributions to organization (education, training, intelligence, experience, effort, hours, ability). Outcomes: rewards received (pay, benefits, status symbols, job titles). Referents: others with whom people compare themselves." },
-    { q:"What is Fiedler's Contingency Theory? What does LPC measure?",
-      fk:"M13", slide:"Slides 6–7 — Fiedler's Contingency Theory",
-      ans:"'Effective group performance depends upon the proper match between the leader's style and the degree of control and influence in the situation.' LPC (Least-Preferred Co-worker) questionnaire: 18 pairs of contrasting adjectives. High score (≥64) = relationship-oriented leader. Low score (≤57) = task-oriented leader. Situational factors: leader-member relations, task structure, position power." },
-    { q:"What are the 3 types of control: feedforward, concurrent, feedback?",
-      fk:"M14", slide:"Slide 7 — Feedforward, Concurrent, Feedback Control",
-      ans:"Feedforward control: 'prevents anticipated problems before actual occurrences.' Concurrent control: 'takes place while a work activity is in progress.' Feedback control: 'takes place after an activity is done.' The 4-step control process: 1.Set standards → 2.Measure actual performance → 3.Compare against standard → 4.Take corrective action." },
-    { q:"What is a Balanced Scorecard?",
-      fk:"M14", slide:"Slide 11 — Balanced Scorecard",
-      ans:"'A measurement tool that uses goals set by managers in four areas to measure a company's performance: Financial (cash flow, balance sheet, income statement). Customer (customer defections). Internal processes (quality & value). People/innovation/growth assets (waste, pollution).'" },
+  "2-3": [
+    { q:"★ Three words examiners mix up: allocation, apportionment, absorption.", fk:null, slide:"Extends slides 30–35",
+      ans:`<b>Allocation</b> — a whole cost goes to one cost centre (the tooling supervisor's salary → tooling). <b>Apportionment</b> — a shared cost is split between centres on a fair basis (rent by floor area) — this is what the Swift Metals schedule does. <b>Absorption</b> — the centre's total is charged into product units with an hourly rate.` },
+    { q:"★ Predetermined rate, and over- or under-absorption.", fk:null, slide:"Extends Apex Mobile",
+      ans:`The rate is set <b>before</b> the year from budgets (that is why the sheet says "predetermined"). At year end compare.<div class="calc">Budget: 1,200,000 ÷ 30,000 MH = $40/MH
+Actual: 31,000 MH worked, actual overhead 1,250,000
+Absorbed = 31,000 × 40 = 1,240,000
+Under-absorbed = 1,250,000 − 1,240,000 = 10,000 (extra expense)</div>Absorbed more than actual = over-absorbed.` },
+    { q:"★ From unit cost to selling price: mark-up vs margin.", fk:null, slide:"Extends Apex Tech ($260.10)",
+      ans:`<div class="calc">Mark-up 40% on cost:  260.10 × 1.40          = 364.14
+Margin 40% on price:  260.10 ÷ (1 − 0.40)    = 433.50</div>Mark-up is a % of cost; margin is a % of selling price. Understanding cost structure is "the foundational prerequisite for any successful pricing strategy" (slide 40).` },
+    { q:"★ One plant-wide rate vs departmental rates.", fk:null, slide:"Extends Swift Metals",
+      ans:`After apportionment each cost centre can have its own rate. If Tooling works 20,000 machine hours: 342,946 ÷ 20,000 = £17.15 per machine hour. If Finishing works 15,000 labour hours: 151,565 ÷ 15,000 = £10.10 per labour hour. Departmental rates are fairer than one blanket rate — and ABC goes one step further.` },
+    { q:"★ Rembrandt on a third basis: revenue.", fk:null, slide:"Extends slide 36 (revenues are given)",
+      ans:`<div class="calc">Total revenue = 16,425,000 + 5,256,000 + 12,340,000 = 34,021,000
+Hotel      48.28% → about 7,024,600
+Restaurant 15.45% → about 2,247,900
+Casino     36.27% → about 5,277,500</div>Weakness: revenue is "ability to bear", not what causes the cost.` },
+    { q:"★ New drill — fresh numbers.", fk:null, slide:"Extra practice",
+      ans:`Overhead $480,000; 12,000 labour hours; 8,000 machine hours. K: DM 30, DL 24, 1.5 DLH, 0.5 MH. L: DM 55, DL 8, 0.5 DLH, 2 MH.<div class="calc">Rates: 480,000 ÷ 12,000 = $40/DLH    480,000 ÷ 8,000 = $60/MH
+Labour basis:   K = 30+24+60 = 114     L = 55+8+20  =  83
+Machine basis:  K = 30+24+30 =  84     L = 55+8+120 = 183</div>` },
+  ],
+
+  /* ───────────── DAY 4 · THU — ABC + MOCK ───────────── */
+  "3-0": [
+    { q:"Why did traditional costing stop working?", fk:"ABC", slide:"Slides 3–4",
+      ans:`Industrial age: high share of direct labour, low overhead. Modern era: low direct labour, massive overhead. Traditional costing was designed for single-product factories with lots of human labour. In an automated plant there is only a small portion of direct material, almost no direct labour, and production overhead is extremely large — so one traditional rate is not economically logical. That is why we interview employees to find the <b>activities</b> that consume resources.` },
+    { q:"The activity-based idea in one line.", fk:"ABC", slide:"Slide 5",
+      ans:`<b>Resources are consumed by activities; activities are consumed by products.</b> Resources (labour, equipment, utilities) → activities (setup, ordering, machining) → products / cost objects. ABC tracks the true cause of overhead.` },
+    { q:"Traditional vs ABC — four criteria.", fk:"ABC", slide:"Slide 6",
+      ans:`<b>Allocation base:</b> single volume metric (labour hours) vs multiple specific cost drivers. <b>Precision:</b> prone to cross-subsidisation (cost distortion) vs highly precise. <b>Complexity:</b> simple and cheap vs needs rigorous data tracking. <b>Best for:</b> uniform mass production vs diverse product lines and complex services.` },
+    { q:"The two-stage allocation; what a cost driver is.", fk:"ABC", slide:"Slides 7–8",
+      ans:`Phase 1 (<b>cost pools</b>): trace overhead to activities. Phase 2 (<b>cost drivers</b>): apply activity costs to products by consumption. A cost driver is the specific factor that influences the cost level of an activity. Machining → machine hours. Finishing and assembly → direct labour hours. Material ordering → number of orders processed.` },
+    { q:"Manufacturing case — Products A and B.", fk:"ABC", slide:"Slides 9–11",
+      ans:`<div class="calc">Machining  45,000 ÷ 3,000 machine hours = $15 per hour
+Finishing  25,000 ÷ 5,000 labour hours  = $5 per hour
+Ordering    4,000 ÷ 25 orders           = $160 per order
+
+Product A: 2,000 MH × 15 + 2,000 LH × 5 + 16 × 160 = 30,000 + 10,000 + 2,560 = 42,560
+Product B: 1,000 MH × 15 + 3,000 LH × 5 +  9 × 160 = 15,000 + 15,000 + 1,440 = 31,440</div>Note: these pools total 74,000; the "$113,000 ÷ 5,000 h = $22.60" is the traditional rate on the full budget.` },
+    { q:"The three short cases.", fk:"ABC", slide:"Slides 20–23",
+      ans:`<div class="calc">1 SOLIDAGO  190,000 ÷ 19,000 orders = $10 per order
+  A: 10,000 × 10 = 100,000      B: 8,000 × 10 = 80,000
+
+2 XO  Setup 100,000 ÷ 500 = $200 per setup   Issue 50,000 ÷ 10,000 = $5 per issue
+  A: 450 × 200 + 8,000 × 5 = 90,000 + 40,000 = 130,000
+  B:  50 × 200 + 2,000 × 5 = 10,000 + 10,000 =  20,000     (total 150,000 ✓)
+
+3 COMPANY X  Traditional: 100,000 ÷ 10,000 labour hours = $10 per hour
+  A (2 h) = $20 per unit       B (6 h) = $60 per unit
+  ABC: Setup 60,000 ÷ 8 = 7,500      Issue 40,000 ÷ 15 = 2,666.67
+  A: 5 × 7,500 + 10 × 2,666.67 = 37,500 + 26,666.67 = 64,166.67
+  B: 3 × 7,500 +  5 × 2,666.67 = 22,500 + 13,333.33 = 35,833.33  (total 100,000 ✓)</div>Compare: traditional charges B three times as much per unit because it takes more labour hours; ABC shows A consumes most of the activity (64%).` },
+    { q:"Trampoline case — the profit mystery.", fk:"ABC", slide:"Slides 16–19",
+      ans:`Standard: 7,000 units, 2 labour hours, materials $50, labour $20. Deluxe: 2,000 units, 3 hours, materials $75, labour $30. Overhead $600,000.<div class="calc">TRADITIONAL  600,000 ÷ 20,000 hours = $30 per hour
+  Standard = 50 + 20 + 60 = 130       Deluxe = 75 + 30 + 90 = 195
+
+ABC   Assembly  100,000 ÷ 20,000 hours = $5 per hour
+      Receiving 200,000 ÷ 4,000 reports = $50 per report
+      Testing   300,000 ÷ 1,000 tests   = $300 per test
+  Deluxe:   6,000 h × 5 + 2,000 reports × 50 + 800 tests × 300 = 370,000
+            370,000 ÷ 2,000 = 185 → unit cost 75 + 30 + 185 = 290.00
+  Standard: 14,000 h × 5 + 2,000 reports × 50 + 200 tests × 300 = 230,000
+            230,000 ÷ 7,000 = 32.86 → unit cost 50 + 20 + 32.86 = 102.86</div>Standard was <b>over-costed by $27.14</b>; Deluxe <b>under-costed by $95.00</b>. The company sold the Deluxe below its true cost, so rising sales multiplied the losses. (The 2,000 / 2,000 split of receiving reports is not printed on the slide — it is what the slide's $290 and $102.86 imply.)` },
+    { q:"Distortion, ABC in services, ABM.", fk:"ABC", slide:"Slides 12–14",
+      ans:`<b>Distortion:</b> Product C traditional €83.22 vs ABC €94.86 — dangerously undercosted; Product D €109.30 vs €97.67 — overcosted (it uses only 1.4 machine hours). <b>Services:</b> a bank has no direct materials — all costs are overhead (teller salaries, manager wages, facility costs → opening accounts, processing deposits, loan processing → retail and commercial customers). ABC is the only way to find true profitability per customer. <b>Activity-based management:</b> process optimisation (eliminate non-value-adding activities) · strategic pricing (stop subsidising complex products) · customer profitability.` },
+    { q:"Constraints and the executive summary.", fk:"ABC", slide:"Slides 15, 17 (deck order: Reality Check, Executive Summary)",
+      ans:`<b>Constraints:</b> data intensity (log every setup) · cost and software (ERP investment, training) · system maintenance (pools must be updated as processes change). Precision vs effort. <b>Summary:</b> overhead is consumed by activities, not products · traditional volume-based costing undercosts complex products and overcosts simple ones · two-stage ABC gives the data for process optimisation and profit maximisation.` },
+  ],
+  "3-3": [
+    { q:"A1. Three pillars of management accounting, one sentence each.", fk:"W1", slide:"Slide 16", ans:`Cost accounting — gather costs and attach them to cost objects. Planning — set objectives, choose strategies, build budgets. Controlling — compare budget with actual and find variances.` },
+    { q:"A2. Five differences between managerial and financial accounting.", fk:"W1", slide:"Slide 14", ans:`Audience, regulation, risk, frequency, output — see Monday's notes.` },
+    { q:"A3. Budget revenue $250,000, actual $232,500.", fk:null, slide:"Fresh numbers", ans:`<div class="calc">Variance = 232,500 − 250,000 = −17,500 UNFAVOURABLE = 7.0%</div>` },
+    { q:"A4. Four pillars of professional conduct; which one in 'spouse is the CEO'?", fk:"ETH", slide:"Slides 4, 8", ans:`Competence, integrity, objectivity, confidentiality. Spouse/CEO bonus case = integrity (conflict of interest).` },
+    { q:"A5. Theory X vs Theory Y; Herzberg's two factors.", fk:"TH", slide:"Slides 8–9", ans:`See Monday's notes. Pay = hygiene factor.` },
+    { q:"A6. Agency theory in three sentences.", fk:"TH", slide:"Slides 10–11", ans:`Jensen and Meckling, mid-1970s; shareholders vs managers; monitoring, transparency, compensation.` },
+    { q:"A7. Two things AI changes; does it replace accountants?", fk:"AI", slide:"Slides 5, 8", ans:`Variance analysis → real-time anomaly detection; static budgets → rolling forecasts. No — it frees the accountant to be a strategic business partner.` },
+    { q:"B1. Mug maker — cost statement and cost per mug (5,000 mugs).", fk:null, slide:"Fresh numbers",
+      ans:`Clay 9,000 · glaze 1,500 · potters' wages 12,000 · kiln depreciation 2,400 · factory rent 3,600 · factory electricity 1,100 · factory supervisor 2,900 · office salaries 4,000 · advertising 1,800 · delivery 700.<div class="calc">Direct material 10,500 + direct labour 12,000 = PRIME 22,500
+Production OH 2,400 + 3,600 + 1,100 + 2,900   =       10,000
+PRODUCTION COST                               =       32,500 → 6.50 per mug
+Other OH 4,000 + 1,800 + 700                  =        6,500
+TOTAL COST                                    =       39,000</div>` },
+    { q:"B2. Materials: 400 @ $5, 600 @ $6, 500 @ $8; issue 1,100. FIFO and AVCO.", fk:null, slide:"Fresh numbers",
+      ans:`<div class="calc">FIFO 6,400 (closing 3,200) · weighted AVCO 6.40 → 7,040 (closing 2,560)</div>` },
+    { q:"B3. Overhead $480,000; 12,000 DLH; 8,000 MH. Products K and L.", fk:null, slide:"Fresh numbers",
+      ans:`K: DM 30, DL 24, 1.5 DLH, 0.5 MH. L: DM 55, DL 8, 0.5 DLH, 2 MH.<div class="calc">$40/DLH: K 114, L 83      $60/MH: K 84, L 183</div>L is the machine-heavy product; on labour hours it is undercosted by $100.` },
+    { q:"B4. ABC: ordering $36,000 (900 orders), setup $84,000 (120 setups).", fk:null, slide:"Fresh numbers",
+      ans:`A: 600 orders, 30 setups, 4,000 labour hours. B: 300 orders, 90 setups, 2,000 labour hours.<div class="calc">Rates: 36,000 ÷ 900 = $40 per order     84,000 ÷ 120 = $700 per setup
+ABC          A = 600×40 + 30×700 = 24,000 + 21,000 = 45,000
+             B = 300×40 + 90×700 = 12,000 + 63,000 = 75,000   (total 120,000 ✓)
+Traditional  120,000 ÷ 6,000 hours = $20 per hour
+             A = 4,000 × 20 = 80,000      B = 2,000 × 20 = 40,000</div>Traditional undercosts B by 35,000 — B is the complex product with many setups.` },
+    { q:"B5. Explain in three sentences why traditional costing undercosts complex products.", fk:"ABC", slide:"Slides 12, 17",
+      ans:`It spreads all overhead on one volume measure such as labour hours. Complex, low-volume products use few hours but many setups, tests and orders. So the simple, high-volume product pays for activities it never caused — cross-subsidisation.` },
+  ],
+  "3-4": [
+    { q:"★ The ABC cost hierarchy.", fk:null, slide:"Extends ABC slides 7–8",
+      ans:`<b>Unit-level</b> — every unit (machine power; driver: machine hours). <b>Batch-level</b> — every batch (setups, material orders, inspections; driver: number of setups). <b>Product-level</b> — keeping a product in the range (design, engineering changes). <b>Facility-level</b> — keeping the plant open (rent, plant manager). Traditional costing treats everything as unit-level; that is the root of the distortion.` },
+    { q:"★ Steps to implement ABC (essay skeleton).", fk:null, slide:"Extends slides 4, 7",
+      ans:`1) Identify activities (interview employees). 2) Assign overhead to activity cost pools. 3) Choose a cost driver for each pool. 4) Rate = pool cost ÷ total driver volume. 5) Charge products for the driver units they consume. 6) Add direct material and direct labour for the full unit cost.` },
+    { q:"★ When is ABC not worth it?", fk:null, slide:"Extends slide 15",
+      ans:`One product or very similar products; overhead is a small share of total cost; overhead really does move with volume; the firm is too small to afford the data collection. Then a traditional rate is good enough.` },
+    { q:"★ Full ABC drill with unit costs — fresh numbers.", fk:null, slide:"Extra practice",
+      ans:`Overhead $240,000. Setups 90,000 (150 setups) · inspection 60,000 (1,200 inspections) · machining 90,000 (9,000 MH). P: 1,000 units, 100 setups, 900 inspections, 3,000 MH. Q: 5,000 units, 50 setups, 300 inspections, 6,000 MH.<div class="calc">Rates: $600 per setup · $50 per inspection · $10 per MH
+P = 100×600 + 900×50 + 3,000×10 = 60,000 + 45,000 + 30,000 = 135,000 → $135 per unit
+Q =  50×600 + 300×50 + 6,000×10 = 30,000 + 15,000 + 60,000 = 105,000 → $21 per unit
+Traditional: 240,000 ÷ 9,000 MH = $26.67 per MH
+P = 80,000 → $80 per unit (undercosted by 55)   Q = 160,000 → $32 per unit (overcosted by 11)</div>` },
+    { q:"★ Link ABC to ethics and to AI in one answer.", fk:null, slide:"Synthesis across decks",
+      ans:`ABC needs honest, competent data collection (competence, objectivity) — a manager could bend driver counts to make a favourite product look profitable. AI lowers ABC's biggest constraint by tracking resource usage automatically ("automated and granular cost driver mapping").` },
   ],
 };
 
+// SCHEDULE — to add a lecture: add a NOTES entry above, then a phase with its nk in the day it arrives.
 const D = [
-  { date:"Fri, June 5", cd:"D–11", subj:"LAW", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"0-0", d:`
-      <strong>READ:</strong> Lecture 1 (Introduction) + Lecture 2 (Forms of State).<br>
+  { date:"Mon, Oct 5", cd:"D–4", subj:"CORE 1", chip:"CORE", strip:{l:"CORE DAY 1 OF 2", e:"All theory + cost statement + FIFO/AVCO"}, phases:[
+    { solo:true, tag:"◆ DENIS SOLO · MUST DO", t:"Before session · 60 min", h:"Block A — Theory: Intro, AI, Management Theories", nk:"0-0", d:`
+      <strong>READ:</strong> 01 Week + 01 AI + 02 Theory.<br>
       <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>What is a state? Name its 3 main elements (territory, population, sovereignty).</li>
-        <li>Unitary state: definition + 3 examples + 2 advantages + 2 disadvantages.</li>
-        <li>Federation: definition + 3 examples + key difference from unitary (sovereignty).</li>
-        <li>Confederation: definition + 3 examples + difference from federation (keeps autonomy).</li>
-        <li>Draw a table: Unitary vs Federation vs Confederation — 3 rows of difference.</li>
+        <li>Two definitions of management accounting (simple + CIMA with the four value verbs).</li>
+        <li>Table: managerial vs financial accounting — 5 rows.</li>
+        <li>Three pillars + the planning and control cycle with what each side produces.</li>
+        <li>Variance: 3,860,800 actual vs 4,160,000 budget — amount, %, direction.</li>
+        <li>AI: predictive vs prescriptive; three pillars; the "traditional → AI" table.</li>
+        <li>Capstone table: 7 theorists · school · focus · mechanism. Fayol's 14 in three groups.</li>
       </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: what the state is, the 3 forms, definitions and examples. Mama listens, does not interrupt."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>What makes Serbia a unitary state?</li>
-        <li>Former Yugoslavia — federation or confederation? Why?</li>
-        <li>Is the EU a federation, confederation, or neither? Explain.</li>
-        <li>What is sovereignty and who holds it in a federation vs confederation?</li>
-        <li>What is the rule of law? Give a real-life example of it being violated.</li>
-        <li>Advantages and disadvantages of unitary state vs federation.</li>
-        <li>Can a federal government abolish a state/republic?</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes 3 things he could not answer confidently. These carry to Day 2."}
-  ]},
-  { date:"Sat, June 6", cd:"D–10", subj:"LAW", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"1-0", d:`
-      <strong>READ:</strong> Lecture 3 (Notion of Law, Types, Legal Norm) + Lecture 4 (Legal Acts & Hierarchy).<br>
+    { solo:true, tag:"◆ DENIS SOLO · MUST DO", t:"Before session · 60 min", h:"Block B — Ethics + Cost Statement + FIFO/AVCO", nk:"1-0", d:`
+      <strong>READ:</strong> 02 Ethics + 03 Product costing slides 1–24.<br>
       <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>4 types of social norms + consequence of breaking each.</li>
-        <li>Natural law vs positive law — who defined each?</li>
-        <li>Public law vs private law — 2 examples of each.</li>
-        <li>Draw the 5-level hierarchy of legal sources in Serbia top to bottom.</li>
-        <li>General legal act vs individual legal act — one example each.</li>
-        <li>Hard (rigid) constitution vs soft (flexible) constitution — one example each.</li>
+        <li>Four pillars of professional conduct + the case file that tests each.</li>
+        <li>Ethical dilemma: definition, 4 red flags, 3-step protocol.</li>
+        <li>Cost statement skeleton: DM → prime → production → total. Rebuild the socks statement.</li>
+        <li>Cost, cost driver, cost object — exact definitions.</li>
+        <li>Porter Farrington 30 / 50 / 40: FIFO and AVCO, material cost and closing stock.</li>
+        <li>Why is LIFO banned?</li>
       </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: types of norms, what makes a rule legally binding, public vs private law, hierarchy of sources from constitution down to individual acts."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>You arrive late to a dinner — which norm? Consequence?</li>
-        <li>You run a red light — which norm? Consequence?</li>
-        <li>You feel guilty after lying — which norm?</li>
-        <li>What separates a legal norm from all other social norms?</li>
-        <li>Name the 5 levels of Serbian legal hierarchy in order.</li>
-        <li>Can a court verdict be a formal legal source in Serbia? When?</li>
-        <li>Difference between written and unwritten constitution — examples?</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis adds to running gap list. Day 1 gaps reviewed first 5 minutes."}
+    { solo:false, t:"4:00 – 4:15", h:"Denis Explains", d:"15 minutes, no notes: what management accounting is and its three pillars, the four ethics pillars, how a cost is classified, FIFO vs AVCO worked aloud. Mama listens, does not interrupt."},
+    { solo:false, tag:"◈ DENIS + MAMA · MUST DO", t:"4:15 – 4:50", h:"Theory Quiz", nk:"0-2", nl:"Answer key for Mama", d:`<ol>
+        <li>Define management accounting. Which statement on the quiz slide is wrong?</li>
+        <li>Which of A–F are components of managerial accounting?</li>
+        <li>Pencil company A, B, C — planning, controlling or cost accounting? Variance in C?</li>
+        <li>Why is managerial accounting "riskiest" and financial "safest"?</li>
+        <li>Which pillar produces budgets? Which produces performance reports?</li>
+        <li>Three ways AI transforms management accounting.</li>
+        <li>Predictive vs prescriptive analytics?</li>
+        <li>Taylor's idea and its flaw. Weber's four features.</li>
+        <li>What surprised the Hawthorne researchers?</li>
+        <li>Is pay a motivator according to Herzberg?</li>
+        <li>Agency theory: who, when, the conflict, three remedies.</li>
+        <li>What does agency theory imply for management and cost accounting?</li>
+      </ol>`},
+    { solo:false, tag:"◈ DENIS + MAMA · MUST DO", t:"4:50 – 5:50", h:"Calculation Drills — Cost Statement + FIFO/AVCO", nk:"1-2", nl:"Answer key for Mama", d:`Denis works on paper, calculator allowed, no notes. Mama checks against the key.<ol>
+        <li>Apex Tech: classify 18 costs → DM, DL, prime, production OH, production cost, cost per phone, other OH.</li>
+        <li>Nova: 200 @ 10, 300 @ 12, 250 @ 15 — issue 550. FIFO + average.</li>
+        <li>Nova again — issue 230.</li>
+        <li>Apex display panels: FIFO, simple AVCO; explain simple vs weighted.</li>
+        <li>Slide E-03: 1,250 / 1,350 / 2,150 units — issue 3,600.</li>
+        <li>Office stationery, marketing, delivery — which category?</li>
+        <li>Quiz questions 1–4.</li>
+        <li>Quiz questions 8–9.</li>
+        <li>Boss wants next year's sales booked now — principle and action?</li>
+        <li>Is a +10% profit target an ethical dilemma?</li>
+      </ol>`},
+    { solo:false, t:"5:50 – 6:00", h:"Gap List", d:"Denis lists what he could not answer. Every drill he got wrong is redone tonight with the numbers covered."},
+    { solo:true, tag:"★ ONLY IF TIME · +20%", t:"Evening · 15 min", h:"Beyond the Slides — Theory", nk:"0-3", nl:"Stretch answers", d:"Reading a real variance report line by line, the four levels of analytics, what agency costs are, CIMA, applying theory X/Y."},
+    { solo:true, tag:"★ ONLY IF TIME · +20%", t:"Evening · 20 min", h:"Beyond the Slides — Costing", nk:"1-3", nl:"Stretch answers", d:"Why the $5 trick in Case File 01 inflates profit, three ways to slice costs, FIFO when prices fall, LIFO worked once, a moving average, one fresh drill."}
   ]},
-  { date:"Sun, June 7", cd:"D–9", subj:"LAW", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"2-0", d:`
-      <strong>READ:</strong> Lecture 5 (Regional Integration) + Lecture 6 (EU Legal & Institutional System).<br>
+  { date:"Tue, Oct 6", cd:"D–3", subj:"CORE 2", chip:"CORE", strip:{l:"CORE DAY 2 OF 2", e:"Overhead + ABC + mock test — current material finished tonight"}, phases:[
+    { solo:true, tag:"◆ DENIS SOLO · MUST DO", t:"Before session · 60 min", h:"Block C — Labour, Overhead, Traditional Rates", nk:"2-0", d:`
+      <strong>READ:</strong> 03 Product costing slides 25–43 + the Apex Mobile sheet.<br>
       <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Timeline: ECSC 1951 → EEC+Euratom 1957 → Maastricht 1992 → Amsterdam 1997 → Nice 2001 → Lisbon 2007. One sentence per event.</li>
-        <li>4 freedoms of the EU single market.</li>
-        <li>What does "sui generis" mean and why does it apply to the EU?</li>
-        <li>5 main EU institutions — one sentence each: Parliament, Council, Commission, European Council, Court of Justice.</li>
-        <li>EU citizenship — what rights does it give?</li>
-        <li>Why did the EU Constitution fail in 2005?</li>
+        <li>Direct labour equation + the exclusion zone.</li>
+        <li>Cost driver map: 4 cost groups → 4 drivers.</li>
+        <li>Four steps of the traditional allocation pipeline.</li>
+        <li>Sock factory $8.00 vs $0.53. Product B: build $170.</li>
+        <li>Rembrandt: both methods.</li>
+        <li>Apex Mobile: two rates, four unit costs, which base and why.</li>
+        <li>Swift Metals: full apportionment schedule (homework 3.4).</li>
       </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: regional integration concept, EU from ECSC through Lisbon, 5 institutions, EU citizenship, why the EU is sui generis."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>Why was the ECSC created? Which 6 countries signed?</li>
-        <li>What did the Treaties of Rome create?</li>
-        <li>What 3 pillars did Maastricht create?</li>
-        <li>Difference between EU Council and Council of Europe?</li>
-        <li>Can an EU citizen vote in local elections in a country where they are not a citizen?</li>
-        <li>Free trade area vs customs union — what is the difference?</li>
-        <li>Serbia is not in the EU — what is its relationship with the EU?</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes EU institutions and their roles from memory — no notes — as final check."}
-  ]},
-  { date:"Mon, June 8", cd:"D–8", subj:"LAW", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"3-0", d:`
-      <strong>READ:</strong> Lecture 7 (Natural & Juridical Persons, Legal Capacity) + Lecture 8 (Civil Law & Property Law).<br>
+    { solo:true, tag:"◆ DENIS SOLO · MUST DO", t:"Before session · 60 min", h:"Block D — Activity-Based Costing", nk:"3-0", d:`
+      <strong>READ:</strong> 04 ABC — all 24 slides.<br>
       <strong>WRITE FROM MEMORY after reading:</strong>
       <ul>
-        <li>Natural person vs juridical person — definition + 4 examples of juridical persons.</li>
-        <li>Passive legal capacity: when does it begin and end?</li>
-        <li>Active legal capacity: when is it full? Two cases when it is restricted.</li>
-        <li>4 basic principles of civil law.</li>
-        <li>Napoleonic Code (1804): 3 categories.</li>
-        <li>German BGB (1900): 5 parts — list all 5.</li>
-        <li>Objects of civil law: 4 types + one example each.</li>
+        <li>"Resources are consumed by ___; ___ are consumed by products."</li>
+        <li>Traditional vs ABC table — 4 rows. Two-stage allocation diagram.</li>
+        <li>Rates $15 / $5 / $160 → overhead for A and B.</li>
+        <li>Solidago, XO, Company X — all three solved.</li>
+        <li>Trampoline: $130 / $195 traditional → $102.86 / $290 ABC.</li>
+        <li>Three uses of ABC data + three implementation constraints.</li>
       </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: legal subjects (natural vs juridical), legal capacity (active vs passive), civil law origins, 4 principles, Napoleonic Code vs BGB structure."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>Is a 15-year-old a legal subject? What can they do legally and what not?</li>
-        <li>Can a company own property? Sue someone? Get married?</li>
-        <li>What rights are exclusive to natural persons?</li>
-        <li>What does "sanctions affect property, not a person" mean? Example.</li>
-        <li>I buy bread from a bakery — is this a civil law relationship? Who are the parties? What is the object?</li>
-        <li>Name 3 countries with civil law systems. Name 2 that do not.</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes the German BGB 5 parts from memory. Blanks = priority for Day 5."}
+    { solo:false, t:"4:00 – 4:15", h:"Denis Explains", d:"Monday's gaps first. Then: why overhead is the hardest problem, why the Apex Pro looks cheap on labour hours, and Company X — traditional $20 / $60 versus ABC $64,167 / $35,833."},
+    { solo:false, tag:"◈ DENIS + MAMA · MUST DO", t:"4:15 – 4:55", h:"Calculation Drills — Overhead", nk:"2-2", nl:"Answer key for Mama", d:`<ol>
+        <li>Idle time during a breakdown — how is it treated?</li>
+        <li>Best driver for canteen costs? For machinery depreciation?</li>
+        <li>$16,000 overhead, 1,000 machine hours — rate?</li>
+        <li>Product B total unit cost.</li>
+        <li>Apex Mobile from a blank page.</li>
+        <li>Rembrandt from a blank page.</li>
+        <li>Swift Metals: canteen and depreciation rows.</li>
+        <li>Why $8.00 on one base and $0.53 on the other?</li>
+        <li>Four steps of traditional allocation.</li>
+        <li>Which costs become inventory? Which are written off?</li>
+      </ol>`},
+    { solo:false, tag:"◈ DENIS + MAMA · MUST DO", t:"4:55 – 6:00", h:"Timed Mock Test", nk:"3-3", nl:"Answer key for Mama", d:`Strict. No notes, no hints. Part A 20 minutes, Part B 45 minutes. Mama marks afterwards.<br><br><strong>PART A — THEORY</strong><ol>
+        <li>Three pillars of management accounting.</li>
+        <li>Five differences: managerial vs financial accounting.</li>
+        <li>Budget revenue $250,000, actual $232,500 — variance, %, direction.</li>
+        <li>Four pillars of professional conduct; which one in "spouse is the CEO"?</li>
+        <li>Theory X vs Y; Herzberg's two factors.</li>
+        <li>Agency theory in three sentences.</li>
+        <li>Two things AI changes; does it replace accountants?</li>
+      </ol><br><strong>PART B — CALCULATIONS</strong> (open the key only to read the data, then cover it)<ol>
+        <li>Mug maker: cost statement + cost per mug.</li>
+        <li>400 @ 5, 600 @ 6, 500 @ 8; issue 1,100 — FIFO and AVCO.</li>
+        <li>Overhead $480,000: products K and L on labour hours and on machine hours.</li>
+        <li>ABC with two pools vs traditional; which product is undercosted?</li>
+        <li>Why does traditional costing undercost complex products?</li>
+      </ol>`},
+    { solo:false, t:"After session", h:"Self-Score + Weak List", d:"Denis marks every mock question he hesitated on. That list is the 20-minute review on Wednesday and Thursday."},
+    { solo:true, tag:"★ ONLY IF TIME · +20%", t:"Evening · 20 min", h:"Beyond the Slides — Overhead", nk:"2-3", nl:"Stretch answers", d:"Allocation vs apportionment vs absorption, over- and under-absorbed overhead, mark-up vs margin, departmental rates, Rembrandt by revenue, a fresh drill."},
+    { solo:true, tag:"★ ONLY IF TIME · +20%", t:"Evening · 20 min", h:"Beyond the Slides — ABC", nk:"3-4", nl:"Stretch answers", d:"The ABC cost hierarchy, implementation steps, when ABC is not worth it, a full ABC drill with unit costs, one synthesis answer linking ABC, ethics and AI."}
   ]},
-  { date:"Tue, June 9", cd:"D–7", subj:"LAW", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"4-0", d:`
-      <strong>READ:</strong> Lecture 9 (Ownership & Possession) — final Law lecture.<br>
-      <strong>WRITE FROM MEMORY after reading:</strong>
+  { date:"Wed, Oct 7", cd:"D–2", subj:"NEW MATERIAL", chip:"NEW", strip:null, phases:[
+    { solo:true, tag:"◆ DENIS SOLO · MUST DO", t:"Before session · 20 min", h:"Daily Review — Keep Mon + Tue Alive", d:`
       <ul>
-        <li>Ownership definition. The 4 rights of the owner: possessio, usus, fructus, abusus — one sentence each.</li>
-        <li>What does "absolute" (erga omnes) mean in ownership?</li>
-        <li>3 modalities of ownership in Serbia: co-ownership, community (joint) ownership, condominium. Definition + example of each.</li>
-        <li>Co-ownership: can a co-owner sell without asking others? What is pre-emption right?</li>
-        <li>Community ownership: key difference from co-ownership (shares not defined).</li>
-        <li>Condominium: what do all owners share in common?</li>
+        <li>Formula sheet (bottom of page) from memory.</li>
+        <li>One FIFO/AVCO drill and one overhead or ABC drill from Tuesday's weak list, numbers covered.</li>
       </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: ownership, 4 rights (usus/fructus/abusus/possession), 3 types of ownership, co-ownership rules, difference between ownership and possession."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>I own an apartment. Name all 4 rights. Which one am I using when I rent it out?</li>
-        <li>I own 40% of a house with two siblings. Which type? Can I sell without asking them? What right do they have?</li>
-        <li>Husband and wife — which type of ownership? What is different?</li>
-        <li>I live in an apartment building. I own my flat. What do I own with the other residents?</li>
-        <li>What does "erga omnes" mean in practice?</li>
-        <li>Can the state take your property? Under what conditions?</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Final Law Gap List", d:"Denis writes every Law concept he is not 100% confident on. This drives the mock exam on Day 6."}
+    { solo:true, tag:"＋ NEW LECTURE", t:"Before session", h:"New Lecture — Waiting for Material", d:"This block is filled in when the next lecture arrives: what to read, what to write from memory, source notes."},
+    { solo:false, t:"4:00 – 6:00", h:"Session on the New Lecture", d:"Same pattern: Denis explains (15 min) → Mama quizzes from the answer key → drills → gap list. Questions and key are added with the lecture."}
   ]},
-  { date:"Wed, June 10", cd:"D–6", subj:"LAW", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo: Written Summary", d:`
-      <strong>NO NOTES. Write from memory only.</strong>
+  { date:"Thu, Oct 8", cd:"D–1", subj:"NEW MATERIAL", chip:"NEW", strip:{l:"ACCOUNTING TEST TOMORROW", e:"Friday October 9 · Belgrade time"}, phases:[
+    { solo:true, tag:"◆ DENIS SOLO · MUST DO", t:"Before session · 20 min", h:"Daily Review — Keep Mon + Tue Alive", d:`
       <ul>
-        <li>One A4 page. Cover all 9 lectures: state elements · 3 forms of state · hierarchy of legal sources · natural vs juridical person · active vs passive capacity · civil law principles · Napoleonic Code vs BGB · EU timeline + 5 institutions · 3 ownership types · 4 owner rights.</li>
-        <li>Any blank = top priority for joint session. Bring the written page.</li>
+        <li>Formula sheet from memory.</li>
+        <li>Redo every mock-test question missed on Tuesday.</li>
       </ul>`},
-    { solo:false, t:"4:00 – 4:15", h:"Phase 2 — Denis Presents From Memory", d:"Denis talks through the full Law subject in 15 minutes, no notes. Mama marks what sounds unsure."},
-    { solo:false, t:"4:15 – 5:15", h:"Phase 3 — Timed Mock Exam", d:`Strict. No hints. 2–3 minutes per question.<ul>
-        <li>Define the state. Name its 3 elements.</li>
-        <li>Difference between federation and confederation.</li>
-        <li>Hierarchy of legal sources in Serbia — top to bottom.</li>
-        <li>Difference between legal norm and moral norm.</li>
-        <li>3 pillars of the Maastricht Treaty.</li>
-        <li>Name 4 EU institutions and one function of each.</li>
-        <li>What is active legal capacity? When is it restricted?</li>
-        <li>5 parts of the German Civil Code (BGB).</li>
-        <li>What are the 4 rights of an owner?</li>
-        <li>Difference between co-ownership and community ownership.</li>
-      </ul>`},
-    { solo:false, t:"5:15 – 5:40", h:"Phase 4 — Self-Score + Weak List", d:"Denis marks every question he hesitated on. This list drives Day 12 final sweep."}
+    { solo:true, tag:"＋ NEW LECTURE", t:"Before session", h:"New Lecture — Waiting for Material", d:"Filled in when the lecture arrives. The day before the test: headings, formulas and exercises first; fine detail last."},
+    { solo:false, t:"4:00 – 5:30", h:"Session on the New Lecture", d:"Denis explains → Mama quizzes → drills. Questions and key are added with the lecture."},
+    { solo:false, tag:"◈ DENIS + MAMA · MUST DO", t:"5:30 – 6:00", h:"Final Sweep", d:"Mama asks only the questions on the weak list — all days. Correct: move on. Wrong: write it once, move on. No spiralling."}
   ]},
-  { date:"Thu, June 11", cd:"D–5", subj:"MANAGEMENT", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"6-0", d:`
-      <strong>READ:</strong> L1 (Intro to Management) + L2 (Management History) + L3 (Org Culture & Environment).<br>
-      <strong>WRITE FROM MEMORY after reading:</strong>
-      <ul>
-        <li>Management definition: efficiency vs effectiveness — one real example of each.</li>
-        <li>3 levels of managers — what does each level focus on?</li>
-        <li>4 management functions (Fayol/Robbins) — one sentence each.</li>
-        <li>Mintzberg's 3 role categories + all roles within each (10 total).</li>
-        <li>3 management skills — which level needs which most?</li>
-        <li>Frederick Taylor — what problem, what solution, what year.</li>
-        <li>Fayol's 14 principles — memorize all 14 in order.</li>
-        <li>Hawthorne Studies — what was discovered.</li>
-        <li>Organizational culture — strong vs weak, 4 ways employees learn it.</li>
-        <li>SWOT + PEST — what each letter stands for.</li>
-      </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: what management is, 4 functions, 3 manager levels, history (Taylor, Fayol, Weber, Hawthorne), organizational culture, SWOT/PEST."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>Efficiency vs effectiveness — can you be efficient but not effective?</li>
-        <li>A factory supervisor — what level of manager? What skills matter most?</li>
-        <li>What problem was Taylor trying to solve in 1911?</li>
-        <li>What did the Hawthorne studies discover that surprised everyone?</li>
-        <li>Fayol said "unity of command" — what does that mean and why does it matter?</li>
-        <li>What is organizational culture — can you see it? How?</li>
-        <li>Do a SWOT for a company Denis knows (e.g. Singidunum University).</li>
-        <li>Name 3 roles from Mintzberg's decisional category.</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes what he could not answer. Mintzberg roles and Fayol's 14 principles are most commonly blank — note every gap."}
-  ]},
-  { date:"Fri, June 12", cd:"D–4", subj:"MANAGEMENT", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"7-0", d:`
-      <strong>READ:</strong> L4 (Ethics & Social Responsibility) + L5 (Communication) + L6 (Planning & Decision Making).<br>
-      <strong>WRITE FROM MEMORY after reading:</strong>
-      <ul>
-        <li>Classical view vs socioeconomic view of social responsibility — who argued for each.</li>
-        <li>Carroll's pyramid — 4 levels in order from bottom.</li>
-        <li>4 ways to encourage ethical behavior in an organization.</li>
-        <li>Draw the communication model: all 7 components + noise.</li>
-        <li>Selective perception definition + example. Fundamental attribution error definition + example.</li>
-        <li>3 types of plans + which manager level uses each + timeframe.</li>
-        <li>SMART — what each letter means + create one SMART goal for studying.</li>
-        <li>MBO — 4 key elements.</li>
-        <li>The 8-step decision-making process in order.</li>
-      </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: ethics and social responsibility, full communication model, planning types, SMART goals, MBO, decision-making process."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>What is the classical view of social responsibility? Who argued for it?</li>
-        <li>What is a code of ethics — does having one guarantee ethical behavior?</li>
-        <li>Draw the communication model from memory and explain what "noise" is.</li>
-        <li>What is the fundamental attribution error? Why does it happen?</li>
-        <li>Difference between strategic and operational plan? Which manager uses each?</li>
-        <li>Create a SMART goal for Denis's exam preparation.</li>
-        <li>What is bounded rationality? When do managers use it?</li>
-        <li>What is MBO — why does it motivate employees?</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis writes all gaps. Particular attention: communication model steps in order, 8-step decision-making process sequence."}
-  ]},
-  { date:"Sat, June 13", cd:"D–3", subj:"MANAGEMENT", strip:null, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"8-0", d:`
-      <strong>READ:</strong> L8 (Innovation & Change) + L9 (Organizational Structure) + L10 (Managing Teams).<br>
-      <strong>WRITE FROM MEMORY after reading:</strong>
-      <ul>
-        <li>S-curve: slow start → rapid growth → plateau. Revolutionary vs incremental change — definition + example of each.</li>
-        <li>4 reasons people resist change.</li>
-        <li>Lewin's 3-step model: unfreeze → change → refreeze. One sentence each step.</li>
-        <li>6 key elements of organizational design.</li>
-        <li>5 types of departmentalization: name + one advantage + one disadvantage each.</li>
-        <li>Chain of command + unity of command — definitions.</li>
-        <li>Tuckman's 5 stages of group development in order — one sentence each.</li>
-        <li>Groupthink definition + why it is dangerous.</li>
-        <li>3 special kinds of teams: cross-functional, virtual, project.</li>
-      </ul>`},
-    { solo:false, t:"4:00 – 4:20", h:"Phase 2 — Denis Explains", d:"Denis presents: change and innovation (S-curve, resistance, Lewin), org structure (6 elements, 5 departmentalization types), team types and stages."},
-    { solo:false, t:"4:20 – 5:20", h:"Phase 3 — Mama Quizzes Denis", d:`<ul>
-        <li>Where is a company most vulnerable on the S-curve?</li>
-        <li>Name 4 reasons people resist change. Which is most powerful?</li>
-        <li>Walk through Lewin's 3 steps with a real example.</li>
-        <li>What is matrix departmentalization? Advantage and the famous disadvantage?</li>
-        <li>What is "span of control"? When would a manager want a narrow span?</li>
-        <li>Name the 5 stages of team development in order. What happens at Storming?</li>
-        <li>What is groupthink? How can a leader prevent it?</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Gap List", d:"Denis notes gaps — especially Tuckman stages in order and the 6 elements of org design."}
-  ]},
-  { date:"Sun, June 14", cd:"D–2", subj:"COMPUTERS", strip:{l:"COMPUTERS EXAM", e:"Friday June 19"}, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", d:`
-      <strong>PRACTICAL WORD FORMATTING EXAM. Know how to execute every task.</strong><br>
-      Study the exam PDF. Memorize exact settings:<br><br>
-      <strong>Page Layout:</strong> A4 · Portrait · Margins: Left 2.4cm · Right 2.4cm · Top 2.1cm · Bottom 2.1cm · Header from top 1.2cm · Footer from bottom 0.8cm · First page different: YES.<br><br>
-      <strong>Styles:</strong> Heading 1 = Times New Roman 14pt · Heading 2 = 13pt · Heading 3 = 12pt · Normal = Times New Roman 12pt Justify.<br><br>
-      <strong>Paragraph tasks:</strong> Drop Cap (Insert → Drop Cap → Options): 2 lines high · 0.3cm from text · first row indent 1.2cm · line spacing 1.3cm. Hanging indent: remaining rows recessed 2.1cm · reduce text area 0.6cm left + 1.3cm right.<br><br>
-      <strong>Text effects:</strong> Strikethrough · expanded character spacing · shadow/outline · subscript · superscript → all in Home → Font dialog.<br><br>
-      <strong>Symbols:</strong> Insert → Symbol → Special Characters: ™ · © · ®<br><br>
-      <strong>Picture:</strong> Insert → Picture · resize to 2.1cm × 2.0cm · hyperlink: right-click → Hyperlink → www.singidunum.ac.rs<br><br>
-      <strong>Table:</strong> Row 1: height 0.6cm width 4cm · Row 2: height 1.2cm width 4cm · 3+ colors · 3+ border styles → Table Tools → Design.<br><br>
-      <strong>SmartArt org chart:</strong> Insert → SmartArt → Hierarchy. General Manager → Marketing/Financial/Sales/HR Managers → their subordinates.<br><br>
-      <strong>Table of Contents:</strong> References → Table of Contents → Automatic. Requires Heading styles applied first.<br><br>
-      <strong>Footnote:</strong> References → Insert Footnote.<br><br>
-      <strong>Shortcuts:</strong> Ctrl+S · Ctrl+Z · Ctrl+Enter (page break) · Ctrl+J (justify) · Ctrl+E (center).`},
-    { solo:false, t:"4:00 – 4:30", h:"Phase 2 — Denis Explains All Tasks", d:"Denis walks through every task from the exam PDF in sequence — names the task, says the menu path, describes the exact settings. Mama follows along."},
-    { solo:false, t:"4:30 – 5:20", h:"Phase 3 — Mama Quizzes: Terminology + Menu Paths", d:`<ul>
-        <li>Where do you change paper size and orientation?</li>
-        <li>What is a "style" — difference between Heading 1 and Normal?</li>
-        <li>What is a Drop Cap? How many steps to insert one? What settings did the exam require?</li>
-        <li>What is a hanging indent? How is it different from first-line indent?</li>
-        <li>Where do you find Strikethrough? Superscript?</li>
-        <li>How do you insert the ™ symbol? Two ways.</li>
-        <li>How do you add a hyperlink to a picture?</li>
-        <li>How do you set a specific row height in a Word table?</li>
-        <li>What is SmartArt? Which category for an org chart?</li>
-        <li>How do you insert a Table of Contents? What must be true for it to work?</li>
-        <li>What is a footnote? How is it different from an endnote?</li>
-      </ul>`},
-    { solo:false, t:"5:20 – 5:40", h:"Phase 4 — Rapid Fire", d:"Mama names a task, Denis says the exact menu path. 10 tasks in 20 minutes. Computers closed."}
-  ]},
-  { date:"Mon, June 15", cd:"D–1", subj:"MANAGEMENT", strip:{l:"MANAGEMENT EXAM", e:"Wednesday June 17"}, phases:[
-    { solo:true, t:"Before session", h:"Phase 1 — Denis Solo Prep", nk:"9-0", d:`
-      <strong>READ:</strong> L11 (HRM) + L12 (Motivation) + L13 (Leadership) + L14 (Controlling).<br>
-      <strong>WRITE FROM MEMORY after reading:</strong>
-      <ul>
-        <li>Job description vs job specification — exact definitions.</li>
-        <li>Validity vs reliability in selection — exact definitions.</li>
-        <li>Maslow's 5 levels bottom to top + main criticism.</li>
-        <li>McClelland's 3 needs — name each + one sentence.</li>
-        <li>Equity theory: inputs definition + outcomes definition + referents.</li>
-        <li>Fiedler LPC: what it measures + high score vs low score thresholds (≥64 / ≤57).</li>
-        <li>3 types of control: feedforward / concurrent / feedback — one sentence each.</li>
-        <li>4-step control process in order.</li>
-        <li>Balanced Scorecard — 4 areas.</li>
-      </ul>`},
-    { solo:false, t:"4:00 – 4:15", h:"Phase 2 — Denis Presents Full Management From Memory", d:"Denis presents entire Management subject in 15 minutes. No notes. Mama marks hesitations."},
-    { solo:false, t:"4:15 – 5:15", h:"Phase 3 — Timed Mock Exam", d:`Strict. No hints.<ul>
-        <li>What are the 4 management functions? One sentence each.</li>
-        <li>Who is Frederick Taylor and what is his contribution?</li>
-        <li>What did the Hawthorne studies discover?</li>
-        <li>What is organizational culture? How does a new employee learn it?</li>
-        <li>Draw the communication model and label every component.</li>
-        <li>Difference between strategic and operational plan?</li>
-        <li>Maslow's 5 levels — what is the main criticism?</li>
-        <li>What is equity theory? What are inputs and outcomes?</li>
-        <li>What is Fiedler's LPC questionnaire and what does it measure?</li>
-        <li>Walk through the control process — 4 steps in order.</li>
-        <li>What is the S-curve of innovation?</li>
-        <li>Name the 5 stages of group development in order.</li>
-      </ul>`},
-    { solo:false, t:"5:15 – 5:40", h:"Phase 4 — Final Gap List", d:"Denis marks every weak point. Tomorrow is final sweep before Law exam."}
-  ]},
-  { date:"Tue, June 16", cd:"D–0", subj:"REST", strip:{l:"LAW EXAM TODAY", e:"Management exam tomorrow"}, phases:[
-    { solo:true, t:"Morning", h:"Phase 1 — Weak Areas Only", d:`
+  { date:"Fri, Oct 9", cd:"D–0", subj:"EXAM", chip:"EXAM", strip:{l:"ACCOUNTING TEST TODAY", e:"Belgrade time"}, phases:[
+    { solo:true, t:"Morning", h:"Weak Areas Only", d:`
       <strong>NO NEW MATERIAL.</strong>
       <ul>
-        <li>Review only what was flagged from Days 6 and 11 gap lists.</li>
-        <li>Read those specific points only. Re-write once. Close the notes.</li>
+        <li>Review only what is on the weak list.</li>
+        <li>Write the formula sheet once from memory: cost statement · FIFO/AVCO · OH rate · ABC two stages · variance.</li>
+        <li>One FIFO/AVCO and one ABC drill, numbers covered. Then close the notes.</li>
       </ul>`},
-    { solo:false, t:"4:00 – 4:40", h:"Phase 2 — Final Confidence Check", d:"Mama asks only the flagged weak questions from both subjects. Denis answers. If correct: move on. If not: write it once, move on. No spiralling."},
-    { solo:false, t:"4:40 – 5:00", h:"Phase 3 — Done", d:"Denis states what he knows cold. Mama confirms. Rest. The work is done."}
+    { solo:false, t:"Before the test", h:"Test Technique", d:`<ul>
+        <li>Write the formula in words before the numbers — method marks survive an arithmetic slip.</li>
+        <li>Label every figure: DM, DL, prime cost, production OH, production cost.</li>
+        <li>After every allocation, check that the products add back to the total overhead.</li>
+        <li>If "AVCO" is not specified as simple or weighted, show weighted and note the simple figure.</li>
+        <li>Finish every comparison with one sentence: which product is over- or undercosted, and why.</li>
+      </ul>`},
+    { solo:false, t:"After", h:"Done", d:"Denis writes down every question he remembers from the test — the best study guide for the next one. Rest. The work is done."}
   ]},
 ];
 
-const SK = "dm_checks_v3";
+const SK = "dm_acc_checks_v1";
 let ch = {};
 try { ch = JSON.parse(localStorage.getItem(SK)) || {}; } catch(e){}
 function save(){ try { localStorage.setItem(SK, JSON.stringify(ch)); } catch(e){} }
@@ -694,16 +747,20 @@ function upProg(){
   document.getElementById("pCt").textContent = done + " / " + tot + " phases";
 }
 
-function buildNotes(nk){
+function buildNotes(nk, label){
   const items = NOTES[nk];
   if(!items) return "";
   let html = `<div class="note-panel" id="np_${nk}">
-    <h4>📂 Where Denis finds the answers — source notes</h4>`;
+    <h4>${label}</h4>`;
   items.forEach((n,i)=>{
+    const src = n.fk
+      ? ftag(n.fk)
+      : `<span class="extra-tag">BEYOND THE SLIDES</span>`;
+    const num = /^(\d+|[AB]\d)\./.test(n.q) || n.q.charAt(0) === "★" ? "" : (i+1) + ". ";
     html += `<div class="note-item">
-      <div class="note-q">${i+1}. ${n.q}</div>
+      <div class="note-q">${num}${n.q}</div>
       <div class="note-src">
-        <a href="${flink(n.fk)}" target="_blank">${ftag(n.fk)}</a>
+        ${src}
         <span class="slide-tag">▸ ${n.slide}</span>
       </div>
       <div class="note-answer">${n.ans}</div>
@@ -722,7 +779,7 @@ function build(){
 
     const hdr = document.createElement("div");
     hdr.className = "day-hdr";
-    hdr.innerHTML = `<span class="day-date">${day.date}</span><span class="day-cd">${day.cd}</span><span class="chip chip-${day.subj}">${day.subj}</span><span class="tog" id="tog${di}">▼</span>`;
+    hdr.innerHTML = `<span class="day-date">${day.date}</span><span class="day-cd">${day.cd}</span><span class="chip chip-${day.chip}">${day.subj}</span><span class="tog" id="tog${di}">▼</span>`;
     hdr.addEventListener("click", () => togDay(di));
     block.appendChild(hdr);
 
@@ -743,9 +800,10 @@ function build(){
       const wrapper = document.createElement("div");
       wrapper.className = "phase" + (done ? " done" : "") + (p.solo ? " solo-phase" : "");
 
+      const tag = p.tag || (p.solo ? "◆ DENIS SOLO" : "◈ DENIS + MAMA");
       const main = document.createElement("div");
       main.className = "phase-main";
-      main.innerHTML = `<span class="ph-time">${p.t}</span><div><div class="ph-tag">${p.solo ? "◆ DENIS SOLO" : "◈ DENIS + MAMA"}</div><div class="ph-title">${p.h}</div><div class="ph-desc">${p.d}</div></div><button class="chk${done ? " on" : ""}" aria-label="Mark complete">✓</button>`;
+      main.innerHTML = `<span class="ph-time">${p.t}</span><div><div class="ph-tag">${tag}</div><div class="ph-title">${p.h}</div><div class="ph-desc">${p.d}</div></div><button class="chk${done ? " on" : ""}" aria-label="Mark complete">✓</button>`;
       main.querySelector(".chk").addEventListener("click", (e) => {
         e.stopPropagation();
         ch[k] = !ch[k];
@@ -756,19 +814,20 @@ function build(){
       });
       wrapper.appendChild(main);
 
-      // Note layer — only on solo phases that have source notes
-      if(p.solo && p.nk && NOTES[p.nk]){
+      // Note layer — source notes on solo phases, answer keys on quiz and stretch phases
+      if(p.nk && NOTES[p.nk]){
+        const lbl = p.nl || "Source notes — where to find each answer";
         const nt = document.createElement("div");
         nt.className = "note-toggle";
         nt.id = "nt_" + p.nk;
-        nt.innerHTML = `<span class="nt-arr">▶</span> Source notes — where to find each answer`;
+        nt.innerHTML = `<span class="nt-arr">▶</span> ${lbl}`;
         nt.addEventListener("click", () => {
           nt.classList.toggle("open");
           document.getElementById("np_" + p.nk).classList.toggle("open");
         });
         wrapper.appendChild(nt);
         const np = document.createElement("div");
-        np.innerHTML = buildNotes(p.nk);
+        np.innerHTML = buildNotes(p.nk, p.nl ? "🔑 " + p.nl : "📂 Where Denis finds the answers — source notes");
         wrapper.appendChild(np.firstChild);
       }
 
@@ -790,7 +849,7 @@ function togDay(di){
 
 build();
 const today = new Date();
-const start = new Date("2026-06-05");
+const start = new Date(2026, 9, 5);
 const idx = Math.floor((today - start) / 86400000);
 if(idx >= 0 && idx < D.length) setTimeout(() => togDay(idx), 150);
 </script>
